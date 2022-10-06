@@ -53,7 +53,8 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/scss/login.scss";
 .form-wrapper {
   height: 54px;
 }

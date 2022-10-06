@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import NotFound from '../views/NotFound.vue'
 import Login from '../views/Login.vue'
 
 
@@ -8,6 +7,11 @@ import Login from '../views/Login.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: 'root',
+    redirect: '/login'
+  },
   {
     path: '/login',
     name: 'login',
@@ -26,7 +30,7 @@ const routes = [
   {
     path: '*',
     name: 'not-found',
-    component: NotFound
+    component: () => import('../views/NotFound.vue')
   }
 ]
 
