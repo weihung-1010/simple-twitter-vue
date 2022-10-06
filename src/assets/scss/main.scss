@@ -1,34 +1,10 @@
-* {
-  font-family: Montserrat, Noto Sans TC;
-}
+@import './reset.scss';
+@import './setups.scss';
+@import './color.scss';
+@import './mixins.scss';
 
-h1 {
-  font-size: 68px;
-  font-weight: bold;
-}
-
-h2 {
-  font-size: 42px;
-  font-weight: bold;
-}
-
-h3 {
-  font-size: 28px;
-  font-weight: 500;
-}
-
-h4 {
-  font-size: 24px;
-  font-weight: 500;
-}
-
-h5 {
-  font-size: 18px;
-  font-weight: 500;
-}
 
 /* 表格樣式*/
-
 .form-wrapper {
   background-color: #F5F8FA;
   color: #696974
@@ -75,7 +51,6 @@ label {
 }
 
 /* 按鈕樣式 */
-
 .btn-singin {
   background-color: #FF6600;
   height: 46px;
