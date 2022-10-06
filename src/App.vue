@@ -12,3 +12,7 @@ export default {
   name: 'App'
 }
 </script>
+
+<style lang="scss">
+@import "./assets/scss/setups.scss";
+</style>
