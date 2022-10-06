@@ -8,7 +8,7 @@
         alt="LogoImage"
       />
     </div>
-    <h3 class="text-center font-weight-bold">登入 Alphitter</h3>
+    <h3 class="text-center font-weight-bold mt-4">登入 Alphitter</h3>
 
     <form @submit.prevent.stop="handleSubmit">
       <div class="form-wrapper mt-5">
