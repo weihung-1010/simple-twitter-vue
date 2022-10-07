@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
-
-
+import Main from '../views/Main.vue'
+import Profile from '../views/Profile.vue'
+import Setting from '../views/Setting.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,21 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import('../views/Admin.vue')
+  },
+  {
+    path: '/main',
+    name: 'main',
+    component: Main
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile
+  }, 
+  {
+    path: '/setting',
+    name: 'setting',
+    component: Setting
   },
   {
     path: '/admin/tweets',
