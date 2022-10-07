@@ -1,27 +1,38 @@
 @charset "UTF-8";
 /* 表格樣式*/
+.title {
+  margin-bottom: 8px;
+}
+
 .form-wrapper {
   background-color: #F5F8FA;
   color: #696974;
+  border-radius: 2px;
 }
 
 label {
   padding-left: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 0;
 }
 
 ::-moz-placeholder {
   color: #B5B5BE;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 :-ms-input-placeholder {
   color: #B5B5BE;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 ::placeholder {
   color: #B5B5BE;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .form {
@@ -37,6 +48,14 @@ label {
 
 .form-wrapper {
   height: 54px;
+  margin-top: 32px;
+}
+.form-wrapper .error-alert {
+  color: #FC5A5A;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  margin-top: 4px;
 }
 
 .form:focus,
@@ -65,4 +84,5 @@ label {
   height: 46px;
   width: 400px;
   border-radius: 50px;
+  margin-top: 40px;
 }/*# sourceMappingURL=login.css.map */

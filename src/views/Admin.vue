@@ -8,10 +8,10 @@
         alt="LogoImage"
       />
     </div>
-    <h3 class="text-center font-weight-bold mt-4">後台登入</h3>
+    <h3 class="title text-center font-weight-bold mt-4">後台登入</h3>
 
     <form @submit.prevent.stop="handleSubmit">
-      <div class="form-wrapper mt-5">
+      <div class="form-wrapper">
         <label for="account">帳號</label>
         <div>
           <input
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div class="form-wrapper mt-4">
+      <div class="form-wrapper">
         <label for="password">密碼</label>
         <div>
           <input
