@@ -116,10 +116,6 @@
   color: #FFFFFF;
 }
 
-.active {
-  color: #ff6600;
-}
-
 .tab .icon-active {
   display: none;
   margin-left: 8px;
@@ -138,7 +134,7 @@
 
 .router-link-exact-active .icon-active {
   display: block;
-  width: 24px;
+  width: 20px;
 }
 </style>
 
