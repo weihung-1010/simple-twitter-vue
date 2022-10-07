@@ -20,12 +20,17 @@ const routes = [
   {
     path: '/signup',
     name: 'sign-in',
-    component:() => import ('../views/SignUp.vue')
+    component: () => import('../views/SignUp.vue')
   },
   {
     path: '/admin',
     name: 'admin',
     component: () => import('../views/Admin.vue')
+  },
+  {
+    path: '/admin/tweets',
+    name: 'admin-tweets',
+    component: () => import('../views/AdminTweets.vue')
   },
   {
     path: '*',
