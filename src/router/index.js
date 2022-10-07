@@ -21,7 +21,7 @@ const routes = [
   {
     path: '/signup',
     name: 'sign-in',
-    component:() => import ('../views/SignUp.vue')
+    component: () => import('../views/SignUp.vue')
   },
   {
     path: '/admin',
@@ -37,10 +37,16 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: Profile
-  }, {
+  }, 
+  {
     path: '/setting',
     name: 'setting',
     component: Setting
+  },
+  {
+    path: '/admin/tweets',
+    name: 'admin-tweets',
+    component: () => import('../views/AdminTweets.vue')
   },
   {
     path: '*',
