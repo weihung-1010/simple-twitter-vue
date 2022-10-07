@@ -53,15 +53,10 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import "../assets/scss/login.scss";
-.form-wrapper {
-  height: 54px;
-}
-</style>
 
 <script>
 export default {
+  name: "Admin",
   data() {
     return {
       account: "",
@@ -80,3 +75,8 @@ export default {
   },
 };
 </script>
+
+
+<style lang="scss">
+@import "../assets/scss/login.scss";
+</style>

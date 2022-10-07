@@ -1,11 +1,22 @@
+@charset "UTF-8";
 /* 表格樣式*/
 .form-wrapper {
   background-color: #F5F8FA;
-  color: #696974
+  color: #696974;
 }
 
 label {
   padding-left: 16px;
+}
+
+::-moz-placeholder {
+  color: #B5B5BE;
+  font-size: 18px;
+}
+
+:-ms-input-placeholder {
+  color: #B5B5BE;
+  font-size: 18px;
 }
 
 ::placeholder {
@@ -34,13 +45,13 @@ label {
   background-color: #f5f8fa;
   -webkit-appearance: none;
   outline: none;
-  border-bottom: 2px solid #50B5FF
+  border-bottom: 2px solid #50B5FF;
 }
 
 .error-message {
   font-size: 14px;
   color: #FC5A5A;
-  height: 24px
+  height: 24px;
 }
 
 .error-notice {
@@ -54,4 +65,4 @@ label {
   height: 46px;
   width: 400px;
   border-radius: 50px;
-}
+}/*# sourceMappingURL=login.css.map */

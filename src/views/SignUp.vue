@@ -88,12 +88,7 @@
       </div>
 
       <div class="mt-4">
-        <button
-          type="submit"
-          class="btn btn-info btn-singin"
-        >
-          註冊
-        </button>
+        <button type="submit" class="btn btn-info btn-singin">註冊</button>
       </div>
     </form>
 
@@ -103,15 +98,10 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import "../assets/scss/login.scss";
-.form-wrapper {
-  height: 54px;
-}
-</style>
 
 <script>
 export default {
+  name: "SignUp",
   data() {
     return {
       account: "",
@@ -130,8 +120,12 @@ export default {
         password: this.passeord,
         passwordCheck: this.passwordCheck,
       };
-      console.log(JSON.stringify(data))
+      console.log(JSON.stringify(data));
     },
   },
 };
 </script>
+
+<style lang="scss">
+@import "../assets/scss/login.scss";
+</style>

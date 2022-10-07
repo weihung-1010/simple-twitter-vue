@@ -1,0 +1,64 @@
+/* reset style */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+/* basic color */
+/* basic style */
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1rem;
+}
+
+/* font for numbers */
+h1 {
+  font-size: 68px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 42px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+h5 {
+  font-size: 18px;
+  font-weight: 700;
+}/*# sourceMappingURL=setups.css.map */

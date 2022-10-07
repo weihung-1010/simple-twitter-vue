@@ -49,21 +49,15 @@
     </form>
     <div class="d-flex mt-4 justify-content-end">
       <router-link class="mx-1" to="/signup"> 註冊 </router-link>
-      ・
+      <span>・</span>
       <router-link class="mx-1" to="/admin"> 後台登入 </router-link>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import "../assets/scss/login.scss";
-.form-wrapper {
-  height: 54px;
-}
-</style>
-
 <script>
 export default {
+  name: "Login",
   data() {
     return {
       account: "",
@@ -83,3 +77,7 @@ export default {
 };
 </script>
 
+
+<style lang="scss">
+@import "../assets/scss/login.scss";
+</style>
