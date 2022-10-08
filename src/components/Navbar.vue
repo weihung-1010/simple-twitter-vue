@@ -84,7 +84,7 @@
 
 .tab {
   display: flex;
-  margin-bottom: 26px;
+  margin-bottom: 40px;
   text-decoration: none;
   color: #44444f;
 }
