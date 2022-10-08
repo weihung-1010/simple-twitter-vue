@@ -8,10 +8,10 @@
         alt="LogoImage"
       />
     </div>
-    <h3 class="text-center font-weight-bold mt-4">建立你的帳號</h3>
+    <h3 class="title text-center font-weight-bold mt-4">建立你的帳號</h3>
 
     <form @submit.prevent.stop="handleSubmit">
-      <div class="form-wrapper mt-4">
+      <div class="form-wrapper">
         <label for="account">帳號</label>
         <div>
           <input
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div class="form-wrapper mt-4">
+      <div class="form-wrapper">
         <label for="name">名稱</label>
         <div>
           <input
@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <div class="form-wrapper mt-4">
+      <div class="form-wrapper">
         <label for="email">Email</label>
         <div>
           <input
@@ -57,7 +57,7 @@
         </div>
       </div>
 
-      <div class="form-wrapper mt-4">
+      <div class="form-wrapper">
         <label for="password">密碼</label>
         <div>
           <input
@@ -72,7 +72,7 @@
         </div>
       </div>
 
-      <div class="form-wrapper mt-4">
+      <div class="form-wrapper">
         <label for="checkPassword">密碼確認</label>
         <div>
           <input
@@ -88,12 +88,7 @@
       </div>
 
       <div class="mt-4">
-        <button
-          type="submit"
-          class="btn btn-info btn-singin"
-        >
-          註冊
-        </button>
+        <button type="submit" class="btn btn-info btn-singin">註冊</button>
       </div>
     </form>
 
@@ -103,15 +98,10 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import "../assets/scss/login.scss";
-.form-wrapper {
-  height: 54px;
-}
-</style>
 
 <script>
 export default {
+  name: "SignUp",
   data() {
     return {
       account: "",
@@ -130,8 +120,12 @@ export default {
         password: this.passeord,
         passwordCheck: this.passwordCheck,
       };
-      console.log(JSON.stringify(data))
+      console.log(JSON.stringify(data));
     },
   },
 };
 </script>
+
+<style lang="scss">
+@import "../assets/scss/login.scss";
+</style>
