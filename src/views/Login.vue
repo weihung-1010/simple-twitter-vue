@@ -119,10 +119,10 @@ export default {
 
         // STEP3-2. 帳密驗證成功
         // 將 token 存在 localStorage 裡
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.data.token);
 
         // 把 API 回傳的目前使用者資料存進 Vuex 裡
-        // this.$store.commit("setCurrentUser", data.user);
+        this.$store.commit("setCurrentUser", data.data.user);
 
         // 登入成功, 直接轉址到首頁 （不需還原 isProcessing 的狀態）
         this.$router.push("/main");
