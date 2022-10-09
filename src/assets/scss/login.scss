@@ -46,6 +46,19 @@ label {
   }
 }
 
+.alert-container {
+  position: relative;
+
+  .letter-count {
+    position: absolute;
+    right: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: dark-80-color;
+    margin-top: 4px;
+  }
+}
+
 .form:focus,
 .form:hover {
   border: 0px;

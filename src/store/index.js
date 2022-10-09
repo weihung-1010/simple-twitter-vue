@@ -19,7 +19,7 @@ export default new Vuex.Store({
   },
   getters: {
   },
-  // 用來修改 state 的函式
+  // 以 commit 來發動，用來修改 state 的函式
   mutations: {
     setCurrentUser(state, currentUser) {
       state.currentUser = {
@@ -31,10 +31,9 @@ export default new Vuex.Store({
       state.isAuthenticated = true
       // state.token = localStorage.getItem('token')
 
-      console.log("有跑！")
     },
   },
-  // 用來設定其他的非同步函式：
+  // 以 dispatch 來發動，用來設定其他的非同步函式：透過 API 請求資料等
   actions: {
   },
   modules: {

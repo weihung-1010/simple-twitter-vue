@@ -26,9 +26,7 @@
             autofocus
           />
           <div class="error-alert">
-            <span class="msg" v-if="errorMsg === '此帳號不存在!'"
-              >帳號不存在</span
-            >
+            <span v-if="errorMsg === '此帳號不存在!'">帳號不存在</span>
           </div>
         </div>
       </div>
@@ -48,7 +46,7 @@
             required
           />
           <div class="error-alert">
-            <span class="msg" v-if="errorMsg === '密碼錯誤!'">密碼錯誤</span>
+            <span v-if="errorMsg === '密碼錯誤!'">密碼錯誤</span>
           </div>
         </div>
       </div>
@@ -96,7 +94,7 @@ export default {
           // STEP1. 如果 email 或 password 為空，則使用 Toast 提示
           Toast.fire({
             icon: "warning",
-            title: "請輸入帳號和密碼",
+            title: "帳號和密碼為必填",
           });
           // STEP2. 然後 return 不繼續往後執行
           return;
@@ -106,18 +104,18 @@ export default {
         // STEP1. 讓登入按鈕失效
         this.isProcessing = true;
 
-        // STEP2. 將帳密透過 API 送回伺服器驗證
+        // STEP2. 將帳密透過 API 送回伺服器驗證，並取得回傳的資料
         const { data } = await authorizationAPI.signIn({
           account: this.account,
           password: this.password,
         });
 
-        // STEP3-1. 帳密驗證失敗，API 回傳錯誤
+        // STEP3-1. 帳密驗證若失敗，API 回傳錯誤
         if (data.status === "error") {
           throw new Error(data.message);
         }
 
-        // STEP3-2. 帳密驗證成功
+        // STEP3-2. 帳密驗證若成功
         // 將 token 存在 localStorage 裡
         localStorage.setItem("token", data.data.token);
 
@@ -126,6 +124,8 @@ export default {
 
         // 登入成功, 直接轉址到首頁 （不需還原 isProcessing 的狀態）
         this.$router.push("/main");
+
+        // 登入失敗
       } catch (error) {
         // 帳號或密碼輸入錯誤後，將密碼欄位清空
         this.password = "";
@@ -149,7 +149,7 @@ export default {
         } else {
           Toast.fire({
             icon: "error",
-            title: "無法登入，請稍後再試",
+            title: "目前無法登入，請稍後再試",
           });
         }
       }
