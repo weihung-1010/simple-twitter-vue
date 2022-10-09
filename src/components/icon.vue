@@ -18,6 +18,7 @@ export default {
       iconLiked: "https://i.postimg.cc/rFB1FHD6/icon-Liked.png",
       iconLike: "https://i.postimg.cc/43TQw0Gv/iconLike.png",
       camera: "https://i.postimg.cc/Y9CgsKsF/camera.png",
+      message:"https://i.postimg.cc/brT17wkK/message.png"
     };
   },
 };
