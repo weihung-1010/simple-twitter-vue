@@ -64,7 +64,6 @@
   border-radius: 16px;
   .followboard-title {
     height: 74px;
-    background: #fafafb;
     h4 {
       padding: 24px;
       border-bottom: 1px solid #e6ecf0;
