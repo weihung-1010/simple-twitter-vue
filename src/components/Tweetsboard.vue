@@ -485,6 +485,7 @@ textarea {
   position: relative;
   left: 82px;
   top: -38px;
+  cursor: pointer;
 }
 .icon-reoly-heart {
   width: 13.4px;

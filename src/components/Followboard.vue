@@ -18,7 +18,7 @@
       <button class="btn-follow ">正在跟隨</button>
       <button class="btn-unfollow ">跟隨</button>
     </div>
-<!-- 串接API時刪除 -->
+    <!-- 串接API時刪除 -->
     <div class="followboard-lists">
       <router-link to="">
         <img
