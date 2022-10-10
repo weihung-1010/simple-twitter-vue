@@ -25,7 +25,7 @@ export default {
   components:{
     Navbar,
     ProfileBoard,
-    FollowBoard
+    FollowBoard,
   }
 }
 </script>

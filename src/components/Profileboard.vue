@@ -31,6 +31,8 @@
         </router-link>
       </div>
     </div>
+    <!-- UserAction -->
+    <UserAction/>
   </div>
 </template>
 
@@ -120,3 +122,12 @@
   }
 }
 </style>
+
+<script>
+import UserAction from '../components/UserAction.vue'
+export default {
+  components:{
+    UserAction
+  }
+}
+</script>

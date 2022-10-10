@@ -36,7 +36,14 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: Profile
+    component: Profile,
+    children: [
+      {
+        name: 'user-tweet',
+        path: '/tweet',
+        component: () => import('../components/UserTweet'),
+      },
+    ]
   }, 
   {
     path: '/setting',
