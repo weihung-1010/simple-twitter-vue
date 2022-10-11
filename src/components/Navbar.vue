@@ -118,7 +118,7 @@ export default {
   width: 178px;
   height: 1200px;
   position: fixed;
-  left: 130px;
+  // left: 130px;
   top: 0px;
   display: flex;
   flex-direction: column;
