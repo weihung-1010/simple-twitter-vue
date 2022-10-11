@@ -1,57 +1,101 @@
 <template>
   <div class="navbar">
-    <div>
-      <img class="logo mb-4" src="https://i.postimg.cc/Dfp23k8g/logo-2x.png" />
-      <router-link :to="{ name: 'main' }" class="tab">
-        <img class="icon" src="https://i.postimg.cc/MK4VTFr0/home.png" />
+    <!-- 導覽列標籤 -->
+    <div class="nav-tags">
+      <!-- 登入者身分為 user 時顯示 -->
+      <template v-if="currentUser.role === 'user'">
         <img
-          class="icon-active"
-          src="https://i.postimg.cc/V6WM7sgm/Home-Active.png"
+          class="logo mb-4"
+          src="https://i.postimg.cc/Dfp23k8g/logo-2x.png"
         />
-        <h5>首頁</h5>
-      </router-link>
+        <router-link :to="{ name: 'main' }" class="tab">
+          <img class="icon" src="https://i.postimg.cc/MK4VTFr0/home.png" />
+          <img
+            class="icon-active"
+            src="https://i.postimg.cc/V6WM7sgm/Home-Active.png"
+          />
+          <h5>首頁</h5>
+        </router-link>
 
-      <router-link :to="{ name: 'profile' }" class="tab">
-        <img class="icon" src="https://i.postimg.cc/L8VJKQf3/User.png" />
-        <img
-          class="icon-active"
-          src="https://i.postimg.cc/j2VxJyPj/User-Active.png"
-        />
-        <h5>個人資料</h5>
-      </router-link>
+        <router-link :to="{ name: 'profile' }" class="tab">
+          <img class="icon" src="https://i.postimg.cc/L8VJKQf3/User.png" />
+          <img
+            class="icon-active"
+            src="https://i.postimg.cc/j2VxJyPj/User-Active.png"
+          />
+          <h5>個人資料</h5>
+        </router-link>
 
-      <router-link :to="{ name: 'setting' }" class="tab">
-        <img class="icon" src="https://i.postimg.cc/qqZNYN3V/Setting.png" />
+        <router-link :to="{ name: 'setting' }" class="tab">
+          <img class="icon" src="https://i.postimg.cc/qqZNYN3V/Setting.png" />
+          <img
+            class="icon-active"
+            src="https://i.postimg.cc/FzfrYD78/Setting-Active.png"
+          />
+          <h5>設定</h5>
+        </router-link>
+        <button class="btn btn-primary btn-post-tweet">推文</button>
+      </template>
+
+      <!-- 登入者身分為 admin 時顯示 -->
+      <template v-else>
         <img
-          class="icon-active"
-          src="https://i.postimg.cc/FzfrYD78/Setting-Active.png"
+          class="logo mb-4"
+          src="https://i.postimg.cc/Dfp23k8g/logo-2x.png"
         />
-        <h5 :class="{ active: navbarSetting }">設定</h5>
-      </router-link>
-      <button class="btn btn-primary btn-post-tweet">推文</button>
+        <router-link :to="{ name: 'admin-tweets' }" class="tab">
+          <img class="icon" src="https://i.postimg.cc/MK4VTFr0/home.png" />
+          <img
+            class="icon-active"
+            src="https://i.postimg.cc/V6WM7sgm/Home-Active.png"
+          />
+          <h5>推文清單</h5>
+        </router-link>
+
+        <router-link :to="{ name: 'admin-users' }" class="tab">
+          <img class="icon" src="https://i.postimg.cc/L8VJKQf3/User.png" />
+          <img
+            class="icon-active"
+            src="https://i.postimg.cc/j2VxJyPj/User-Active.png"
+          />
+          <h5>使用者列表</h5>
+        </router-link>
+      </template>
     </div>
 
-    <div style="cursor: pointer" class="d-flex">
+    <!-- 登出按鈕 -->
+    <div style="cursor: pointer" class="d-flex logout-container">
       <img class="logout" src="https://i.postimg.cc/NjVnH4Yp/logoOut.png" />
-      <h5 class="ml-2">登出</h5>
+      <button type="button" class="ml-2 logout-btn" @click="logout">
+        <h5>登出</h5>
+      </button>
     </div>
   </div>
 </template>
 
+
+
 <script>
+import { mapState } from "vuex";
+
 export default {
-  data() {
-    return {
-      navbarHome: false,
-      navbarProfile: false,
-      navbarSetting: false,
-    };
+  name: "Navbar",
+
+  // 取得並載入 Vuex state 中的 currentUser 資料
+  computed: {
+    ...mapState(["currentUser"]),
+  },
+  methods: {
+    logout() {
+      console.log("登出");
+    },
   },
 };
 </script>
 
 
-<style scoped>
+
+<style scoped lang="scss">
 @import "../assets/scss/setups.scss";
 
 .navbar {
@@ -64,8 +108,13 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  padding: 0;
 }
 
+.nav-tags {
+  position: absolute;
+  left: 0;
+}
 .tab {
   display: flex;
   margin-bottom: 40px;
@@ -76,11 +125,12 @@ export default {
 .logo {
   width: 40px;
   height: 40px;
+  margin-left: 13px;
 }
 
 .icon {
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 16.9px;
+  margin-right: 16.9px;
 }
 
 .icon,
@@ -90,6 +140,8 @@ export default {
 }
 
 .btn-post-tweet {
+  position: absolute;
+  left: 0;
   width: 178px;
   height: 46px;
   font-family: "Noto Sans TC";
@@ -102,8 +154,8 @@ export default {
 
 .tab .icon-active {
   display: none;
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 16.9px;
+  margin-right: 16.9px;
   width: 20px;
   height: 20px;
 }
@@ -119,5 +171,20 @@ export default {
 .router-link-exact-active .icon-active {
   display: block;
   width: 20px;
+}
+
+.logout-container {
+  position: absolute;
+  left: 19px;
+  bottom: 16px;
+  .logout-btn {
+    all: unset;
+    font-weight: 700;
+    font-size: 18px;
+    color: $dark-90-color;
+    &:hover {
+      color: $logo-color;
+    }
+  }
 }
 </style>
