@@ -57,8 +57,8 @@
 @import "../assets/scss/setups.scss";
 .followboard-wrapper {
   width: 273px;
-  height: 100%;
-  margin-left: 360px;
+  // height: 100%;
+  // margin-left: 360px;
   margin-top: 16px;
   background: #fafafb;
   border-radius: 16px;

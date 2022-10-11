@@ -40,7 +40,7 @@
 @import "../assets/scss/setups.scss";
 .profile-wrapper {
   width: 639px;
-  margin-left: 343px;
+  // margin-left: 343px;
   border: 1px solid #e6ecf0;
   .prev {
     margin-left: 28px;

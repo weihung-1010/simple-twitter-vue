@@ -1,11 +1,19 @@
 <template>
-  <div class="user-page d-flex">
+  <div class="container">
     <!-- Navbar -->
+    <div class="row">
+    <div class="col">
     <Navbar />
+    </div>
     <!-- Tweetsboard -->
+    <div class="col-7">
     <Tweetsboard />
+    </div>
+    <div class="col-3">
     <!-- Followboard -->
     <Followboard/>
+    </div>
+    </div>
   </div>
 </template>
 
@@ -21,3 +29,4 @@ export default {
   },
 };
 </script>
+

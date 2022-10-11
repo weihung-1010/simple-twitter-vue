@@ -378,8 +378,8 @@
   border-right: #e6ecf0 1px solid;
   border-left: #e6ecf0 1px solid;
   position: relative;
-  left: 338px;
-  width: 641px;
+  // left: 338px;
+  width: 639px;
   height: 100%;
 }
 //新增貼文
