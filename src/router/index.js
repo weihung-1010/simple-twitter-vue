@@ -44,7 +44,7 @@ const routes = [
         component: () => import('../components/UserTweet'),
       },
     ]
-  }, 
+  },
   {
     path: '/setting',
     name: 'setting',
@@ -54,6 +54,11 @@ const routes = [
     path: '/admin/tweets',
     name: 'admin-tweets',
     component: () => import('../views/AdminTweets.vue')
+  },
+  {
+    path: '/admin/users',
+    name: 'admin-users',
+    component: () => import('../views/AdminUsers.vue')
   },
   {
     path: '*',
