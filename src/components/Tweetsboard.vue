@@ -67,8 +67,8 @@
         </div>
       </div>
     </div>
-    
-<!-- 串API時刪除 -->
+
+    <!-- 串API時刪除 -->
     <div class="tweets-wall">
       <div class="user-img">
         <router-link to="">
@@ -197,7 +197,6 @@
         </div>
       </div>
     </div>
-
 
     <div class="tweets-wall">
       <div class="user-img">
@@ -376,8 +375,8 @@
 <style scoped lang="scss">
 @import "../assets/scss/setups.scss";
 .main {
-  border-right:#e6ecf0 1px solid ;
-  border-left:#e6ecf0 1px solid ;
+  border-right: #e6ecf0 1px solid;
+  border-left: #e6ecf0 1px solid;
   position: relative;
   left: 338px;
   width: 641px;
@@ -437,7 +436,7 @@ textarea {
 //貼文牆
 .tweets-wall {
   width: 100%;
-  border-bottom: 1px solid #E6ECF0;
+  border-bottom: 1px solid #e6ecf0;
 }
 .user-img {
   margin-top: 16px;
@@ -475,7 +474,7 @@ textarea {
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
-  width:528px;
+  width: 528px;
   color: #171725;
   position: relative;
   left: 82px;
@@ -498,10 +497,10 @@ textarea {
   font-family: "Montserrat";
   font-weight: 600;
   font-size: 14px;
-  color: #6C757D;
-  padding-left:9.3px;
+  color: #6c757d;
+  padding-left: 9.3px;
 }
-.tweet-heart{
-  padding-left:41.3px ;
+.tweet-heart {
+  padding-left: 41.3px;
 }
 </style>
