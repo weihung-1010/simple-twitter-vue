@@ -38,9 +38,21 @@
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      navbarHome: false,
+      navbarProfile: false,
+      navbarSetting: false,
+    };
+  },
+};
+</script>
+
+
 <style scoped>
 @import "../assets/scss/setups.scss";
-@import "../assets/scss/color.scss";
 
 .navbar {
   width: 178px;
@@ -109,15 +121,3 @@
   width: 20px;
 }
 </style>
-
-<script>
-export default {
-  data() {
-    return {
-      navbarHome: false,
-      navbarProfile: false,
-      navbarSetting: false,
-    };
-  },
-};
-</script>
