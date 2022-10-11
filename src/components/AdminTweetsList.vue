@@ -1,14 +1,36 @@
 
 <template>
-  <div class="tweets-list">
-    <h4 class="title">推文清單</h4>
+  <div class="tweets-container">
     <div class="tweets">
       <div class="tweet" v-for="tweet in initialTweets" :key="tweet.id">
-        <img
-          class="avatar"
-          :src="tweet.User.avatar | emptyImage"
-          alt="avatar"
-        />
+        <!-- Avatar -->
+        <div class="img-container">
+          <!-- 若無頭像則套用 emptyImage 濾鏡，改用替代圖片 -->
+          <img
+            class="avatar"
+            :src="tweet.User.avatar | emptyImage"
+            alt="avatar"
+          />
+        </div>
+
+        <!-- Tweet Details -->
+        <div class="detail-container">
+          <div class="tweet-owner">
+            <span class="owner-name">{{ tweet.User.name }}</span>
+            <span class="owner-account-datetime"
+              >@{{ tweet.User.name }}・{{ tweet.createdAt | fromNow }}</span
+            >
+          </div>
+          <div class="tweet-content">
+            {{ tweet.description }}
+          </div>
+          <button
+            class="delete-btn"
+            @click.prevent.stop="handleDeleteBtnClick(tweet.id)"
+          >
+            ✕
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -32,18 +54,19 @@ export default {
   methods: {
     async handleDeleteBtnClick(tweetId) {
       try {
-        // 發送API請伺服器刪掉這則tweet
+        // 透過 API 請伺服器刪掉這篇推文
         const { data } = await adminAPI.tweets.delete({ tweetId });
         if (data.status === "error") {
           throw new Error(data.message);
         }
-        // 告訴父元件哪一條tweet被刪掉
+        // 觸發事件，傳回父元件並使其執行刪除推文的動作
         this.$emit("after-delete-tweet", tweetId);
         Toast.fire({
           icon: "success",
-          title: "推文刪除成功",
+          title: "推文已成功刪除",
         });
       } catch (error) {
+        // 報錯通知
         console.error(error.message);
         Toast.fire({
           icon: "error",
@@ -60,6 +83,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../assets/scss/admin.scss";
 </style>
