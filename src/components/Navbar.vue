@@ -80,14 +80,30 @@ import { mapState } from "vuex";
 
 export default {
   name: "Navbar",
-
   // 取得並載入 Vuex state 中的 currentUser 資料
   computed: {
     ...mapState(["currentUser"]),
   },
+  data() {
+    return {
+      roleWhenLogin: "",
+    };
+  },
   methods: {
     logout() {
       console.log("登出");
+      // 因為登出時會清空 currentUser 的資料，故先把 currentUser.role 記錄下來
+      this.roleWhenLogin = this.currentUser.role;
+
+      // 發動 revokeAuthentication 這個 mutation，修改 state 中 currentUser 的資料
+      this.$store.commit("revokeAuthentication");
+
+      // 透過 roleWhenLogin 判斷要回到前台還是後台的登入頁面
+      if (this.roleWhenLogin === "user") {
+        this.$router.push("/login");
+      } else {
+        this.$router.push("/admin");
+      }
     },
   },
 };
