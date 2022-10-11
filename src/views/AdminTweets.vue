@@ -38,11 +38,11 @@ export default {
         // 在取得資料前，讓 spinner 出現
         this.isLoading = true;
         const { data } = await adminAPI.tweets.get();
-        console.log("data 是:", data); // 待刪除
 
         if (data.status === "error") {
           throw new Error(data.message);
         }
+        // 將 API 回傳的推文陣列存在 tweets 中
         this.tweets = data;
         // 成功取得資料後，讓 spinner 消失
         this.isLoading = false;

@@ -20,7 +20,7 @@
             name="account"
             type="text"
             class="form"
-            :class="{ redBottomLine: errorMsg === '此帳號不存在!' }"
+            :class="{ redBottomLine: errorMsg === '此帳號不存在！' }"
             placeholder="請輸入帳號"
             required
             autofocus
@@ -40,13 +40,13 @@
             name="password"
             type="password"
             class="form"
-            :class="{ redBottomLine: errorMsg === '密碼錯誤!' }"
+            :class="{ redBottomLine: errorMsg === '密碼錯誤！' }"
             placeholder="請輸入密碼"
             autocomplete="current-password"
             required
           />
           <div class="error-alert">
-            <span v-if="errorMsg === '密碼錯誤!'">密碼錯誤</span>
+            <span v-if="errorMsg === '密碼錯誤！'">密碼錯誤</span>
           </div>
         </div>
       </div>
@@ -104,10 +104,12 @@ export default {
         this.isProcessing = true;
 
         // STEP2. 將帳密透過 API 送回伺服器驗證，並取得回傳的資料
-        const { data } = await authorizationAPI.adminSignIn({
+        const res = await authorizationAPI.adminSignIn({
           account: this.account,
           password: this.password,
         });
+        const { data } = res;
+        console.log("response is: ", res);
 
         // STEP3-1. 帳密驗證若失敗，API 回傳錯誤
         if (data.status === "error") {
@@ -135,12 +137,14 @@ export default {
         // 錯誤通知處理
         console.error(error.message);
         this.errorMsg = error.message;
-        if (error.message === "此帳號不存在!") {
+        console.log("errorMsg is:", this.errorMsg);
+
+        if (error.message === "此帳號不存在！") {
           Toast.fire({
             icon: "error",
             title: "帳號不存在，請重新確認",
           });
-        } else if (error.message === "密碼錯誤!") {
+        } else if (error.message === "密碼錯誤！") {
           Toast.fire({
             icon: "error",
             title: "密碼錯誤，請重新輸入",

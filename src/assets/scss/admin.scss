@@ -1,0 +1,26 @@
+@import './mixins.scss';
+
+.tweets-list {
+  // background-color: lightcoral;
+  @include two-side-grey;
+  width: 937.13px;
+  height: 100%;
+  position: absolute;
+  left: 332.87px;
+
+  .title {
+    @include bottom-grey;
+    // background-color: lightgreen;
+    width: 100%;
+    height: 74px;
+    padding-left: 20.92px;
+    padding-top: 24px;
+  }
+
+  .tweet {
+    .avatar {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}

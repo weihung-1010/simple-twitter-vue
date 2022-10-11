@@ -7,9 +7,9 @@ export default {
     get() {
       return apiHelper.get('/admin/tweets')
     },
-    // // 刪除特定推文
-    // delete({ tweetId }) {
-    //   return apiHelper.delete(`/admin/tweets/${tweetId}`)
-    // }
+    // 刪除特定推文
+    delete({ tweetId }) {
+      return apiHelper.delete(`/admin/tweets/${tweetId}`)
+    }
   },
 }
