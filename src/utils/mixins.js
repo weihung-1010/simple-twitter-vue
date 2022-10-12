@@ -15,7 +15,7 @@ export const fromNowFilter = {
 export const emptyImageFilter = {
   filters: {
     emptyImage(src) {
-      return src || require('./../assets/images/noImage@2x.png')
+      return src || "https://i.imgur.com/hAKcS3E.jpg"
     }
   }
 }
