@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <!-- Navbar -->
-      <div class="col">
+      <div class="col-2">
         <Navbar />
       </div>
       <!-- ProfileBoard -->
@@ -10,10 +10,8 @@
         <ProfileBoard />
       </div>
       <!-- FollowBoard -->
-      <div class="co-2">
-        
-          <FollowBoard />
-        
+      <div class="col-2">
+        <FollowBoard />
       </div>
     </div>
   </div>
