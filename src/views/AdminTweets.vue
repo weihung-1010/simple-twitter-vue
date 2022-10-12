@@ -6,15 +6,12 @@
         <Navbar />
       </div>
 
-      <div class="col-10" v-if="isLoading">
-        <h4 class="list-title">推文清單</h4>
-        <Spinner />
-      </div>
-
-      <div class="col-10" v-else>
-        <h4 class="list-title">推文清單</h4>
-        <div class="list-container">
+      <div class="col-10">
+        <div class="list-wrapper">
+          <h4 class="list-title">推文清單</h4>
+          <Spinner v-if="isLoading" />
           <AdminTweetsList
+            v-else
             :initial-tweets="tweets"
             @after-delete-tweet="afterDeleteTweet"
           />
@@ -46,7 +43,7 @@ export default {
     };
   },
   created() {
-    // 載入頁面時取得推文清單
+    // 載入頁面時取得所有推文
     this.fetchTweets();
   },
   methods: {
@@ -63,7 +60,9 @@ export default {
         }
         // 將 API 回傳的推文陣列存在 tweets 中
         this.tweets = data;
-        console.log("tweets array is: ", this.tweets);
+
+        console.log("tweets array is: ", this.tweets); //待刪除
+
         // 成功取得資料後，讓 spinner 消失
         this.isLoading = false;
       } catch (error) {

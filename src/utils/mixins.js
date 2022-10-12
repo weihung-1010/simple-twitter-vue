@@ -19,3 +19,12 @@ export const emptyImageFilter = {
     }
   }
 }
+
+// 前 50 字濾鏡：若字數大於 50 字，則只會回傳前 50 個字
+export const first50LettersFilter = {
+  filters: {
+    first50Letters(string) {
+      return string.length > 50 ? string.slice(0, 50) + "..." : string
+    }
+  }
+}

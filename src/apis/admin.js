@@ -3,7 +3,7 @@ import { apiHelper } from './../utils/helpers'
 
 export default {
   tweets: {
-    // 取得推文清單
+    // 取得所有推文
     get() {
       return apiHelper.get('/admin/tweets')
     },
@@ -12,4 +12,12 @@ export default {
       return apiHelper.delete(`/admin/tweets/${tweetId}`)
     }
   },
+
+
+  users: {
+    // 取得所有使用者
+    get() {
+      return apiHelper.get('/admin/users')
+    }
+  }
 }
