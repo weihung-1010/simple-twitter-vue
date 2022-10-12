@@ -11,7 +11,7 @@
           <div class="title">
             <h4 class="ml-4 pt-4">帳戶設定</h4>
           </div>
-          <div class="content pt-4">
+          <div class="content ">
             <form class="pl-4 pr-4">
               <div class="form-wrapper mt-4">
                 <label for="account">帳號</label>
@@ -28,7 +28,7 @@
                 </div>
               </div>
 
-              <div class="form-wrapper mt-2">
+              <div class="form-wrapper mt-4">
                 <label for="account">名稱</label>
                 <div>
                   <input
@@ -75,7 +75,7 @@
                 <span v-show="passwordError">密碼與確認密碼不符。</span>
               </div>
 
-              <div class="form-wrapper mt-4">
+              <div class="form-wrapper mt-2">
                 <label for="checkPassword">密碼確認</label>
                 <div>
                   <input

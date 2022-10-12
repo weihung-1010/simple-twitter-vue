@@ -11,9 +11,7 @@
       </div>
       <!-- FollowBoard -->
       <div class="col-2">
-        
-          <FollowBoard />
-        
+        <FollowBoard />
       </div>
     </div>
   </div>
