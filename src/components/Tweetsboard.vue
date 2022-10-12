@@ -50,8 +50,12 @@
         </div>
       </div>
       <div class="tweet-reply-heart d-flex">
-        <!-- 要跳出 modal -->
-        <div class="tweet-reply d-flex">
+        <!-- 跳出 modal -->
+        <div
+          class="tweet-reply d-flex"
+          data-toggle="modal"
+          data-target="#replyModal"
+        >
           <img
             class="icon-reoly-heart"
             src="https://i.postimg.cc/brT17wkK/message.png"
@@ -64,6 +68,86 @@
             src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
           />
           <p class="number">76</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- replyModal -->
+    <div
+      class="modal fade"
+      id="replyModal"
+      tabindex="-1"
+      aria-labelledby="replyModalLabe"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form class="form-wrapper" @submit.stop.prevent="handleSubmitReply">
+            <div class="modal-header">
+              <button
+                type="button"
+                class="close-btn"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <img
+                  class="iconX"
+                  aria-hidden="true"
+                  src="https://i.postimg.cc/G3MzrzPr/iconX.png"
+                  alt="close-icon"
+                />
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="tweet-area">
+                <div class="tweet">
+                  <img
+                    class="avatar"
+                    src="https://i.imgur.com/hAKcS3E.jpg"
+                    alt="avatar"
+                  />
+                  <div class="tweet-info">
+                    <div class="tweet-detail">
+                      <span class="user-name">Apple</span>
+                      <span class="account-created-time">@apple ‧1個月前</span>
+                    </div>
+                    <p class="tweet-text">測試1234567853334234567876533555</p>
+                    <div class="reply-to">
+                      <span>回覆給</span>&nbsp;<span class="reply-to-account"
+                        >@Apple</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="reply-area">
+                <div class="modal-user-avatar">
+                  <!-- 改 currentUser 的頭貼 -->
+                  <img
+                    class="modal-user-avatar"
+                    src="https://i.imgur.com/hAKcS3E.jpg"
+                    alt="avatar"
+                  />
+                </div>
+                <div class="modal-tweet-text">
+                  <textarea
+                    class="form-control"
+                    id="tweet-text"
+                    name="tweet-text"
+                    type="text"
+                    placeholder="推你的回覆"
+                    required
+                  />
+                </div>
+              </div>
+              <span
+                class="alert-msg"
+                v-if="description && description.trim().length === 0"
+                >內容不可空白</span
+              >
+              <button class="modal-reply-btn" type="submit">回覆</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -502,5 +586,154 @@ textarea {
 }
 .tweet-heart {
   padding-left: 41.3px;
+}
+
+// replyModal
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 634px;
+  height: 500px;
+  background-color: #ffffff;
+  background-clip: padding-box;
+  border-radius: 14px;
+  z-index: 10;
+  .form-wrapper {
+    .modal-header {
+      margin-top: -32px;
+      display: flex;
+      width: 100%;
+      height: 56px;
+      border-bottom: 1px solid #e6ecf0;
+      background-color: #ffffff;
+      .close-btn {
+        border: none;
+        background: #ffffff;
+      }
+      .iconX {
+        width: 15px;
+        height: 15px;
+      }
+    }
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 450px;
+      padding: 16px 24px;
+      background: #ffffff;
+      .tweet-area {
+        display: flex;
+        flex-direction: column;
+        .tweet {
+          display: flex;
+          position: relative;
+          // 連結線
+          &::before {
+            content: "";
+            position: absolute;
+            left: 25px;
+            top: 60px;
+            height: calc(100% - 45px); // 裝飾線長度自動調整
+            background-color: #b5b5be;
+            border-right: 1px solid #b5b5be;
+            border-left: 1px solid #b5b5be;
+          }
+          .avatar {
+            height: 50px;
+            width: 50px;
+            margin-right: 8px;
+            border-radius: 50%;
+          }
+          .tweet-info {
+            width: 85%;
+            display: flex;
+            flex-direction: column;
+            .tweet-detail {
+              width: 100%;
+              align-items: center;
+            }
+            .user-name {
+              font-size: 16px;
+              font-weight: 700;
+              color: #171725;
+              margin-right: 8px;
+            }
+            .account-created-time {
+              font-size: 14px;
+              font-weight: 400;
+              color: #6c757d;
+            }
+            .tweet-text {
+              width: 100%;
+              margin-left: -81px;
+              margin-top: 50px;
+              color: #171725;
+              font-size: 16px;
+              font-weight: 400;
+              // 避免文字過長溢出
+              overflow-wrap: break-word;
+            }
+            .reply-to {
+              width: 100%;
+              margin-top: -35px;
+              span {
+                font-size: 14px;
+                font-weight: 400;
+                color: #6c757d;
+              }
+              .reply-to-account {
+                color: #ff6600;
+              }
+            }
+          }
+        }
+      }
+      .reply-area {
+        display: flex;
+        flex: 1;
+        width: 100%;
+        margin-top: 23px;
+        .modal-user-avatar {
+          width: 50px;
+          height: 50px;
+          margin-right: 8px;
+          border-radius: 50%;
+        }
+        .modal-tweet-text {
+          flex: 1;
+          textarea {
+            width: 90%;
+            height: 75%;
+            border-radius: 5px;
+            padding: 0;
+            padding-top: 10px;
+          }
+        }
+      }
+      .alert-msg {
+        position: absolute;
+        right: 100px;
+        bottom: 28px;
+        font-size: 15px;
+        font-weight: 500;
+        color: #fc5a5a;
+      }
+      .modal-reply-btn {
+        width: 64px;
+        height: 40px;
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        font-size: 16px;
+        font-weight: 400;
+        background: #ff6600;
+        border-radius: 50px;
+        color: #ffffff;
+        border: none;
+      }
+    }
+  }
 }
 </style>
