@@ -2,30 +2,6 @@
 <template>
   <div class="tweets-container">
     <div class="tweets">
-      <div class="tweet">
-        <!-- Avatar -->
-        <div class="img-container">
-          <!-- 若無頭像則套用 emptyImage 濾鏡，改用替代圖片 -->
-          <img class="avatar" :src="avatar | emptyImage" alt="avatar" />
-        </div>
-
-        <!-- Tweet Details -->
-        <div class="detail-container">
-          <div class="tweet-owner">
-            <span class="owner-name">{{ name }}</span>
-            <span class="owner-account-datetime"
-              >@{{ account }}・{{ createdAt | fromNow }}</span
-            >
-          </div>
-          <div class="tweet-content">
-            {{ description | first50Letters }}
-          </div>
-          <button class="delete-btn" @click.prevent.stop="testBtnClick()">
-            ✕
-          </button>
-        </div>
-      </div>
-
       <div class="tweet" v-for="tweet in initialTweets" :key="tweet.id">
         <!-- Avatar -->
         <div class="img-container">
@@ -78,19 +54,7 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      avatar: null,
-      name: "Yuzu",
-      account: "yuzuxhi",
-      createdAt: "2022-10-11T21:27:48.000Z",
-      description: "1234567890123456789012345678901234567890123456789012345",
-    };
-  },
   methods: {
-    testBtnClick() {
-      console.log("hi, Yuzu!");
-    },
     async handleDeleteBtnClick(tweetId) {
       try {
         // 透過 API 請伺服器刪掉這篇推文
@@ -112,11 +76,6 @@ export default {
           title: "無法刪除此推文，請稍後再試",
         });
       }
-    },
-  },
-  filters: {
-    onlyDisplay50Letters(string) {
-      return string.length > 50 ? string.slice(0, 50) + "..." : string;
     },
   },
 };

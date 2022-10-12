@@ -4,10 +4,9 @@
 .list-wrapper {
   @include two-side-grey;
   margin-left: 10px;
-  height: 100vh; // 高度與螢幕等高
 
   .list-title {
-    @include bold-bottom-grey;
+    @include bottom-grey;
     position: sticky;
     top: 0;
     background-color: white;
