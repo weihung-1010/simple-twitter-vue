@@ -1,35 +1,54 @@
 
 <template>
-  <div class="users-container">
-    <div class="row">
-      <!-- card -->
-      <div class="col-3 card-container" v-for="user in users" :key="user.id">
+  <div class="users-list">
+    <div class="cards-container row">
+      <!-- 使用者卡片 -->
+      <div class="col-3 p-0" v-for="user in users" :key="user.id">
         <div class="card">
-          <div class="card-banner-container">
-            <img :src="user.cover" alt="cover" class="card-banner-img" />
+          <div class="banner">
+            <img :src="user.cover" alt="banner" />
           </div>
-          <div class="card-avatar-container">
-            <img class="card-avatar-img" :src="user.avatar" alt="avatar" />
-          </div>
-          <div class="card-body">
-            <div class="card-title">
-              <img
-                src="~@/assets/images/tweetPen@2x.png"
-                alt="pen-icon"
-                width="23.87px"
-              />
-              <span>{{ user.tweetCount }}</span>
-              <img
-                src="~@/assets/images/tweetLike@2x.png"
-                alt="pen-icon"
-                width="20.1px"
-              />
-              <span>{{ user.likeCount }}</span>
+          <img class="avatar" :src="user.avatar" alt="avatar" />
+          <div class="card-content">
+            <div class="name">
+              <p :title="user.name">{{ user.name }}</p>
             </div>
-            <div class="card-text">
-              <span>{{ user.followingCount }}</span
-              >跟隨中 <span>{{ user.followerCount }}</span
-              >跟隨者
+            <div class="account">
+              <p>@{{ user.account }}</p>
+            </div>
+            <div class="tweets-likes">
+              <div class="tweets-count">
+                <img
+                  class="pen-icon icon"
+                  src="~@/assets/images/tweetPen@2x.png"
+                  alt="pen-icon"
+                />
+                <span class="tweets-total">{{
+                  user.tweetCount | countConvert
+                }}</span>
+              </div>
+              <div class="likes-count">
+                <img
+                  class="like-icon icon"
+                  src="~@/assets/images/tweetLike@2x.png"
+                  alt="like-icon"
+                />
+                <span class="likes-total">{{
+                  user.likeCount | countConvert
+                }}</span>
+              </div>
+            </div>
+            <div class="followings-followers">
+              <div class="followings">
+                <span class="followings-count"
+                  >{{ user.followingCount | countConvert }} 個</span
+                ><span>跟隨中</span>
+              </div>
+              <div class="followers">
+                <span class="followers-count"
+                  >{{ user.followerCount | countConvert }} 位</span
+                ><span>跟隨者</span>
+              </div>
             </div>
           </div>
         </div>
@@ -39,8 +58,10 @@
 </template>
 
 <script>
+import { countConvertFilter } from "./../utils/mixins";
 export default {
   name: "AdminUsersList",
+  mixins: [countConvertFilter],
   props: {
     initialUsers: {
       type: Array,
@@ -55,6 +76,8 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "./../assets/scss/setups.scss";
+
+
+<style lang="scss" scoped>
+@import "./../assets/scss/adminUsers.scss";
 </style>

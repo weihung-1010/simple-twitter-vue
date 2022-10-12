@@ -61,7 +61,6 @@ export default {
         // 將 API 回傳的推文陣列存在 tweets 中
         this.tweets = data;
 
-        console.log("tweets array is: ", this.tweets); //待刪除
 
         // 成功取得資料後，讓 spinner 消失
         this.isLoading = false;
@@ -87,6 +86,6 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "./../assets/scss/adminTweets.scss";
 </style>

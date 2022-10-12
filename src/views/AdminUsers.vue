@@ -49,17 +49,12 @@ export default {
         this.isLoading = true;
 
         // 向 API 請求所有使用者資料
-        const res = await adminAPI.users.get();
-        console.log("res is: ", res);
-        const { data } = res;
-        console.log("data is: ", data); //待刪除
-
+        const { data } = await adminAPI.users.get();
         if (data.status === "error") {
           throw new Error(data.message);
         }
         // 將 API 回傳的使用者陣列存在 users 中
         this.users = data;
-        console.log("users array is: ", this.users); //待刪除
 
         // 成功取得資料後，讓 spinner 消失
         this.isLoading = false;
@@ -79,6 +74,6 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "./../assets/scss/adminUsers.scss";
 </style>
