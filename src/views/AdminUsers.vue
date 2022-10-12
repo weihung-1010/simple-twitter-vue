@@ -16,7 +16,7 @@
     </div>
   </div>
 </template>
-
+/320/240/scenery/
 
 <script>
 import Navbar from "./../components/Navbar.vue";
@@ -80,5 +80,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/admin.scss";
+@import "./../assets/scss/adminUsers.scss";
 </style>

@@ -9,7 +9,7 @@
       <div class="col-10">
         <div class="list-wrapper">
           <h4 class="list-title">推文清單</h4>
-          <Spinner v-if="isLoading" />
+          <Spinner class="spinner" v-if="isLoading" />
           <AdminTweetsList
             v-else
             :initial-tweets="tweets"
@@ -88,5 +88,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/admin.scss";
+@import "./../assets/scss/adminTweets.scss";
 </style>

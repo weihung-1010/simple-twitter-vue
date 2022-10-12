@@ -6,11 +6,7 @@
         <!-- Avatar -->
         <div class="img-container">
           <!-- 若無頭像則套用 emptyImage 濾鏡，改用替代圖片 -->
-          <!-- <img
-            class="avatar"
-            :src="tweet.User.avatar | emptyImage"
-            alt="avatar"
-          /> -->
+          <img class="avatar" :src="tweet.avatar | emptyImage" alt="avatar" />
         </div>
 
         <!-- Tweet Details -->
@@ -82,5 +78,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/admin.scss";
+@import "./../assets/scss/adminTweets.scss";
 </style>

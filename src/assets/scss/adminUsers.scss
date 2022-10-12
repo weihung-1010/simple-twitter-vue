@@ -1,0 +1,68 @@
+@import "./setups.scss";
+
+// AdminUsers.vue
+.list-wrapper {
+  border-left: 1px solid #e6ecf0;
+  margin-left: 10px;
+
+  .list-title {
+    @include two-side-grey;
+    @include bottom-grey;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    width: 100%;
+    height: 74px;
+    padding-left: 20.92px;
+    padding-top: 24px;
+    z-index: 999;
+  }
+}
+
+
+// AdminUsersList.vue
+.users-container {
+  width: 100%;
+  position: relative;
+  margin-top: 72px;
+}
+
+.card-container {
+  width: 249px;
+  height: 314px;
+  margin: 16px;
+  border-radius: 10px;
+  background-color: #f6f7f8;
+  margin: 16px;
+}
+
+.card-banner-container {
+  width: 249px;
+  height: 140px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  .card-banner-img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+}
+
+.card-avatar-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid white;
+
+  .card-avatar-img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
