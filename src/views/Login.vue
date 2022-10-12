@@ -20,7 +20,7 @@
             name="account"
             type="text"
             class="form"
-            :class="{ redBottomLine: errorMsg === '此帳號不存在!' }"
+            :class="{ redBottomLine: errorMsg === '此帳號不存在！' }"
             placeholder="請輸入帳號"
             required
             autofocus
@@ -40,7 +40,7 @@
             name="password"
             type="password"
             class="form"
-            :class="{ redBottomLine: errorMsg === '密碼錯誤!' }"
+            :class="{ redBottomLine: errorMsg === '密碼錯誤！' }"
             placeholder="請輸入密碼"
             autocomplete="current-password"
             required
@@ -136,12 +136,12 @@ export default {
         // 錯誤通知處理
         console.error(error.message);
         this.errorMsg = error.message;
-        if (error.message === "此帳號不存在!") {
+        if (error.message === "此帳號不存在！") {
           Toast.fire({
             icon: "error",
             title: "帳號不存在，請重新確認",
           });
-        } else if (error.message === "密碼錯誤!") {
+        } else if (error.message === "密碼錯誤！") {
           Toast.fire({
             icon: "error",
             title: "密碼錯誤，請重新輸入",

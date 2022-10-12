@@ -91,7 +91,6 @@ export default {
   },
   methods: {
     logout() {
-      console.log("登出");
       // 因為登出時會清空 currentUser 的資料，故先把 currentUser.role 記錄下來
       this.roleWhenLogin = this.currentUser.role;
 

@@ -1,9 +1,23 @@
 
 <template>
-  <div>
-    <Navbar />
-    <Spinner v-if="isLoading" />
-    <AdminTweetsList v-else :initial-tweets="tweets" />
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+        <Navbar />
+      </div>
+
+      <div class="col-10">
+        <div class="list-wrapper">
+          <h4 class="list-title">推文清單</h4>
+          <Spinner class="spinner" v-if="isLoading" />
+          <AdminTweetsList
+            v-else
+            :initial-tweets="tweets"
+            @after-delete-tweet="afterDeleteTweet"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,7 +43,7 @@ export default {
     };
   },
   created() {
-    // 載入頁面時取得推文清單
+    // 載入頁面時取得所有推文
     this.fetchTweets();
   },
   methods: {
@@ -37,13 +51,17 @@ export default {
       try {
         // 在取得資料前，讓 spinner 出現
         this.isLoading = true;
+
+        // 向 API 請求所有推文資料
         const { data } = await adminAPI.tweets.get();
-        console.log("data 是:", data); // 待刪除
 
         if (data.status === "error") {
           throw new Error(data.message);
         }
+        // 將 API 回傳的推文陣列存在 tweets 中
         this.tweets = data;
+
+
         // 成功取得資料後，讓 spinner 消失
         this.isLoading = false;
       } catch (error) {
@@ -58,11 +76,16 @@ export default {
         });
       }
     },
-    // // 刪除tweet
-    // afterTweetDelete(tweetId) {
-    //   // 過濾掉要刪除的tweet
-    //   this.tweets = this.tweets.filter((tweet) => tweet.id !== tweetId);
-    // },
+
+    // 刪除其中一篇推文
+    afterDeleteTweet(tweetId) {
+      // 將要刪除的推文過濾掉
+      this.tweets = this.tweets.filter((tweet) => tweet.id !== tweetId);
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "./../assets/scss/adminTweets.scss";
+</style>
