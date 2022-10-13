@@ -5,23 +5,9 @@ import Main from '../views/Main.vue'
 import Profile from '../views/Profile.vue'
 import Setting from '../views/Setting.vue'
 import store from './../store'
+import { Toast } from "./../utils/helpers";
 
 Vue.use(VueRouter)
-
-//To-do: 比 router.beforeEach 的 fetchCurrentUser 先執行，導致目前雖然可以阻止沒有權限的使用者進入後台頁，但是在後台時重新整理頁面後，會先抓不到 currentUser 的資料，而直接轉址到 not-found 頁面！
-// 避免沒有權限的使用者進入後台頁
-// 網址有變換時，會先確目前使用者的身份是否為 admin，不是即轉到 not-found 頁面
-const authorizeIsAdmin = (to, from, next) => {
-  const currentUser = store.state.currentUser;
-  //以下測試用
-  // console.log("router currentUser is", currentUser);
-  // console.log("routercurrentUser.role is ", currentUser.role);
-  if (currentUser && currentUser.role !== 'admin') {
-    next('not-found')
-    return
-  }
-  next()
-}
 
 
 const routes = [
@@ -40,7 +26,7 @@ const routes = [
   },
   {
     path: '/signup',
-    name: 'sign-in',
+    name: 'sign-up',
     component: () => import('../views/SignUp.vue')
   },
   {
@@ -76,15 +62,11 @@ const routes = [
     path: '/admin/tweets',
     name: 'admin-tweets',
     component: () => import('../views/AdminTweets.vue'),
-    // 進入前先驗證是否為 admin 身分 
-    beforeEnter: authorizeIsAdmin
   },
   {
     path: '/admin/users',
     name: 'admin-users',
     component: () => import('../views/AdminUsers.vue'),
-    // 進入前先驗證是否為 admin 身分
-    beforeEnter: authorizeIsAdmin
   },
 
   // not-found 頁面
@@ -101,66 +83,86 @@ const router = new VueRouter({
 
 
 
-// 每次切換路由都拉取一次 currentUser資料
-router.beforeEach((to, from, next) => {
-  // 使用 dispatch 呼叫 Vuex 內的 actions
-  store.dispatch('fetchCurrentUser')
+// 網址有變動時都重新拿取一次 currentUser 的資料
+router.beforeEach(async (to, from, next) => {
+  // 取出 localStorage 裡的 token
+  const token = localStorage.getItem('token')
+
+  // 不需要 token 即可進入的頁面
+  const pathWithoutToken = ['login', 'sign-up', 'admin']
+
+  // 管理員身分可以進入所有的頁面
+  const pathAllForAdmin = ['login', 'sign-up', 'admin', 'admin-tweets', 'admin-users']
+
+  // 只有管理員身分可以進入的頁面
+  const pathOnlyForAdmin = ['admin-tweets', 'admin-users']
+
+
+  // 在沒有登入的狀況下（沒有 token）, 若要進入需要驗證的頁面則轉址到登入頁
+  if (!token && !pathWithoutToken.includes(to.name)) {
+    Toast.fire({
+      icon: 'warning',
+      title: '無權查看該頁面，請先完成登入'
+    })
+    next('login')
+    return
+
+
+    // 在已登入的狀況下（有 token）
+  } else if (token) {
+    // 先取得目前登入者的資料，確認驗證狀態以及身分
+    let { isAuthenticated, role } = await store.dispatch('fetchCurrentUser')
+
+    // 在驗證無效的狀況下，若要進入需要驗證的頁面則轉址到登入頁
+    if (!isAuthenticated && !pathWithoutToken.includes(to.name)) {
+      Toast.fire({
+        icon: 'warning',
+        title: '無權查看該頁面，請先完成登入'
+      })
+      next('/login')
+      return
+    }
+
+
+    // 在驗證有效的狀況下，使用者若要進入註冊或前台登入頁，則轉址到首頁
+    if (isAuthenticated && role === 'user') {
+      if (to.name === 'sign-up' || to.name === 'login') {
+        next('/main')
+        return
+
+        // 使用者若要進入後台頁面，則跳出錯誤通知，並跳回原本的頁面
+      } else if (pathOnlyForAdmin.includes(to.name)) {
+        Toast.fire({
+          icon: 'warning',
+          title: '只有管理員可以查看後台，請先登出後再登入後台'
+        })
+        next(from)
+        return
+      }
+
+
+
+      // 在驗證有效的狀況下，管理員若要進入後台登入頁，則轉址到推文清單頁
+    } else if (isAuthenticated && role === 'admin') {
+      if (to.name === 'admin') {
+        next('/admin/tweets')
+        return
+
+        // 管理員若要進入前台的頁面, 則跳出錯誤通知，並跳回原本的頁面
+      } else if (!pathAllForAdmin.includes(to.name)) {
+        Toast.fire({
+          icon: 'warning',
+          title: '如欲查看前台頁面，請先登出後再登入前台'
+        })
+        next(from)
+        return
+      }
+    }
+    next()
+  }
+
   next()
 })
-// router.beforeEach(async (to, from, next) => {
-//   // 拿出token
-//   const token = localStorage.getItem('token')
-//   // 無須驗證即可瀏覽的頁面
-//   const pathWithoutToken = ['login', 'sign-up', 'admin-login']
-//   // 管理員可以去的頁面(包含無須驗證即可瀏覽的頁面)
-//   const pathAdminCanEnter = ['login', 'sign-up', 'admin-login', 'admin-tweets', 'admin-users']
-//   // 如果沒有token(沒有登入), 並且要去的頁面是其他需要驗證的頁面, 直接導向登入頁
-//   if (!token && !pathWithoutToken.includes(to.name)) {
-//     Toast.fire({
-//       icon: 'warning',
-//       title: '您無權訪問該頁面，請先進行登入'
-//     })
-//     next('login')
-//     return
-//     //如果有token
-//   } else if (token) {
-//     // fetchCurrentUser時, 取得是否通過驗證, 以及是user還是admin
-//     let { isAuthenticated, role } = await store.dispatch('fetchCurrentUser')
-//     // 驗證無效, 要去的地方是需驗證的頁面, 直接導向登入頁
-//     if (!isAuthenticated && !pathWithoutToken.includes(to.name)) {
-//       Toast.fire({
-//         icon: 'warning',
-//         title: '您無權訪問該頁面，請先進行登入'
-//       })
-//       next('/login')
-//       return
-//     }
-//     // 驗證有效, 且身分是user: 如果要去註冊或前台登入頁, 轉址到首頁
-//     if (isAuthenticated && role === 'user') {
-//       if (to.name === 'login' || to.name === 'sign-up') {
-//         next('/main/mainpage')
-//         return
-//       }
-//       // 驗證有效, 且身分是admin: 如果要去後台登入頁, 轉址到後台推文清單
-//     } else if (isAuthenticated && role === 'admin') {
-//       if (to.name === 'admin-login') {
-//         next('/admin/tweets')
-//         return
-//         // 如果要去管理員無權瀏覽的頁面, 轉址登入頁
-//       } else if (!pathAdminCanEnter.includes(to.name)) {
-//         Toast.fire({
-//           icon: 'warning',
-//           title: '您無權訪問該頁面，請先進行登入'
-//         })
-//         next('/login')
-//         return
-//       }
-//     }
-//     next()
-//   }
-
-//   next()
-// })
 
 
 export default router

@@ -6,9 +6,9 @@
       <div class="col-3 p-0" v-for="user in users" :key="user.id">
         <div class="card">
           <div class="banner">
-            <img :src="user.cover" alt="banner" />
+            <img :src="user.cover | emptyCover" alt="banner" />
           </div>
-          <img class="avatar" :src="user.avatar" alt="avatar" />
+          <img class="avatar" :src="user.avatar | emptyImage" alt="avatar" />
           <div class="card-content">
             <div class="name">
               <p :title="user.name">{{ user.name }}</p>
@@ -58,10 +58,14 @@
 </template>
 
 <script>
-import { countConvertFilter } from "./../utils/mixins";
+import {
+  countConvertFilter,
+  emptyImageFilter,
+  emptyCoverFilter,
+} from "./../utils/mixins";
 export default {
   name: "AdminUsersList",
-  mixins: [countConvertFilter],
+  mixins: [countConvertFilter, emptyImageFilter, emptyCoverFilter],
   props: {
     initialUsers: {
       type: Array,

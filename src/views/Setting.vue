@@ -206,7 +206,7 @@ export default {
         (this.id = this.currentUser.id);
     },
     // 送出表單
-    async handleSubmit(formData) {
+    async handleSubmit() {
       try {
         // 重新設定錯誤訊息
         this.errorMsg = "";
@@ -257,31 +257,15 @@ export default {
         // STEP1. 讓註冊按鈕失效
         this.isProcessing = true;
 
-        // 待刪除
-        // const submitData = JSON.stringify({
-        //   account: this.account,
-        //   name: this.name,
-        //   email: this.email,
-        //   password: this.password,
-        //   checkPassword: this.checkPassword,
-        // });
-
-        // 待刪除
-        // const form = e.target;
-        // const formData = new FormData(form);
-        // for (let [name, value] of formData.entries()) {
-        //   console.log(name + ":" + value);
-        // }
-        // console.log("formData.entries is:", formData.entries());
-        // const a = formData.entries();
-
         // STEP2. 將註冊資料透過 API 送回伺服器新增，並取得回傳的資料
         const { data } = await userAPI.update({
           userId: this.id,
-          formData,
+          account: this.account,
+          name: this.name,
+          email: this.email, 
+          password: this.password,
+          checkPassword: this.checkPassword,
         });
-
-        console.log("data is:", data); //待刪除
 
         // 更新資料若失敗，API 回傳錯誤
         if (data.status === "error") {
@@ -291,7 +275,7 @@ export default {
         // 成功更新資料
         Toast.fire({
           icon: "success",
-          title: "成功更新帳戶資料",
+          title: "帳號已更新！",
         });
 
         // 更新後將密碼欄位清空
@@ -308,17 +292,17 @@ export default {
 
         // 錯誤通知處理
         console.error(error.message);
-        if (error.message === "此帳號已註冊過！") {
+        if (error.message === "此帳號已有人使用！") {
           this.errorMsg = error.message;
           Toast.fire({
             icon: "error",
-            title: "請改用其他帳號註冊",
+            title: "請改輸入其他帳號",
           });
-        } else if (error.message === "此信箱已註冊過！") {
+        } else if (error.message === "此信箱已有人使用！") {
           this.errorMsg = error.message;
           Toast.fire({
             icon: "error",
-            title: "請改用其他 Email 註冊",
+            title: "請改輸入其他 Email",
           });
         } else if (error.message === "請輸入正確信箱地址") {
           Toast.fire({
