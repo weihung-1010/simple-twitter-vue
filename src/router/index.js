@@ -8,14 +8,14 @@ import store from './../store'
 
 Vue.use(VueRouter)
 
+//To-do: 比 router.beforeEach 的 fetchCurrentUser 先執行，導致目前雖然可以阻止沒有權限的使用者進入後台頁，但是在後台時重新整理頁面後，會先抓不到 currentUser 的資料，而直接轉址到 not-found 頁面！
 // 避免沒有權限的使用者進入後台頁
 // 網址有變換時，會先確目前使用者的身份是否為 admin，不是即轉到 not-found 頁面
 const authorizeIsAdmin = (to, from, next) => {
-
   const currentUser = store.state.currentUser;
-  console.log("router currentUser is", currentUser);
-  console.log("router currentUser.role is ", currentUser.role);
-
+  //以下測試用
+  // console.log("router currentUser is", currentUser);
+  // console.log("routercurrentUser.role is ", currentUser.role);
   if (currentUser && currentUser.role !== 'admin') {
     next('not-found')
     return
@@ -77,12 +77,14 @@ const routes = [
     name: 'admin-tweets',
     component: () => import('../views/AdminTweets.vue'),
     // 進入前先驗證是否為 admin 身分 
+    beforeEnter: authorizeIsAdmin
   },
   {
     path: '/admin/users',
     name: 'admin-users',
     component: () => import('../views/AdminUsers.vue'),
-    beforeEnter: authorizeIsAdmin  // 進入前先驗證是否為 admin 身分
+    // 進入前先驗證是否為 admin 身分
+    beforeEnter: authorizeIsAdmin
   },
 
   // not-found 頁面
@@ -97,11 +99,6 @@ const router = new VueRouter({
   routes
 })
 
-//待刪除
-// router.beforeEach((to, from, next) => {
-//   console.log("beforeEach", { to, from })
-//   next()
-// })
 
 
 // 每次切換路由都拉取一次 currentUser資料
