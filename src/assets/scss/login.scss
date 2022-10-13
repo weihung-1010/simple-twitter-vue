@@ -4,9 +4,11 @@
 }
 
 .form-wrapper {
+  margin-bottom: 8px;
   background-color: #F5F8FA;
   color: #696974;
   border-radius: 2px;
+
 }
 
 label {
@@ -42,7 +44,7 @@ label {
     font-size: 12px;
     font-weight: 500;
     line-height: 20px;
-    margin-top: 4px;
+    margin-top: 0px;
   }
 }
 
@@ -55,7 +57,7 @@ label {
     font-size: 12px;
     font-weight: 500;
     color: dark-80-color;
-    margin-top: 4px;
+    margin-top: 1px;
   }
 }
 
@@ -91,4 +93,3 @@ label {
   border-radius: 50px;
   margin-top: 40px;
 }
-

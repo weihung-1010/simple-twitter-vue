@@ -22,10 +22,24 @@
                     name="account"
                     type="text"
                     class="form"
+                    :class="{ redBottomLine: errorMsg === '此帳號已註冊過！' }"
                     placeholder="請輸入帳號"
                     required
                     autofocus
                   />
+                  <div class="error-alert">
+                    <span v-if="errorMsg === '此帳號已註冊過！'"
+                      >帳號已重複註冊</span
+                    >
+                  </div>
+                  <div class="alert-container">
+                    <span class="error-alert" v-if="account.length > 15"
+                      >字數超過上限</span
+                    >
+                    <span class="letter-count" v-if="account.length > 0"
+                      >{{ account.length }}/15</span
+                    >
+                  </div>
                 </div>
               </div>
 
@@ -38,10 +52,19 @@
                     name="name"
                     type="text"
                     class="form"
+                    :class="{ redBottomLine: name.length > 50 }"
                     placeholder="請輸入使用者名稱"
                     required
                     autofocus
                   />
+                  <div class="alert-container">
+                    <span class="error-alert" v-if="name.length > 50"
+                      >字數超過上限</span
+                    >
+                    <span class="letter-count" v-if="name.length > 0"
+                      >{{ name.length }}/50</span
+                    >
+                  </div>
                 </div>
               </div>
 
@@ -54,10 +77,25 @@
                     name="email"
                     type="email"
                     class="form"
+                    :class="{
+                      redBottomLine:
+                        errorMsg === '此信箱已註冊過！' ||
+                        errorMsg === '請輸入正確信箱地址',
+                    }"
                     placeholder="請輸入 Email"
                     required
                     autofocus
                   />
+                  <div class="error-alert">
+                    <span v-if="errorMsg === '此信箱已註冊過！'"
+                      >信箱已重複註冊</span
+                    >
+                  </div>
+                  <div class="error-alert">
+                    <span v-if="errorMsg === '請輸入正確信箱地址'"
+                      >信箱格式錯誤</span
+                    >
+                  </div>
                 </div>
               </div>
 
@@ -76,7 +114,7 @@
                 </div>
               </div>
 
-              <div class="form-wrapper mt-2">
+              <div class="form-wrapper mt-4">
                 <label for="checkPassword">密碼確認</label>
                 <div>
                   <input
@@ -85,9 +123,17 @@
                     name="checkPassword"
                     type="password"
                     class="form"
+                    :class="{
+                      redBottomLine: errorMsg === '密碼與確認密碼不相符',
+                    }"
                     placeholder="請再次輸入密碼"
                     required
                   />
+                  <div class="error-alert">
+                    <span v-if="errorMsg === '密碼與確認密碼不相符'"
+                      >密碼不一致</span
+                    >
+                  </div>
                 </div>
               </div>
 
@@ -159,9 +205,13 @@ export default {
         (this.email = this.currentUser.email),
         (this.id = this.currentUser.id);
     },
-    async handleSubmit(e) {
+    async handleSubmit(formData) {
       try {
+        // 重新設定錯誤訊息
         this.errorMsg = "";
+
+        // 表單驗證失敗
+        // STEP1. 攔截惡意拿掉帳密 required 屬性而送出表單的狀況
         if (
           !this.account.trim() ||
           !this.email.trim() ||
@@ -171,79 +221,96 @@ export default {
         ) {
           Toast.fire({
             icon: "warning",
-            title: "請輸入所有欄位，如不更新密碼，請輸入舊密碼",
+            title: "請輸入所有的欄位",
           });
           return;
-        } else if (this.password !== this.checkPassword) {
-          this.password = "";
+
+          // STEP2. 在回傳伺服器前先檢查帳號字數
+        } else if (this.account.length > 15) {
+          Toast.fire({
+            icon: "warning",
+            title: "帳號不可超過 15 字",
+          });
+          return;
+
+          // STEP3. 在回傳伺服器前先檢查名稱字數
+        } else if (this.name.length > 50) {
+          Toast.fire({
+            icon: "warning",
+            title: "名稱不可超過 50 字",
+          });
+          return;
+
+          // STEP4. 在回傳伺服器前先檢查兩次密碼輸入的長度是否一致
+        } else if (this.password.length !== this.checkPassword.length) {
           this.checkPassword = "";
+          this.errorMsg = "密碼與確認密碼不相符";
           Toast.fire({
             icon: "warning",
             title: "兩次密碼輸入不同",
           });
           return;
-        } else if (this.name.length > 50) {
-          Toast.fire({
-            icon: "warning",
-            title: "暱稱不可超過50字",
-          });
-          return;
         }
-        this.isProcessing = true;
-        const form = e.target;
-        const formData = new FormData(form);
 
-        const response = await userAPI.update({
+        // 表單驗證成功：全部欄位皆有填寫
+        // STEP1. 讓註冊按鈕失效
+        this.isProcessing = true;
+
+        // STEP2. 將註冊資料透過 API 送回伺服器新增，並取得回傳的資料
+        const { data } = await userAPI.update({
           userId: this.id,
           formData,
         });
-        const { data } = response;
-        if (response.statusText !== "OK") {
+
+        console.log("data is:", data); //待刪除
+
+        // 更新資料若失敗，API 回傳錯誤
+        if (data.status === "error") {
           throw new Error(data.message);
         }
+
+        // 成功更新資料
         Toast.fire({
           icon: "success",
-          title: "更新帳戶資料成功",
+          title: "成功更新帳戶資料",
         });
 
-        // 更新成功, 清空密碼
+        // 更新後將密碼欄位清空
         this.password = "";
         this.checkPassword = "";
+
+        // 還原按鈕狀態
         this.isProcessing = false;
+
+        // 更新失敗
       } catch (error) {
+        // 因為更新失敗，所以要把按鈕狀態還原
         this.isProcessing = false;
+
+        // 錯誤通知處理
         console.error(error.message);
-        if (error.message === "The email is registered.") {
+        if (error.message === "此帳號已註冊過！") {
           this.errorMsg = error.message;
           Toast.fire({
             icon: "error",
-            title: "Email已重複註冊！",
+            title: "請改用其他帳號註冊",
           });
-        } else if (error.message === "The account is registered.") {
+        } else if (error.message === "此信箱已註冊過！") {
           this.errorMsg = error.message;
           Toast.fire({
             icon: "error",
-            title: "account已重複註冊！",
+            title: "請改用其他 Email 註冊",
           });
-        } else if (error.message === "Name is too long.") {
-          this.errorMsg = error.message;
+        } else if (error.message === "請輸入正確信箱地址") {
           Toast.fire({
             icon: "error",
-            title: "暱稱不可超過50字",
+            title: "請輸入正確的信箱格式",
           });
-        } else if (
-          error.message === "Password and checkPassword are not same."
-        ) {
-          this.errorMsg = error.message;
+        } else if (error.message === "密碼與確認密碼不相符") {
+          this.checkPassword = "";
           Toast.fire({
             icon: "error",
-            title: "兩次密碼輸入不相符",
-          });
-        } else if (error.message === "Invalid email address.") {
-          this.errorMsg = error.message;
-          Toast.fire({
-            icon: "error",
-            title: "Email格式錯誤，請填入有效的Email地址",
+            title: "兩次密碼輸入不同",
           });
         } else {
           this.errorMsg = error.message;
@@ -271,7 +338,8 @@ export default {
   padding-bottom: 24px;
 }
 .form-wrapper {
-  width: 589px;
+  width: 593px;
+  height: 54px;
 }
 .btn {
   background: #ff6600;

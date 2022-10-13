@@ -222,7 +222,7 @@ export default {
           checkPassword: this.checkPassword,
         });
 
-        // STEP3-1. 註冊資料若失敗，API 回傳錯誤
+        // 註冊資料若失敗，API 回傳錯誤
         if (data.status === "error") {
           throw new Error(data.message);
         }

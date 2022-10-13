@@ -8,6 +8,6 @@ export default {
 
   // 編輯目前使用者的帳號資料
   update({ userId, formData }) {
-    return apiHelper.put(`/current/${userId}`, formData)
+    return apiHelper.put(`/current_user/${userId}`, formData)
   },
 }
