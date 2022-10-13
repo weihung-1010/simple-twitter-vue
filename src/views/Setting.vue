@@ -205,6 +205,7 @@ export default {
         (this.email = this.currentUser.email),
         (this.id = this.currentUser.id);
     },
+    // 送出表單
     async handleSubmit(formData) {
       try {
         // 重新設定錯誤訊息
@@ -255,6 +256,24 @@ export default {
         // 表單驗證成功：全部欄位皆有填寫
         // STEP1. 讓註冊按鈕失效
         this.isProcessing = true;
+
+        // 待刪除
+        // const submitData = JSON.stringify({
+        //   account: this.account,
+        //   name: this.name,
+        //   email: this.email,
+        //   password: this.password,
+        //   checkPassword: this.checkPassword,
+        // });
+
+        // 待刪除
+        // const form = e.target;
+        // const formData = new FormData(form);
+        // for (let [name, value] of formData.entries()) {
+        //   console.log(name + ":" + value);
+        // }
+        // console.log("formData.entries is:", formData.entries());
+        // const a = formData.entries();
 
         // STEP2. 將註冊資料透過 API 送回伺服器新增，並取得回傳的資料
         const { data } = await userAPI.update({
