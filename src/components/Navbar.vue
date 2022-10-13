@@ -34,7 +34,79 @@
           />
           <h5>設定</h5>
         </router-link>
-        <button class="btn btn-primary btn-post-tweet">推文</button>
+        <button
+          class="btn btn-primary btn-post-tweet"
+          data-toggle="modal"
+          data-target="#createTweetModal"
+        >
+          推文
+        </button>
+
+        
+        <!-- createTweetModal -->
+        <div>
+          <div
+            class="modal fade"
+            id="createTweetModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="createTweetModal"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <div>
+                    <button
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <div class="">
+                    <div class="avatar-container">
+                      <img
+                        class="avatar"
+                        src="https://i.imgur.com/hAKcS3E.jpg"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+
+                  <div class="modal-text">
+                    <div class="d-flex ">
+                      <form class="modal-form">
+                        <textarea
+                          placeholder="你有什麼新鮮事？"
+                          required
+                        ></textarea>
+                        <div class="modal-footer">
+                          <div class="modal-error">
+                            <span class="alert-error">
+                              字數不可超過140字
+                            </span>
+                            <span class="alert-error"> 內容不可空白 </span>
+                          </div>
+                          <button
+                            type="button"
+                            @click.prevent.stop="postTweetModal"
+                            class="create-btn"
+                          >
+                            推文
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </template>
 
       <!-- 登入者身分為 admin 時顯示 -->
@@ -202,4 +274,6 @@ export default {
     }
   }
 }
+
+// createTweetModal
 </style>

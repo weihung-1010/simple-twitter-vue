@@ -141,7 +141,7 @@
                 </div>
               </div>
               <span
-                class="alert-msg"
+                class="alert-error"
                 v-if="description && description.trim().length === 0"
                 >內容不可空白</span
               >
@@ -598,7 +598,6 @@ textarea {
   background-color: #ffffff;
   background-clip: padding-box;
   border-radius: 14px;
-  z-index: 10;
   .form-wrapper {
     .modal-header {
       margin-top: -32px;
@@ -712,7 +711,7 @@ textarea {
           }
         }
       }
-      .alert-msg {
+      .alert-error {
         position: absolute;
         right: 100px;
         bottom: 28px;
