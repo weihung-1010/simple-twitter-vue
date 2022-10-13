@@ -70,6 +70,7 @@ export default {
   },
   data() {
     return {
+      // 由於 API 回傳的 initialUsers 裡包含 root admin，因此要先過濾掉
       users: this.initialUsers.filter((user) => user.account != "root"),
     };
   },

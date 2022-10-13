@@ -16,7 +16,7 @@
     </div>
   </div>
 </template>
-/320/240/scenery/
+
 
 <script>
 import Navbar from "./../components/Navbar.vue";

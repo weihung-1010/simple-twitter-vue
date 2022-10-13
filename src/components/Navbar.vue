@@ -2,8 +2,33 @@
   <div class="navbar">
     <!-- 導覽列標籤 -->
     <div class="nav-tags">
+      <!-- 登入者身分為 admin 時顯示 -->
+      <template v-if="currentUser.role === 'admin'">
+        <img
+          class="logo mb-4"
+          src="https://i.postimg.cc/Dfp23k8g/logo-2x.png"
+        />
+        <router-link :to="{ name: 'admin-tweets' }" class="tab">
+          <img class="icon" src="https://i.postimg.cc/MK4VTFr0/home.png" />
+          <img
+            class="icon-active"
+            src="https://i.postimg.cc/V6WM7sgm/Home-Active.png"
+          />
+          <h5>推文清單</h5>
+        </router-link>
+
+        <router-link :to="{ name: 'admin-users' }" class="tab">
+          <img class="icon" src="https://i.postimg.cc/L8VJKQf3/User.png" />
+          <img
+            class="icon-active"
+            src="https://i.postimg.cc/j2VxJyPj/User-Active.png"
+          />
+          <h5>使用者列表</h5>
+        </router-link>
+      </template>
+
       <!-- 登入者身分為 user 時顯示 -->
-      <template v-if="currentUser.role === 'user'">
+      <template v-else>
         <img
           class="logo mb-4"
           src="https://i.postimg.cc/Dfp23k8g/logo-2x.png"
@@ -42,7 +67,6 @@
           推文
         </button>
 
-        
         <!-- createTweetModal -->
         <div>
           <div
@@ -78,7 +102,7 @@
                   </div>
 
                   <div class="modal-text">
-                    <div class="d-flex ">
+                    <div class="d-flex">
                       <form class="modal-form">
                         <textarea
                           placeholder="你有什麼新鮮事？"
@@ -86,9 +110,7 @@
                         ></textarea>
                         <div class="modal-footer">
                           <div class="modal-error">
-                            <span class="alert-error">
-                              字數不可超過140字
-                            </span>
+                            <span class="alert-error"> 字數不可超過140字 </span>
                             <span class="alert-error"> 內容不可空白 </span>
                           </div>
                           <button
@@ -107,31 +129,6 @@
             </div>
           </div>
         </div>
-      </template>
-
-      <!-- 登入者身分為 admin 時顯示 -->
-      <template v-else>
-        <img
-          class="logo mb-4"
-          src="https://i.postimg.cc/Dfp23k8g/logo-2x.png"
-        />
-        <router-link :to="{ name: 'admin-tweets' }" class="tab">
-          <img class="icon" src="https://i.postimg.cc/MK4VTFr0/home.png" />
-          <img
-            class="icon-active"
-            src="https://i.postimg.cc/V6WM7sgm/Home-Active.png"
-          />
-          <h5>推文清單</h5>
-        </router-link>
-
-        <router-link :to="{ name: 'admin-users' }" class="tab">
-          <img class="icon" src="https://i.postimg.cc/L8VJKQf3/User.png" />
-          <img
-            class="icon-active"
-            src="https://i.postimg.cc/j2VxJyPj/User-Active.png"
-          />
-          <h5>使用者列表</h5>
-        </router-link>
       </template>
     </div>
 
@@ -154,7 +151,7 @@ export default {
   name: "Navbar",
   // 取得並載入 Vuex state 中的 currentUser 資料
   computed: {
-    ...mapState(["currentUser"]),
+    ...mapState(["currentUser", "isAuthenticated"]),
   },
   data() {
     return {
