@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
-import Main from '../views/Main.vue'
+import Main from '../views/NewMain.vue'
 import Profile from '../views/Profile.vue'
 import Setting from '../views/Setting.vue'
 import store from './../store'
@@ -29,11 +29,34 @@ const routes = [
     name: 'sign-up',
     component: () => import('../views/SignUp.vue')
   },
+  // {
+  //   path: '/main',
+  //   name: 'main',
+  //   component: Main
+  // },
+
   {
-    path: '/main',
+    path: '/main/',
     name: 'main',
-    component: Main
+    redirect: '/main/mainpage',
+    component: Main,
+    children: [
+      {
+        name: 'main-page',
+        path: 'mainpage',
+        component: () => import('../views/MainPage'),
+      },
+      // {
+      //   name: 'reply-list',
+      //   path: 'replylist/:id',
+      //   component: () => import('../views/ReplyList'),
+      // },
+    ]
   },
+
+
+
+
   {
     path: '/profile',
     name: 'profile',
@@ -83,7 +106,7 @@ const router = new VueRouter({
 
 
 
-// 網址有變動時都重新拿取一次 currentUser 的資料
+// 驗證：網址有變動時都重新拿取一次 currentUser 的資料
 router.beforeEach(async (to, from, next) => {
   // 取出 localStorage 裡的 token
   const token = localStorage.getItem('token')
