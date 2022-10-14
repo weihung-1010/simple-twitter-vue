@@ -15,8 +15,8 @@
         <p class="name">user1</p>
         <p class="account">@uesr1</p>
       </div>
-      <button class="btn-follow ">正在跟隨</button>
-      <button class="btn-unfollow ">跟隨</button>
+      <button class="btn-follow btn-info">正在跟隨</button>
+      <button class="btn-unfollow btn-info">跟隨</button>
     </div>
     <!-- 串接API時刪除 -->
     <div class="followboard-lists">
@@ -31,8 +31,8 @@
         <p class="name">user1</p>
         <p class="account">@uesr1</p>
       </div>
-      <button class="btn-follow ">正在跟隨</button>
-      <button class="btn-unfollow ">跟隨</button>
+      <button class="btn-follow btn-info">正在跟隨</button>
+      <button class="btn-unfollow btn-info">跟隨</button>
     </div>
 
     <div class="followboard-lists">
@@ -47,8 +47,8 @@
         <p class="name">user1</p>
         <p class="account">@uesr1</p>
       </div>
-      <button class="btn-follow ">正在跟隨</button>
-      <button class="btn-unfollow ">跟隨</button>
+      <button class="btn-follow btn-info">正在跟隨</button>
+      <button class="btn-unfollow btn-info">跟隨</button>
     </div>
   </div>
 </template>

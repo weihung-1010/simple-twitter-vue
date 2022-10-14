@@ -60,7 +60,7 @@
           <h5>設定</h5>
         </router-link>
         <button
-          class="btn btn-primary btn-post-tweet"
+          class="btn btn-primary btn-post-tweet btn-info"
           data-toggle="modal"
           data-target="#createTweetModal"
         >
@@ -116,7 +116,7 @@
                           <button
                             type="button"
                             @click.prevent.stop="postTweetModal"
-                            class="create-btn"
+                            class="btn btn-info create-btn"
                           >
                             推文
                           </button>

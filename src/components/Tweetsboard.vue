@@ -17,7 +17,7 @@
             </router-link>
             <textarea type="text" placeholder="有什麼新鮮事？" />
             <div class="input-footer">
-              <button type="submit" class="btn-tweet">推文</button>
+              <button type="submit" class="btn-tweet btn-info btn">推文</button>
             </div>
           </div>
         </div>
