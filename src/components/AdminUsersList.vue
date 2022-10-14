@@ -6,9 +6,9 @@
       <div class="col-3 p-0" v-for="user in users" :key="user.id">
         <div class="card">
           <div class="banner">
-            <img :src="user.cover" alt="banner" />
+            <img :src="user.cover | emptyCover" alt="banner" />
           </div>
-          <img class="avatar" :src="user.avatar" alt="avatar" />
+          <img class="avatar" :src="user.avatar | emptyImage" alt="avatar" />
           <div class="card-content">
             <div class="name">
               <p :title="user.name">{{ user.name }}</p>
@@ -58,10 +58,14 @@
 </template>
 
 <script>
-import { countConvertFilter } from "./../utils/mixins";
+import {
+  countConvertFilter,
+  emptyImageFilter,
+  emptyCoverFilter,
+} from "./../utils/mixins";
 export default {
   name: "AdminUsersList",
-  mixins: [countConvertFilter],
+  mixins: [countConvertFilter, emptyImageFilter, emptyCoverFilter],
   props: {
     initialUsers: {
       type: Array,
@@ -70,6 +74,7 @@ export default {
   },
   data() {
     return {
+      // 由於 API 回傳的 initialUsers 裡包含 root admin，因此要先過濾掉
       users: this.initialUsers.filter((user) => user.account != "root"),
     };
   },

@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import userAPI from "./../apis/user"
+
 
 Vue.use(Vuex)
+
 
 export default new Vuex.Store({
   // 用來放置資料的地方
@@ -49,6 +52,33 @@ export default new Vuex.Store({
   },
   // 以 dispatch 來發動，用來設定其他的非同步函式：透過 API 請求資料等
   actions: {
+    // 透過 API 請求目前登入者的資料
+    async fetchCurrentUser({ commit }) {
+      try {
+        const { data } = await userAPI.getCurrentUser()
+        if (data.status === 'error') {
+          throw new Error(data.message)
+        }
+        // 成功取得資料，代表有確實登入
+        // 重新設定 currentUser 的資料
+        const { id, name, account, email, avatar, role } = data
+        commit('setCurrentUser', {
+          id, name, account, email, avatar, role
+        })
+
+        // 待刪除
+        console.log("store currentUser is", this.state.currentUser);
+        console.log("store currentUser.role is ", this.state.currentUser.role);
+
+        return { isAuthenticated: true, role: this.state.currentUser.role }
+
+        // 無法取得資料，代表沒有確實登入
+      } catch (error) {
+        console.error(error.message)
+        commit('revokeAuthentication');
+        return { isAuthenticated: false, role: '' };
+      }
+    },
   },
   modules: {
   }

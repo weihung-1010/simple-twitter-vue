@@ -15,7 +15,16 @@ export const fromNowFilter = {
 export const emptyImageFilter = {
   filters: {
     emptyImage(src) {
-      return src || require('./../assets/images/noImage@2x.png')
+      return src || "https://i.imgur.com/hAKcS3E.jpg"
+    }
+  }
+}
+
+// 空白背景濾鏡：若無上傳背景則套用此替代影像
+export const emptyCoverFilter = {
+  filters: {
+    emptyCover(src) {
+      return src || require("../assets/images/Night.jpg")
     }
   }
 }
