@@ -17,7 +17,7 @@
           :newReply="newReply"
           :popular="topPopular"
           @after-click-reply="afterClickReply"
-          class="col-7"
+          
         />
       </div>
 
@@ -37,14 +37,14 @@
 </template>
 
 <script>
-import Followboard from "../components/Followboard.vue";
 import Navbar from "../components/Navbar.vue";
-import TweetModal from "../components/TweetModal.vue";
-import ReplyModal from "../components/ReplyModal.vue";
 import Spinner from "../components/Spinner.vue";
+import Followboard from "../components/Followboard.vue";
+import TweetModal from "../components/TweetModal";
+import ReplyModal from "../components/ReplyModal.vue";
+import tweetsAPI from "../apis/tweets";
 import { mapState } from "vuex";
 import { Toast } from "../utils/helpers";
-import tweetsAPI from "../apis/tweets";
 
 export default {
   name: "NewMain",
@@ -61,69 +61,102 @@ export default {
   data() {
     return {
       tweets: [],
-      replyModalData: {},
+      replyModalData: {}, // 要傳到 ReplyModal 的資料
       newReply: {},
-      theTweetId: -1, //及時增加留言數使用
+      theTweetId: -1, //即時增加留言數使用
       isLoading: true,
     };
   },
   created() {
+    // 載入頁面時取得所有推文
     this.fetchTweets();
   },
   methods: {
+    // 透過 API 取得所有推文
     async fetchTweets() {
       try {
+        // 在取得資料前，讓 spinner 出現
         this.isLoading = true;
+
+        // 向 API 請求所有推文資料
         const response = await tweetsAPI.tweets.getTweets();
         if (response.statusText !== "OK") {
-          throw new Error("無法取得推文資料，請稍後再試");
+          throw new Error("無法取得推文，請稍後再試");
         }
+
+        // 將回傳的所有推文資料指派給 tweets
         this.tweets = response.data;
+
+        // 成功取得資料後，讓 spinner 消失
         this.isLoading = false;
       } catch (error) {
+        // 確定無法資料後，讓 spinner 消失
         this.isLoading = false;
+
+        // 報錯
         console.error(error.message);
         Toast.fire({
           icon: "error",
-          title: "無法取得推文資料，請稍後再試",
+          title: "無法取得推文，請稍後再試",
         });
       }
     },
+
     mainAfterSubmitReply(id) {
       //即時顯示留言數字 + 1
       this.theTweetId = id;
     },
+
+    // 按下推文按鈕後，將新推文的資料加入推文清單中
     afterSubmitTweet(payload) {
-      const { tweetId, description } = payload;
-      // 新增的推文加入下面的推文清單中
-      this.tweets.unshift({
-        id: tweetId,
-        description: description,
-        likeCount: 0,
-        replyCount: 0,
-        isLiked: false,
-        createdAt: new Date(),
-        User: {
-          id: this.currentUser.id,
-          name: this.currentUser.name,
-          avatar: this.currentUser.avatar,
-          account: this.currentUser.account,
-        },
-      });
-    },
-    afterClickReply(payload) {
-      // 點擊回覆，顯示 modal 使用的資料
-      const { id, description, User, createdAt } = payload;
-      this.replyModalData = {
+      const {
         id,
         description,
-        userName: User.name,
-        userAccount: User.account,
-        userAvatar: User.avatar,
-        createdAt: createdAt,
+        UserId,
+        account,
+        commentCount,
+        createdAt,
+        likeCount,
+        name,
+        avatar,
+      } = payload;
+
+      // 待刪除
+      console.log("afterSubmitTweet payload is: ", payload);
+
+      this.tweets.unshift({
+        id, // tweetID
+        UserId,
+        description,
+        account,
+        name,
+        createdAt,
+        likeCount,
+        commentCount,
+        avatar,
+        isLiked: false,
+      });
+    },
+
+    // 點擊留言圖示後，將該則推文的資料傳給 replyModal
+    afterClickReply(payload) {
+      const { id, avatar, name, account, createdAt, description } = payload;
+
+      // 待刪除
+      console.log("reply icon payload is: ", payload);
+
+      this.replyModalData = {
+        id, // tweetID
+        avatar,
+        name,
+        account,
+        createdAt,
+        description,
       };
     },
   },
 };
 </script>
+
+
 

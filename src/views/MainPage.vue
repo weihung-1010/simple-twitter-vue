@@ -10,11 +10,11 @@
         <div class="tweet-wrapper">
           <div class="avatar-input d-flex">
             <!-- 使用者頭像（點擊後會連到該用戶的個人資料頁） -->
-            <!-- 待新增 router-link  -->
+            <!-- 待新增 router-link：目前使用者的個人資料頁  -->
             <router-link to="">
               <img
                 class="user-avatar"
-                :src="currentUser.avatar"
+                :src="currentUser.avatar | emptyImage"
                 alt="user-avatar"
               />
             </router-link>
@@ -30,7 +30,7 @@
                 <span v-if="description.length > 140" class="alert-error">
                   字數不可超過140字
                 </span>
-                <!-- 待新增 -->
+                <!-- 待新增功能 -->
                 <!-- <span v-if="description.length === "0" class="alert-error"> 內容不可空白 </span> -->
               </div>
               <button type="submit" class="btn-tweet btn-info btn">推文</button>
@@ -52,9 +52,11 @@ import TweetsWall from "../components/TweetsWall.vue";
 import { Toast } from "./../utils/helpers";
 import tweetsAPI from "./../apis/tweets";
 import { mapState } from "vuex";
+import { emptyImageFilter } from "./../utils/mixins";
 
 export default {
   name: "MainPage",
+  mixins: [emptyImageFilter],
   components: {
     TweetsWall,
   },
@@ -110,40 +112,46 @@ export default {
           });
           return;
         }
-        // api post
-        const response = await tweetsAPI.tweets.create({
-          userId: this.currentUser.id,
+
+        // 向 API 請求建立新推文並接受回傳的資料
+        const { data } = await tweetsAPI.tweets.create({
           description: this.description,
         });
-        if (response.data.status !== "success") {
-          throw new Error(response.data.status);
+
+        // 待刪除
+        console.log("create tweet response data is:", data);
+
+        if (data.status === "error") {
+          throw new Error(data.message);
         }
+
         // 新的推文資料放入陣列第一筆
         this.tweets.unshift({
-          id: response.data.tweetId,
-          description: this.description,
+          id: data.data.Id,
+          UserId: data.data.id,
+          description: data.data.description,
+          account: this.currentUser.account,
+          name: this.currentUser.name,
+          avatar: this.currentUser.avatar,
+          createdAt: data.data.createdAt,
           likeCount: 0,
-          replyCount: 0,
+          commentCount: 0,
           isLiked: false,
-          createdAt: new Date(),
-          User: {
-            id: this.currentUser.id,
-            name: this.currentUser.name,
-            avatar: this.currentUser.avatar,
-            account: this.currentUser.account,
-          },
         });
+
         // 將發推區內的文字清空
         this.description = "";
+
+        // 跳出通知
         Toast.fire({
           icon: "success",
-          title: "推文發送成功",
+          title: "推文成功",
         });
       } catch (error) {
         console.error(error.message);
         Toast.fire({
           icon: "error",
-          title: "推文發送失敗，請稍後再試",
+          title: "推文失敗，請稍後再試",
         });
       }
     },

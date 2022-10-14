@@ -8,18 +8,19 @@ export default {
     },
 
     // 新增推文
-    create({ userId, description }) {
-      return apiHelper.post(`/tweets`, { userId, description })
+    create({ description }) {
+      return apiHelper.post(`/tweets`, { description })
     },
+
 
     // 按喜歡推文
     addLiked({ tweetId }) {
-      return apiHelper.post(`/tweets/${tweetId}/like`, null)
+      return apiHelper.post(`/tweets/${tweetId}/like`)
     },
 
     // 按刪除喜歡
     deleteLiked({ tweetId }) {
-      return apiHelper.post(`/tweets/${tweetId}/unlike`, null)
+      return apiHelper.post(`/tweets/${tweetId}/unlike`)
     },
 
 
