@@ -138,7 +138,11 @@
               </div>
 
               <div class="mt-4 d-flex justify-content-end">
-                <button type="submit" class="btn btn-info" :disabled="isProcessing">
+                <button
+                  type="submit"
+                  class="btn btn-info"
+                  :disabled="isProcessing"
+                >
                   {{ isProcessing ? "更新中" : "儲存" }}
                 </button>
               </div>
@@ -262,7 +266,7 @@ export default {
           userId: this.id,
           account: this.account,
           name: this.name,
-          email: this.email, 
+          email: this.email,
           password: this.password,
           checkPassword: this.checkPassword,
         });
@@ -329,12 +333,12 @@ export default {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
 @import "../assets/scss/login.scss";
 .user-section {
   outline: 1px solid #e6ecf0;
   width: 639px;
-  height: 1200px;
+  height: 100vh; // 高度維持視窗高度
 }
 .title {
   border-bottom: 1px solid #e6ecf0;
