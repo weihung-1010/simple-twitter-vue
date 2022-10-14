@@ -124,3 +124,25 @@
   }
 }
 </style>
+
+<script>
+import { Toast } from "./../utils/helpers";
+import usersAPI from "./../apis/user";
+
+export default {
+  methods:{
+    async fetchTopUsers(){
+      try{
+        const {data} = await usersAPI.getTopUsers();
+        console.log(data)
+      } catch(error){
+        console.log(error)
+        Toast.fire({
+          icon:'error',
+          title:'無法取得人氣使用者，請稍後再試'
+        })
+      }
+    }
+  }
+}
+</script>
