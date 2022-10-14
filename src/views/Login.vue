@@ -74,7 +74,7 @@ import { Toast } from "./../utils/helpers";
 import authorizationAPI from "./../apis/authorization";
 
 export default {
-  name: "LogIn",
+  name: "Login",
   data() {
     return {
       account: "",

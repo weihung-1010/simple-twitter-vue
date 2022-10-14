@@ -28,6 +28,7 @@ import Navbar from "../components/Navbar.vue";
 import ProfileBoard from "../components/Profileboard.vue";
 import FollowBoard from "../components/Followboard.vue";
 export default {
+  name: "Profile",
   components: {
     Navbar,
     ProfileBoard,

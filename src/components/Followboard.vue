@@ -56,9 +56,8 @@
 <style scoped lang="scss">
 @import "../assets/scss/setups.scss";
 .followboard-wrapper {
+  position: fixed; // 固定在右邊
   width: 273px;
-  // height: 100%;
-  // margin-left: 360px;
   margin-top: 16px;
   background: #fafafb;
   border-radius: 16px;
@@ -130,19 +129,20 @@ import { Toast } from "./../utils/helpers";
 import usersAPI from "./../apis/user";
 
 export default {
-  methods:{
-    async fetchTopUsers(){
-      try{
-        const {data} = await usersAPI.getTopUsers();
-        console.log(data)
-      } catch(error){
-        console.log(error)
+  name: "FollowBoard",
+  methods: {
+    async fetchTopUsers() {
+      try {
+        const { data } = await usersAPI.getTopUsers();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
         Toast.fire({
-          icon:'error',
-          title:'無法取得人氣使用者，請稍後再試'
-        })
+          icon: "error",
+          title: "無法取得人氣使用者，請稍後再試",
+        });
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

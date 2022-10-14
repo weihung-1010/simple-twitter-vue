@@ -27,14 +27,14 @@
       <!-- 要跳出 modal -->
       <div class="tweet-reply d-flex">
         <img
-          class="icon-reoly-heart"
+          class="icon-reply-heart"
           src="https://i.postimg.cc/brT17wkK/message.png"
         />
         <p class="number">13</p>
       </div>
       <div class="tweet-heart d-flex">
         <img
-          class="icon-reoly-heart"
+          class="icon-reply-heart"
           src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
         />
         <p class="number">76</p>
@@ -43,6 +43,12 @@
   </div>
 </template>
 
+
+<script>
+export default {
+  name: "UserTweet",
+};
+</script>
 
 
 <style scoped lang="scss">
@@ -104,7 +110,7 @@
   left: 82px;
   top: -38px;
 }
-.icon-reoly-heart {
+.icon-reply-heart {
   width: 13.4px;
   height: 12.61px;
   margin-top: 4px;

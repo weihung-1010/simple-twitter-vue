@@ -7,11 +7,12 @@ export default {
   },
 
   // 編輯目前使用者的帳號資料
-  update({ userId, account, name, email, password, checkPassword }) {
-    return apiHelper.put(`/current_user/${userId}`, { userId, account, name, email, password, checkPassword })
+  update({ userId, newData }) {
+    return apiHelper.put(`/current_user/${userId}`, newData)
   },
+
   // 取得人氣使用者資料
-  getTopUsers(){
+  getTopUsers() {
     return apiHelper.get('/top_followers')
   }
 }

@@ -138,7 +138,11 @@
               </div>
 
               <div class="mt-4 d-flex justify-content-end">
-                <button type="submit" class="btn" :disabled="isProcessing">
+                <button
+                  type="submit"
+                  class="btn btn-info"
+                  :disabled="isProcessing"
+                >
                   {{ isProcessing ? "更新中" : "儲存" }}
                 </button>
               </div>
@@ -258,13 +262,17 @@ export default {
         this.isProcessing = true;
 
         // STEP2. 將註冊資料透過 API 送回伺服器新增，並取得回傳的資料
-        const { data } = await userAPI.update({
-          userId: this.id,
+        const newData = {
           account: this.account,
           name: this.name,
-          email: this.email, 
+          email: this.email,
           password: this.password,
           checkPassword: this.checkPassword,
+        };
+
+        const { data } = await userAPI.update({
+          userId: this.id,
+          newData,
         });
 
         // 更新資料若失敗，API 回傳錯誤
@@ -329,12 +337,12 @@ export default {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
 @import "../assets/scss/login.scss";
 .user-section {
   outline: 1px solid #e6ecf0;
   width: 639px;
-  height: 1200px;
+  height: 100vh; // 高度維持視窗高度
 }
 .title {
   border-bottom: 1px solid #e6ecf0;

@@ -179,12 +179,21 @@
   </div>
 </template>
 
+
+<script>
+export default {
+  name: "ProfileBoard",
+};
+</script>
+
+
 <style scoped lang="scss">
 @import "../assets/scss/setups.scss";
 .profile-wrapper {
   width: 639px;
-  // margin-left: 343px;
   border: 1px solid #e6ecf0;
+  height: 100vh; // 高度維持視窗高度
+  overflow-y: scroll; // 產生捲軸
   .prev {
     margin-left: 28px;
     margin-top: 30px;
