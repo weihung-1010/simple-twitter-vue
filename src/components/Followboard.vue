@@ -129,6 +129,7 @@ import { Toast } from "./../utils/helpers";
 import usersAPI from "./../apis/user";
 
 export default {
+  name: "FollowBoard",
   methods: {
     async fetchTopUsers() {
       try {

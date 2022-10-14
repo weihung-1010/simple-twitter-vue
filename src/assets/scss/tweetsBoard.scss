@@ -1,0 +1,319 @@
+@import "./setups.scss";
+
+
+.main {
+  border-right: #e6ecf0 1px solid;
+  border-left: #e6ecf0 1px solid;
+  position: relative;
+  width: 639px;
+  height: 100vh; // 高度維持在視窗高度
+  overflow-y: scroll; // 產生捲軸
+}
+
+//新增貼文
+.tweet-wrapper {
+  height: 136px;
+}
+
+.title {
+  position: sticky;
+  top: 0;
+  background: $white;
+  height: 74px;
+  border-bottom: #e6ecf0 1px solid;
+  z-index: 1;
+}
+
+.title-text {
+  padding: 24px 26px;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.avatar-input {
+  width: 90%;
+  padding: 24px 26px;
+}
+
+textarea {
+  padding: 12px;
+  width: 100%;
+  height: 60px;
+  border: none;
+  resize: none;
+  outline: none;
+}
+
+.btn-tweet {
+  position: relative;
+  left: 60px;
+  top: 56px;
+  background-color: #ff6600;
+  height: 40px;
+  width: 64px;
+  border-radius: 50px;
+  border-color: transparent;
+  color: white;
+}
+
+.line {
+  width: 100%;
+  height: 10px;
+  background: #e6ecf0;
+}
+
+//貼文牆
+.tweets-wall {
+  width: 100%;
+  border-bottom: 1px solid #e6ecf0;
+}
+
+.user-img {
+  margin-top: 16px;
+  margin-left: 24px;
+  width: 50px;
+  border-radius: 50px;
+}
+
+.tweet-content {
+  position: relative;
+  width: 80%;
+  height: 22px;
+  display: flex;
+  padding: 0 29px 0 0;
+  left: 82px;
+  top: -48px;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 16px;
+  color: #171725;
+}
+
+.account,
+.time {
+  position: relative;
+  font-weight: 400;
+  font-size: 14px;
+  top: 2px;
+  padding-left: 8px;
+  color: #6c757d;
+}
+
+.time {
+  padding-left: 2px;
+}
+
+.tweet-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  width: 528px;
+  color: #171725;
+  position: relative;
+  left: 82px;
+  top: -42px;
+}
+
+.tweet-reply-heart {
+  position: relative;
+  left: 82px;
+  top: -38px;
+  cursor: pointer;
+}
+
+.icon-reply-heart {
+  width: 13.4px;
+  height: 12.61px;
+  margin-top: 4px;
+}
+
+.number {
+  width: 18px;
+  height: 14px;
+  font-family: "Montserrat";
+  font-weight: 600;
+  font-size: 14px;
+  color: #6c757d;
+  padding-left: 9.3px;
+}
+
+.tweet-heart {
+  padding-left: 41.3px;
+}
+
+
+// ReplyModal
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 634px;
+  height: 500px;
+  background-color: #ffffff;
+  background-clip: padding-box;
+  border-radius: 14px;
+
+  .form-wrapper {
+    .modal-header {
+      margin-top: -32px;
+      display: flex;
+      width: 100%;
+      height: 56px;
+      border-bottom: 1px solid #e6ecf0;
+      background-color: #ffffff;
+
+      .close-btn {
+        border: none;
+        background: #ffffff;
+      }
+
+      .iconX {
+        width: 15px;
+        height: 15px;
+      }
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 450px;
+      padding: 16px 24px;
+      background: #ffffff;
+
+      .tweet-area {
+        display: flex;
+        flex-direction: column;
+
+        .tweet {
+          display: flex;
+          position: relative;
+
+          // 連結線
+          &::before {
+            content: "";
+            position: absolute;
+            left: 25px;
+            top: 60px;
+            height: calc(100% - 45px); // 裝飾線長度自動調整
+            background-color: #b5b5be;
+            border-right: 1px solid #b5b5be;
+            border-left: 1px solid #b5b5be;
+          }
+
+          .avatar {
+            height: 50px;
+            width: 50px;
+            margin-right: 8px;
+            border-radius: 50%;
+          }
+
+          .tweet-info {
+            width: 85%;
+            display: flex;
+            flex-direction: column;
+
+            .tweet-detail {
+              width: 100%;
+              align-items: center;
+            }
+
+            .user-name {
+              font-size: 16px;
+              font-weight: 700;
+              color: #171725;
+              margin-right: 8px;
+            }
+
+            .account-created-time {
+              font-size: 14px;
+              font-weight: 400;
+              color: #6c757d;
+            }
+
+            .tweet-text {
+              width: 100%;
+              margin-left: -81px;
+              margin-top: 50px;
+              color: #171725;
+              font-size: 16px;
+              font-weight: 400;
+              // 避免文字過長溢出
+              overflow-wrap: break-word;
+            }
+
+            .reply-to {
+              width: 100%;
+              margin-top: -35px;
+
+              span {
+                font-size: 14px;
+                font-weight: 400;
+                color: #6c757d;
+              }
+
+              .reply-to-account {
+                color: #ff6600;
+              }
+            }
+          }
+        }
+      }
+
+      .reply-area {
+        display: flex;
+        flex: 1;
+        width: 100%;
+        margin-top: 23px;
+
+        .modal-user-avatar {
+          width: 50px;
+          height: 50px;
+          margin-right: 8px;
+          border-radius: 50%;
+        }
+
+        .modal-tweet-text {
+          flex: 1;
+
+          textarea {
+            width: 90%;
+            height: 75%;
+            border-radius: 5px;
+            padding: 0;
+            padding-top: 10px;
+          }
+        }
+      }
+
+      .alert-error {
+        position: absolute;
+        right: 100px;
+        bottom: 28px;
+        font-size: 15px;
+        font-weight: 500;
+        color: #fc5a5a;
+      }
+
+      .modal-reply-btn {
+        width: 64px;
+        height: 40px;
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        font-size: 16px;
+        font-weight: 400;
+        background: #ff6600;
+        border-radius: 50px;
+        color: #ffffff;
+        border: none;
+      }
+    }
+  }
+}

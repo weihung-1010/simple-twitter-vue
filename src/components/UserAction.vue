@@ -1,10 +1,12 @@
 <template>
   <div class="action-wrapper">
     <div class="action-item">
-      <div class="pt-2 item ">
-        <router-link class="item-link active" :to="{name: 'user-tweets'}">推文</router-link>
-        <router-link class="item-link " to="">回覆</router-link>
-        <router-link class="item-link " to="">喜歡的內容</router-link>
+      <div class="pt-2 item">
+        <router-link class="item-link active" :to="{ name: 'user-tweets' }"
+          >推文</router-link
+        >
+        <router-link class="item-link" to="">回覆</router-link>
+        <router-link class="item-link" to="">喜歡的內容</router-link>
       </div>
     </div>
     <UserTweet />
@@ -12,6 +14,13 @@
     <UserLike />
   </div>
 </template>
+
+
+<script>
+export default {
+  name: "UserAction",
+};
+</script>
 
 <style scoped lang="scss">
 @import "../assets/scss/setups.scss";
@@ -45,14 +54,14 @@
 </style>
 
 <script>
-import UserTweet from '../components/UserTweet.vue'
-import UserReply from '../components/UserReply.vue'
-import UserLike  from '../components/UserLike.vue'
+import UserTweet from "../components/UserTweet.vue";
+import UserReply from "../components/UserReply.vue";
+import UserLike from "../components/UserLike.vue";
 export default {
-  components:{
+  components: {
     UserTweet,
     UserReply,
-    UserLike
+    UserLike,
   },
   data() {
     return {

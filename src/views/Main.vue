@@ -5,12 +5,12 @@
       <div class="col-2">
         <Navbar />
       </div>
-      <!-- Tweetsboard -->
+      <!-- Tweets board -->
       <div class="col-7">
         <Tweetsboard />
       </div>
       <div class="col-3">
-        <!-- Followboard -->
+        <!-- Follow board -->
         <Followboard />
       </div>
     </div>
@@ -22,6 +22,7 @@ import Navbar from "../components/Navbar.vue";
 import Tweetsboard from "../components/Tweetsboard.vue";
 import Followboard from "../components/Followboard.vue";
 export default {
+  name: "Main",
   components: {
     Navbar,
     Tweetsboard,

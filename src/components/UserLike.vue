@@ -43,6 +43,14 @@
   </div>
 </template>
 
+
+<script>
+export default {
+  name: "UserLike",
+};
+</script>
+
+
 <style scoped lang="scss">
 @import "../assets/scss/setups.scss";
 

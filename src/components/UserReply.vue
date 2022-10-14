@@ -35,6 +35,13 @@
 </template>
 
 
+<script>
+export default {
+  name: "UserReply",
+};
+</script>
+
+
 
 <style scoped lang="scss">
 @import "../assets/scss/setups.scss";
@@ -101,7 +108,7 @@
   font-size: 14px;
   color: #6c757d;
 }
-.reply-account{
-  padding-left:5px ;
+.reply-account {
+  padding-left: 5px;
 }
 </style>
