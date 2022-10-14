@@ -1,9 +1,10 @@
 <template>
   <div class="main">
     <div class="title">
-      <!-- 新增推文 -->
       <h4 class="title-text">首頁</h4>
     </div>
+
+    <!-- 新增推文區塊 -->
     <form @submit.stop.prevent="handleSubmit">
       <div class="main-wrapper">
         <div class="tweet-wrapper">
@@ -23,7 +24,9 @@
         </div>
       </div>
     </form>
+
     <div class="line"></div>
+
     <!-- 所有推文 -->
     <div class="tweets-wall">
       <div class="user-img">
@@ -462,9 +465,9 @@
   border-right: #e6ecf0 1px solid;
   border-left: #e6ecf0 1px solid;
   position: relative;
-  // left: 338px;
   width: 639px;
-  height: 100%;
+  height: 100vh; // 高度維持在視窗高度
+  overflow-y: scroll; // 產生捲軸
 }
 //新增貼文
 .tweet-wrapper {
@@ -502,7 +505,7 @@ textarea {
 
 .btn-tweet {
   position: relative;
-  left: 70px;
+  left: 60px;
   top: 56px;
   background-color: #ff6600;
   height: 40px;

@@ -138,7 +138,7 @@
               </div>
 
               <div class="mt-4 d-flex justify-content-end">
-                <button type="submit" class="btn" :disabled="isProcessing">
+                <button type="submit" class="btn btn-info" :disabled="isProcessing">
                   {{ isProcessing ? "更新中" : "儲存" }}
                 </button>
               </div>
