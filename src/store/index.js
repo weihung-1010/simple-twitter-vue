@@ -66,9 +66,6 @@ export default new Vuex.Store({
           id, name, account, email, avatar, role
         })
 
-        // 待刪除
-        console.log("store currentUser is", this.state.currentUser);
-        console.log("store currentUser.role is ", this.state.currentUser.role);
 
         return { isAuthenticated: true, role: this.state.currentUser.role }
 

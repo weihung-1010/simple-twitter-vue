@@ -262,13 +262,17 @@ export default {
         this.isProcessing = true;
 
         // STEP2. 將註冊資料透過 API 送回伺服器新增，並取得回傳的資料
-        const { data } = await userAPI.update({
-          userId: this.id,
+        const newData = {
           account: this.account,
           name: this.name,
           email: this.email,
           password: this.password,
           checkPassword: this.checkPassword,
+        };
+
+        const { data } = await userAPI.update({
+          userId: this.id,
+          newData,
         });
 
         // 更新資料若失敗，API 回傳錯誤
