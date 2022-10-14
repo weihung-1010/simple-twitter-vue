@@ -2,7 +2,7 @@
   <div class="container">
     <!-- Navbar -->
     <div class="row">
-      <div class="col">
+      <div class="col-2">
         <Navbar />
       </div>
       <!-- Tweetsboard -->
@@ -29,4 +29,3 @@ export default {
   },
 };
 </script>
-
