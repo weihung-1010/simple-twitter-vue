@@ -64,7 +64,7 @@
             type="button"
             class="btn btn-primary btn-post-tweet"
             data-toggle="modal"
-            data-target="#createTweetModal"
+            data-target="#TweetModal"
           >
             推文
           </button>
@@ -80,7 +80,7 @@
       </div>
     </div>
     <div v-if="currentUser.role === 'user'">
-      <CreateTweetModal />
+      <TweetModal />
     </div>
   </div>
 </template>
@@ -89,11 +89,11 @@
 
 <script>
 import { mapState } from "vuex";
-import CreateTweetModal from "./CreateTweetModal.vue";
+import TweetModal from "./TweetModal.vue";
 
 export default {
   name: "Navbar",
-  components: { CreateTweetModal },
+  components: { TweetModal },
   // 取得並載入 Vuex state 中的 currentUser 資料
   computed: {
     ...mapState(["currentUser", "isAuthenticated"]),
@@ -219,7 +219,7 @@ export default {
   }
 }
 
-// createTweetModal
+// TweetModal
 // .modal-content {
 //   border: none;
 //   width: 634px;

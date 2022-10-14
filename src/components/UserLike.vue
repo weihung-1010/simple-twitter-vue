@@ -1,46 +1,46 @@
 <template>
   <div class="tweets-wall">
-      <div class="user-img">
+    <div class="user-img">
+      <router-link to="">
+        <img
+          class="user-avatar"
+          src="https://i.imgur.com/hAKcS3E.jpg"
+          alt="user-avatar"
+        />
+      </router-link>
+    </div>
+    <div class="tweet-box">
+      <div class="tweet-content d-flex">
         <router-link to="">
-          <img
-            class="user-avatar"
-            src="https://i.imgur.com/hAKcS3E.jpg"
-            alt="user-avatar"
-          />
+          <p class="name">Apple</p>
         </router-link>
+        <router-link to="">
+          <p class="account">@apple</p>
+        </router-link>
+        <p class="time">‧1個月前</p>
       </div>
-      <div class="tweet-box">
-        <div class="tweet-content d-flex">
-          <router-link to="">
-            <p class="name">Apple</p>
-          </router-link>
-          <router-link to="">
-            <p class="account">@apple</p>
-          </router-link>
-          <p class="time">‧1個月前</p>
-        </div>
-        <div class="tweet-text">
-          <p>222</p>
-        </div>
-      </div>
-      <div class="tweet-reply-heart d-flex">
-        <!-- 要跳出 modal -->
-        <div class="tweet-reply d-flex">
-          <img
-            class="icon-reoly-heart"
-            src="https://i.postimg.cc/brT17wkK/message.png"
-          />
-          <p class="number">13</p>
-        </div>
-        <div class="tweet-heart d-flex">
-          <img
-            class="icon-reoly-heart"
-            src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
-          />
-          <p class="number">76</p>
-        </div>
+      <div class="tweet-text">
+        <p>222</p>
       </div>
     </div>
+    <div class="tweet-reply-heart d-flex">
+      <!-- 要跳出 modal -->
+      <div class="tweet-reply d-flex">
+        <img
+          class="icon-reply-heart"
+          src="https://i.postimg.cc/brT17wkK/message.png"
+        />
+        <p class="number">13</p>
+      </div>
+      <div class="tweet-heart d-flex">
+        <img
+          class="icon-reply-heart"
+          src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
+        />
+        <p class="number">76</p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -54,7 +54,7 @@
 
 .tweets-wall {
   width: 100%;
-  border-bottom: 1px solid #E6ECF0;
+  border-bottom: 1px solid #e6ecf0;
 }
 .user-img {
   margin-top: 16px;
@@ -92,7 +92,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
-  width:528px;
+  width: 528px;
   color: #171725;
   position: relative;
   left: 82px;
@@ -103,7 +103,7 @@
   left: 82px;
   top: -38px;
 }
-.icon-reoly-heart {
+.icon-reply-heart {
   width: 13.4px;
   height: 12.61px;
   margin-top: 4px;
@@ -114,10 +114,10 @@
   font-family: "Montserrat";
   font-weight: 600;
   font-size: 14px;
-  color: #6C757D;
-  padding-left:9.3px;
+  color: #6c757d;
+  padding-left: 9.3px;
 }
-.tweet-heart{
-  padding-left:41.3px ;
+.tweet-heart {
+  padding-left: 41.3px;
 }
 </style>

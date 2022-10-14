@@ -10,8 +10,9 @@ export default {
   update({ userId, account, name, email, password, checkPassword }) {
     return apiHelper.put(`/current_user/${userId}`, { userId, account, name, email, password, checkPassword })
   },
+
   // 取得人氣使用者資料
-  getTopUsers(){
+  getTopUsers() {
     return apiHelper.get('/top_followers')
   }
 }

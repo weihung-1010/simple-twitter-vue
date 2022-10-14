@@ -1,12 +1,12 @@
 <template>
-  <!-- createTweetModal -->
+  <!-- TweetModal -->
   <div>
     <div
       class="modal"
-      id="createTweetModal"
+      id="TweetModal"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="createTweetModal"
+      aria-labelledby="TweetModal"
       aria-hidden="true"
     >
       <div class="modal-dialog" role="document">

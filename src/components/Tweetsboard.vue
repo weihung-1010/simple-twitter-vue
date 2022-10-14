@@ -27,7 +27,7 @@
 
     <div class="line"></div>
 
-    <!-- 所有推文 -->
+    <!-- 推文牆 -->
     <div class="tweets-wall">
       <div class="user-img">
         <router-link to="">
@@ -60,14 +60,14 @@
           data-target="#replyModal"
         >
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/brT17wkK/message.png"
           />
           <p class="number">13</p>
         </div>
         <div class="tweet-heart d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
           />
           <p class="number">76</p>
@@ -184,14 +184,14 @@
         <!-- 要跳出 modal -->
         <div class="tweet-reply d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/brT17wkK/message.png"
           />
           <p class="number">13</p>
         </div>
         <div class="tweet-heart d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
           />
           <p class="number">76</p>
@@ -227,14 +227,14 @@
         <!-- 要跳出 modal -->
         <div class="tweet-reply d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/brT17wkK/message.png"
           />
           <p class="number">13</p>
         </div>
         <div class="tweet-heart d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
           />
           <p class="number">76</p>
@@ -270,14 +270,14 @@
         <!-- 要跳出 modal -->
         <div class="tweet-reply d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/brT17wkK/message.png"
           />
           <p class="number">13</p>
         </div>
         <div class="tweet-heart d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
           />
           <p class="number">76</p>
@@ -313,14 +313,14 @@
         <!-- 要跳出 modal -->
         <div class="tweet-reply d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/brT17wkK/message.png"
           />
           <p class="number">13</p>
         </div>
         <div class="tweet-heart d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
           />
           <p class="number">76</p>
@@ -356,14 +356,14 @@
         <!-- 要跳出 modal -->
         <div class="tweet-reply d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/brT17wkK/message.png"
           />
           <p class="number">13</p>
         </div>
         <div class="tweet-heart d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
           />
           <p class="number">76</p>
@@ -399,14 +399,14 @@
         <!-- 要跳出 modal -->
         <div class="tweet-reply d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/brT17wkK/message.png"
           />
           <p class="number">13</p>
         </div>
         <div class="tweet-heart d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
           />
           <p class="number">76</p>
@@ -442,14 +442,14 @@
         <!-- 要跳出 modal -->
         <div class="tweet-reply d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/brT17wkK/message.png"
           />
           <p class="number">13</p>
         </div>
         <div class="tweet-heart d-flex">
           <img
-            class="icon-reoly-heart"
+            class="icon-reply-heart"
             src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
           />
           <p class="number">76</p>
@@ -573,7 +573,7 @@ textarea {
   top: -38px;
   cursor: pointer;
 }
-.icon-reoly-heart {
+.icon-reply-heart {
   width: 13.4px;
   height: 12.61px;
   margin-top: 4px;
