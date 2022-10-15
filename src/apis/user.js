@@ -14,5 +14,9 @@ export default {
   // 取得人氣使用者資料
   getTopUsers() {
     return apiHelper.get('/top_followers')
-  }
+  },
+  // 取得個人資料
+  getUser(userId) { // ClickedUser
+    return apiHelper.get(`/users/${userId}`)
+  },
 }

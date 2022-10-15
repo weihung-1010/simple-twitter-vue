@@ -5,7 +5,7 @@
         <img src="https://i.postimg.cc/T3b8t37Q/Vector.png" />
       </router-link>
       <div class="name-tweet">
-        <h5 class="name">John Doe</h5>
+        <h5 class="name"></h5>
         <p class="tweet-count">25 推文</p>
       </div>
     </div>
@@ -181,8 +181,39 @@
 
 
 <script>
+import usersAPI from "./../apis/users";
+import { mapState } from "vuex";
+import { Toast } from "./../utils/helpers";
 export default {
   name: "ProfileBoard",
+  data() {
+    return {
+      
+    };
+  },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
+  created() {
+    this.userId = this.$route.params.id; // id從首頁來
+    this.fetchClickedUser(this.userId);
+    // this.fetchCurrentUserInfo();
+  },
+
+  methods:{
+    async fetchClickedUser(userId) {
+      try {
+        const response = await usersAPI.getUser(userId);
+        const { data } = response;
+        this.user = data;
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: "無法取得使用者資料，請稍後再試",
+        })
+      }
+    },
+  }
 };
 </script>
 
