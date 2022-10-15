@@ -49,7 +49,7 @@
         >
           <img
             class="icon-reply-heart"
-            src="https://i.postimg.cc/brT17wkK/message.png"
+            src="~@/assets/images/tweetReply@2x.png"
             alt="reply-icon"
           />
           <p class="number">{{ tweet.commentCount }}</p>
@@ -77,7 +77,7 @@
         >
           <img
             class="icon-reply-heart"
-            src="https://i.postimg.cc/43TQw0Gv/iconLike.png"
+            src="~@/assets/images/tweetLike@2x.png"
             alt="empty-heart-icon"
           />
           <p class="number">{{ tweet.likeCount }}</p>
@@ -122,13 +122,12 @@ export default {
       this.tweets = this.initialTweets;
     },
 
-
     // 透過 tweetID 找出被點擊留言的哪一篇推文 -> 顯示 modal 使用
     isClickedTweet(tweetId) {
       this.oneTweet = this.tweets.find((tweet) => {
         return tweet.id === tweetId;
       });
-      
+
       this.$emit("after-click-reply", this.oneTweet);
     },
 
