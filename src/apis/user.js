@@ -17,7 +17,7 @@ export default {
   },
 
   // 取得個人資料
-  getUser(userId) { // ClickedUser
+  getUser(userId) { 
     return apiHelper.get(`/users/${userId}`)
   },
 }

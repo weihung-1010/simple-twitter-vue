@@ -5,17 +5,24 @@
         <img src="https://i.postimg.cc/T3b8t37Q/Vector.png" />
       </router-link>
       <div class="name-tweet">
-        <h5 class="name"></h5>
-        <p class="tweet-count">25 推文</p>
+        <h5 class="name">{{ user.name }}</h5>
+        <p class="tweet-count">{{ user.tweetCount }} 推文</p>
       </div>
     </div>
     <img
       class="bg-img"
-      src="https://i.postimg.cc/nLwNk2CD/unsplash-c-O9-jo-Z1-Fd-A.png"
+      :src="
+        user.cover ||
+        'https://i.postimg.cc/nLwNk2CD/unsplash-c-O9-jo-Z1-Fd-A.png'
+      "
       alt=""
     />
     <div class="user-wrapper">
-      <img class="user-avatar" src="https://i.imgur.com/hAKcS3E.jpg" alt="" />
+      <img
+        class="user-avatar"
+        :src="user.avatar || 'https://i.imgur.com/hAKcS3E.jpg'"
+        alt=""
+      />
       <button
         class="btn-edit-info"
         data-toggle="modal"
@@ -25,16 +32,16 @@
       </button>
     </div>
     <div class="user-info">
-      <h5 class="name">John Doe</h5>
-      <p class="account">@heyjohn</p>
-      <p class="text">個人簡介</p>
+      <h5 class="name">{{ user.name }}</h5>
+      <p class="account">@{{ user.account }}</p>
+      <p class="text">{{ user.introduction }}</p>
       <div class="follow-count">
         <router-link class="followed" to=""
-          >34個
+          >{{ user.followingCount }}個
           <p class="followe-text">跟隨中</p>
         </router-link>
         <router-link class="follow" to=""
-          >59位
+          >{{ user.followerCount }}位
           <p class="followe-text">跟隨者</p>
         </router-link>
       </div>
@@ -49,7 +56,11 @@
       aria-labelledby="user-edit-label"
       aria-hidden="true"
     >
-      <form class="modal-dialog" role="document">
+      <form
+        class="modal-dialog"
+        role="document"
+        @submit.stop.prevent="handleSubmit"
+      >
         <div class="modal-content">
           <div class="modal-header">
             <button
@@ -66,15 +77,28 @@
             </button>
             <h5 class="modal-title" id="user-edit-label">編輯個人資料</h5>
 
-            <button type="submit" class="modal-save">儲存</button>
+            <button
+              type="submit"
+              class="modal-save"
+              :disabled="
+                user.name.length > 50 ||
+                user.name.trim().length === 0 ||
+                user.introduction.length > 160
+              "
+            >
+              儲存
+            </button>
           </div>
           <div class="modal-body">
             <div class="modal-img">
-              <div>
-                <!-- 背景圖這邊 -->
+              <div @click="$refs.cover.click()">
+                <!-- 背景圖 -->
                 <img
                   class="background-img"
-                  src="https://i.postimg.cc/nLwNk2CD/unsplash-c-O9-jo-Z1-Fd-A.png"
+                  :src="
+                    user.cover ||
+                    'https://i.postimg.cc/nLwNk2CD/unsplash-c-O9-jo-Z1-Fd-A.png'
+                  "
                   alt="user-background"
                 />
               </div>
@@ -86,6 +110,7 @@
                   type="file"
                   name="cover"
                   accept="image/*"
+                  @change="handleCoverChange"
                   class="d-none"
                 />
                 <div class="add-avatar-box">
@@ -93,11 +118,13 @@
                     class="add-avatar"
                     src="https://i.postimg.cc/1z1TfSdJ/add-avatar.png"
                     alt="add-avatar"
+                    @click="$refs.cover.click()"
                   />
                 </div>
                 <!-- 刪除前一次上傳的圖片 -->
                 <div>
                   <img
+                    @click="restoreDefaultCover"
                     class="delete-img"
                     src="https://i.postimg.cc/XY3tQ4Vm/Vector.png"
                     alt="delete-img"
@@ -112,17 +139,19 @@
                   name="avatar"
                   accept=""
                   class="d-none"
+                  @change="handleAvatarChange"
                 />
-                <div class="black">
+                <div class="black" @click="$refs.avatar.click()">
                   <!-- 大頭貼 -->
                   <img
                     class="user-avatar"
-                    src="https://i.imgur.com/hAKcS3E.jpg"
+                    :src="user.avatar || 'https://i.imgur.com/hAKcS3E.jpg'"
                     alt="user-avatar"
                   />
                 </div>
                 <!-- 新增大頭貼圖片 -->
                 <img
+                  @click="$refs.avatar.click()"
                   class="add-avatar-user"
                   src="https://i.postimg.cc/1z1TfSdJ/add-avatar.png"
                   alt="add-avatar"
@@ -134,42 +163,44 @@
               <div class="form-field name-field">
                 <label for="name">名稱</label>
                 <input
+                  :class="{
+                    error:
+                      user.name.trim().length > 50 ||
+                      user.name.length > 50 ||
+                      user.name.trim().length === 0,
+                  }"
+                  v-model="user.name"
                   id="name"
                   name="name"
                   type="text"
                   placeholder="請輸入名稱"
                   required
                 />
-                <!-- <div class="alert-msg">
-                  <span class="msg" v-if="profile.name.length > 50">
-                    字數超出上限！
+                <div class="alert-msg">
+                  <span class="msg" v-if="user.name.length > 50">
+                    不可超過50字
                   </span>
-                  <span
-                    class="msg"
-                    :class="{ blank: profile.name.length > 50 }"
-                    v-if="profile.name.trim().length === 0"
-                  >
-                    名稱不可空白！
+                  <span class="msg" v-if="user.name.trim().length === 0">
+                    名稱不可空白
                   </span>
-                  <span class="number">{{ profile.name.length }}/50</span>
-                </div> -->
+                  <span class="number">{{ user.name.length }}/50</span>
+                </div>
               </div>
               <div class="form-field introduction-field">
                 <label for="introduction">自我介紹</label>
                 <textarea
+                  v-model="user.introduction"
                   id="introduction"
                   name="introduction"
                   type="text"
                   placeholder="請輸入自我介紹"
                 />
-                <!-- <div class="alert-msg-intro">
-                  <span class="msg" v-if="profile.introduction.length > 160"
-                    >字數超出上限！</span
+                <div class="alert-msg-intro">
+                  <span class="msg" v-if="user.introduction.length > 160"
+                    >不可超過160字</span
                   >
-                  <span class="number"
-                    >{{ profile.introduction.length }}/160</span
-                  >
-                </div> -->
+                  <span class="number">{{ user.introduction.length }}/160</span>
+                </div>
               </div>
             </div>
           </div>
@@ -178,44 +209,6 @@
     </div>
   </div>
 </template>
-
-
-<script>
-import usersAPI from "./../apis/users";
-import { mapState } from "vuex";
-import { Toast } from "./../utils/helpers";
-export default {
-  name: "ProfileBoard",
-  data() {
-    return {
-      
-    };
-  },
-  computed: {
-    ...mapState(["currentUser"]),
-  },
-  created() {
-    this.userId = this.$route.params.id; // id從首頁來
-    this.fetchClickedUser(this.userId);
-    // this.fetchCurrentUserInfo();
-  },
-
-  methods:{
-    async fetchClickedUser(userId) {
-      try {
-        const response = await usersAPI.getUser(userId);
-        const { data } = response;
-        this.user = data;
-      } catch (error) {
-        Toast.fire({
-          icon: "error",
-          title: "無法取得使用者資料，請稍後再試",
-        })
-      }
-    },
-  }
-};
-</script>
 
 
 <style scoped lang="scss">
@@ -334,9 +327,14 @@ export default {
       height: 40px;
       margin-top: -6px;
     }
+    .modal-save:disabled {
+      background-color: #b5b5be;
+      color: #fafafb;
+    }
   }
   .background-img {
     width: 638px;
+    height: 180px;
     margin: -17px;
   }
   .icon-add-delete {
@@ -427,14 +425,152 @@ export default {
       color: #696974;
     }
   }
+  .add-avatar-user,
+  .add-avatar,
+  .delete-img {
+    cursor: pointer;
+  }
+  .alert-msg {
+    position: absolute;
+    top: 54px;
+    width: 100%;
+    margin: 4px 0 0 0;
+    .msg {
+      position: absolute;
+      left: 0;
+      color: #ff6600;
+      font-size: 12px;
+    }
+    .blank {
+      margin: 0 0 0 90px;
+    }
+    .number {
+      position: absolute;
+      right: 0;
+      color: #696974;
+      font-size: 12px;
+    }
+  }
+  .alert-msg-intro {
+    position: absolute;
+    bottom: -8px;
+    right: 0;
+    width: 100%;
+    .msg {
+      position: absolute;
+      left: 0;
+      color: #ff6600;
+      font-size: 12px;
+    }
+    .number {
+      position: absolute;
+      right: 0;
+      color: #696974;
+      font-size: 12px;
+    }
+  }
 }
 </style>
 
 <script>
+import $ from "jquery";
 import UserAction from "../components/UserAction.vue";
+import userAPI from "../apis/user";
+import { Toast } from "./../utils/helpers";
+import { mapState } from "vuex";
 export default {
   components: {
     UserAction,
+  },
+  data() {
+    return {
+      user: {},
+      id: -1,
+      name: "",
+      email: "",
+      account: "",
+      avatar: "",
+      introduction: "",
+      cover: "",
+      tweetCount: "",
+      followerCount: "",
+      followingCount: "",
+      isFollowed: "",
+      isProcessing: false,
+    };
+  },
+  computed: {
+    ...mapState(["currentUser"]),
+  },
+  created() {
+    // this.fetchAccountData();?
+    this.fetchUserData("14");
+  },
+  watch: {
+    initialTargetProfile(newValue) {
+      this.user = { ...newValue };
+    },
+  },
+  methods: {
+    async fetchUserData(userId) {
+      try {
+        const response = await userAPI.getUser(userId);
+        const { data } = response;
+        this.user = data;
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+        Toast.fire({
+          icon: "error",
+          title: "無法取得使用者資料，請稍後再試",
+        });
+      }
+    },
+    handleCoverChange(e) {
+      const { files } = e.target;
+      console.log(files);
+      if (files.length === 0) {
+        return this.user.cover;
+      } else {
+        const imageURL = window.URL.createObjectURL(files[0]);
+        this.user.cover = imageURL;
+      }
+    },
+    handleAvatarChange(e) {
+      const { files } = e.target;
+      if (files.length === 0) {
+        return this.avatar.cover;
+      } else {
+        const imageURL = window.URL.createObjectURL(files[0]);
+        this.user.avatar = imageURL;
+      }
+    },
+    restoreDefaultCover() {
+      document.querySelector("#image-cover").value = "";
+      this.user.cover = this.initialTargetProfile.cover;
+    },
+    async handleSubmit(e) {
+      if (!this.user.name.trim()) {
+        Toast.fire({
+          icon: "warning",
+          title: "名稱不可空白！",
+        });
+        return;
+      } else if (
+        this.user.name.trim().length > 50 ||
+        this.user.introduction.length > 160
+      ) {
+        Toast.fire({
+          icon: "warning",
+          title: "字數超出上限！",
+        });
+        return;
+      }
+      $("#user-edit").modal("hide");
+      const form = e.target;
+      const formData = new FormData(form);
+      this.$emit("after-submit-profile", formData);
+    },
   },
 };
 </script>
