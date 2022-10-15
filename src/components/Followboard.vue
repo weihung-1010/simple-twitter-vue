@@ -15,42 +15,8 @@
         <p class="name">{{user.name}}</p>
         <p class="account">@{{user.account}}</p>
       </div>
-      <button class="btn-follow btn-info">正在跟隨</button>
-      <button class="btn-unfollow btn-info">跟隨</button>
-    </div>
-
-    
-    <!-- 串接API時刪除 -->
-    <div class="followboard-lists">
-      <router-link to="">
-        <img
-          class="user-avatar"
-          src="https://i.imgur.com/hAKcS3E.jpg"
-          alt="user-avatar"
-        />
-      </router-link>
-      <div class="name-account">
-        <p class="name">user1</p>
-        <p class="account">@uesr1</p>
-      </div>
-      <button class="btn-follow btn-info">正在跟隨</button>
-      <button class="btn-unfollow btn-info">跟隨</button>
-    </div>
-
-    <div class="followboard-lists">
-      <router-link to="">
-        <img
-          class="user-avatar"
-          src="https://i.imgur.com/hAKcS3E.jpg"
-          alt="user-avatar"
-        />
-      </router-link>
-      <div class="name-account">
-        <p class="name">user1</p>
-        <p class="account">@uesr1</p>
-      </div>
-      <button class="btn-follow btn-info">正在跟隨</button>
-      <button class="btn-unfollow btn-info">跟隨</button>
+      <button class="btn-follow btn-info" v-if="user.isFollowed">正在跟隨</button>
+      <button class="btn-unfollow btn-info" v-else>跟隨</button>
     </div>
   </div>
 </template>
@@ -121,7 +87,6 @@
     color: #ff6600;
     top: 21px;
     right: 13px;
-    display: none;
   }
 }
 </style>
@@ -147,15 +112,15 @@ export default {
     async fetchTopUsers() {
       try {
         const { data } = await usersAPI.getTopUsers();
-        this.users = data.users.map((user) => ({
-          id: user.id,
-          name: user.name,
-          account: user.account,
-          avatar: user.avatar,
-          followerCount: user.FollowerCount,
-          isFollowed: user.isFollowed,
+        console.log(data)
+        this.users = data.map((user) => ({
+          id:user.id,
+          name:user.name,
+          account:user.account,
+          avatar:user.avatar,
+          followerCount:user.followerCount,
+          isFollowed:user.isFollowed,
         }));
-
       } catch (error) {
         console.error(error.message);
         Toast.fire({
