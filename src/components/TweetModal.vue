@@ -149,6 +149,14 @@ export default {
       border-radius: 50px;
       border: none;
     }
+    .modal-error {
+      position: relative;
+      bottom:10px;
+      left: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #fc5a5a;
+    }
   }
 }
 </style>
