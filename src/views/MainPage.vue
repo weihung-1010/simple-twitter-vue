@@ -27,11 +27,12 @@
 
             <div class="input-footer">
               <div class="modal-error">
-                <!-- 樣式＆位置待修改 -->
+                <!-- 樣式＆位置待修改: 字數限制 & 空白限制 -->
                 <!-- 字數限制 -->
                 <span v-if="description.length > 140" class="alert-error">
                   字數不可超過140字
                 </span>
+
                 <!-- 空白限制 -->
                 <span
                   class="alert-error"
