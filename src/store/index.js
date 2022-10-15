@@ -18,8 +18,8 @@ export default new Vuex.Store({
       role: ''
     },
     isAuthenticated: false,
-    token: ''
-    // topPopular: []
+    token: '',
+    topPopular: []
   },
   getters: {
   },

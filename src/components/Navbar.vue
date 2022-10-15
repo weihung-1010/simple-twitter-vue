@@ -89,7 +89,7 @@
 
 <script>
 import { mapState } from "vuex";
-import TweetModal from "./TweetModal.vue";
+import TweetModal from "./TweetModal";
 
 export default {
   name: "Navbar",
