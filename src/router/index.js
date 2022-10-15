@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
-import Main from '../views/NewMain.vue'
+import Main from '../views/Main.vue'
 import Profile from '../views/Profile.vue'
 import Setting from '../views/Setting.vue'
 import store from './../store'
@@ -29,12 +29,6 @@ const routes = [
     name: 'sign-up',
     component: () => import('../views/SignUp.vue')
   },
-  // {
-  //   path: '/main',
-  //   name: 'main',
-  //   component: Main
-  // },
-
   {
     path: '/main/',
     name: 'main',
