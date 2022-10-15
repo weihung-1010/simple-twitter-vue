@@ -72,6 +72,7 @@ textarea {
 .tweets-wall {
   width: 100%;
   border-bottom: 1px solid #e6ecf0;
+  word-wrap: break-word; // 推文文字換行
 }
 
 .user-img {
@@ -127,6 +128,17 @@ textarea {
   left: 82px;
   top: -17.5px;
   cursor: pointer;
+  width: 50%;
+
+  .tweet-reply:hover {
+    border-radius: 4px;
+    background-color: $dark-30-color;
+  }
+
+  .tweet-heart:hover {
+    border-radius: 4px;
+    background-color: $dark-30-color;
+  }
 }
 
 .icon-reply-heart {
@@ -138,15 +150,19 @@ textarea {
 .number {
   width: 18px;
   height: 14px;
-  font-family: "Montserrat";
+  font-family: $number-font;
   font-weight: 600;
   font-size: 14px;
   color: #6c757d;
   padding-left: 9.3px;
+
+  &:hover {
+    font-weight: bold;
+  }
 }
 
 .tweet-heart {
-  padding-left: 41.3px;
+  margin-left: 41.3px;
 }
 
 
