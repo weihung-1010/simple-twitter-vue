@@ -41,16 +41,29 @@
                 <div class="d-flex">
                   <form class="modal-form">
                     <textarea
+                      v-model="description"
                       placeholder="你有什麼新鮮事？"
                       required
                     ></textarea>
                     <div class="modal-footer">
-                      <!-- <div class="modal-error">
-                              <span class="alert-error">
-                                字數不可超過140字
-                              </span>
-                              <span class="alert-error"> 內容不可空白 </span>
-                            </div> -->
+                      <div class="modal-error">
+                        <!-- 樣式＆位置待修改 -->
+                        <!-- 字數限制 -->
+                        <span
+                          v-if="description.length > 140"
+                          class="alert-error"
+                        >
+                          字數不可超過140字
+                        </span>
+                        <!-- 空白限制 -->
+                        <span
+                          class="alert-error"
+                          v-if="description && description.trim().length === 0"
+                          >內容不可空白</span
+                        >
+                      </div>
+
+                      <!-- 送出按鈕 -->
                       <button
                         type="button"
                         @click.prevent.stop="postTweetModal"
@@ -73,6 +86,11 @@
 <script>
 export default {
   name: "TweetModal",
+  data() {
+    return {
+      description: "",
+    };
+  },
 };
 </script>
 

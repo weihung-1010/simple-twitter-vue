@@ -27,12 +27,21 @@
 
             <div class="input-footer">
               <div class="modal-error">
+                <!-- 樣式＆位置待修改: 字數限制 & 空白限制 -->
+                <!-- 字數限制 -->
                 <span v-if="description.length > 140" class="alert-error">
                   字數不可超過140字
                 </span>
-                <!-- 待新增功能 -->
-                <!-- <span v-if="description.length === "0" class="alert-error"> 內容不可空白 </span> -->
+
+                <!-- 空白限制 -->
+                <span
+                  class="alert-error"
+                  v-if="description && description.trim().length === 0"
+                  >內容不可空白</span
+                >
               </div>
+
+              <!-- 送出按鈕 -->
               <button type="submit" class="btn-tweet btn-info btn">推文</button>
             </div>
           </div>
@@ -86,7 +95,7 @@ export default {
       this.tweets = [...newValue];
     },
     theTweetId(newVal) {
-      this.addReplyCount(newVal);
+      this.addCommentCount(newVal);
     },
   },
   created() {
@@ -155,10 +164,10 @@ export default {
         });
       }
     },
-    addReplyCount(id) {
+    addCommentCount(id) {
       this.tweets = this.tweets.map((tweet) => {
         return tweet.id === id
-          ? { ...tweet, replyCount: tweet.replyCount + 1 }
+          ? { ...tweet, commentCount: tweet.commentCount + 1 }
           : tweet;
       });
     },

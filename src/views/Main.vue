@@ -9,15 +9,14 @@
       <div class="col-7">
         <!-- 中間 Spinner -->
         <Spinner v-if="isLoading" />
+
         <!-- 中間推文首頁＆推文回覆頁 -->
         <router-view
           v-else
           :theTweetId="theTweetId"
           :initialTweets="tweets"
-          :newReply="newReply"
           :popular="topPopular"
           @after-click-reply="afterClickReply"
-          
         />
       </div>
 
@@ -61,10 +60,12 @@ export default {
   data() {
     return {
       tweets: [],
-      replyModalData: {}, // 要傳到 ReplyModal 的資料
-      newReply: {},
-      theTweetId: -1, //即時增加留言數使用
       isLoading: true,
+      // 要傳到 ReplyModal 的資料
+      replyModalData: {},
+      // 用來記錄被點擊回覆的推文 ID（預設為 -1）
+      // 子元件 MainPage 會監聽此變數，若有變更則增加該推文的留言數
+      theTweetId: -1,
     };
   },
   created() {
@@ -102,6 +103,7 @@ export default {
       }
     },
 
+    // 在 MainPage (Main)的 ReplyModal 點擊回覆按鈕後
     mainAfterSubmitReply(id) {
       //即時顯示留言數字 + 1
       this.theTweetId = id;
@@ -110,7 +112,7 @@ export default {
     // 按下推文按鈕後，將新推文的資料加入推文清單中
     afterSubmitTweet(payload) {
       const {
-        id,
+        id, // tweetID
         description,
         UserId,
         account,

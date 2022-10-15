@@ -24,6 +24,12 @@ export default {
     },
 
 
+    // 留言回覆
+    createReply({ tweetId, comment }) {
+      return apiHelper.post(`tweets/${tweetId}/replies`, comment)
+    },
+
+
     // getOneTweet({ tweetId }) {
     //   return apiHelper.get(`/tweets/${tweetId}`)
     // },
@@ -33,9 +39,6 @@ export default {
     // },
 
 
-    // createReply({ tweetId, comment }) {
-    //   return apiHelper.post(`tweets/${tweetId}/replies`, { tweetId, comment })
-    // },
   },
 
 
