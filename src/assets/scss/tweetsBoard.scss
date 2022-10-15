@@ -49,9 +49,9 @@ textarea {
 }
 
 .btn-tweet {
-  position: relative;
-  left: 60px;
-  top: 56px;
+  // position: relative;
+  // left: 60px;
+  // top: 56px;
   background-color: #ff6600;
   height: 40px;
   width: 64px;
@@ -316,6 +316,29 @@ textarea {
         color: #ffffff;
         border: none;
       }
+
+      .modal-reply-btn:disabled {
+        background-color: #B5B5BE;
+        color: #FAFAFB;
+      }
+    }
+  }
+}
+
+.footer-wrapper{
+  display: flex;
+  width: 15rem;
+  position: absolute;
+  top:170px;
+  left: 360px;
+  justify-content: space-between;
+  .modal-error {
+    font-size: 15px;
+    font-weight: 500;
+    color: #fc5a5a;
+    margin-top: 10px;
+    .alert-error{
+      margin-left: 30px;
     }
   }
 }
