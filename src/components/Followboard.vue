@@ -3,22 +3,28 @@
     <div class="followboard-title">
       <h4>推薦跟隨</h4>
     </div>
-    <div class="followboard-lists" v-for="user in users" :key="user.id">
-      <router-link to="">
-        <img
-          class="user-avatar"
-          :src="user.avatar || 'https://i.imgur.com/hAKcS3E.jpg'"
-          alt="user-avatar"
-        />
-      </router-link>
-      <div class="name-account">
-        <p class="name">{{ user.name }}</p>
-        <p class="account">@{{ user.account }}</p>
+    <div class="list-wrapper">
+      <div class="followboard-lists" v-for="user in users" :key="user.id">
+        <router-link to="">
+          <img
+            class="user-avatar"
+            :src="user.avatar || 'https://i.imgur.com/hAKcS3E.jpg'"
+            alt="user-avatar"
+          />
+        </router-link>
+
+        <div class="right-content d-flex">
+          <div class="name-account">
+            <p class="name">{{ user.name }}</p>
+            <p class="account">@{{ user.account }}</p>
+          </div>
+
+          <button class="btn-follow btn-info" v-if="user.isFollowed">
+            正在跟隨
+          </button>
+          <button class="btn-unfollow btn-info" v-else>跟隨</button>
+        </div>
       </div>
-      <button class="btn-follow btn-info" v-if="user.isFollowed">
-        正在跟隨
-      </button>
-      <button class="btn-unfollow btn-info" v-else>跟隨</button>
     </div>
   </div>
 </template>
@@ -27,7 +33,7 @@
 @import "../assets/scss/setups.scss";
 .followboard-wrapper {
   position: fixed; // 固定在右邊
-  height: 100vh; // 高度維持在視窗高度
+  height: 70vh; // 高度維持在視窗高度
   overflow-y: scroll; // 產生捲軸
   width: 273px;
   margin-top: 16px;
@@ -37,21 +43,37 @@
     width: 1px;
   }
   .followboard-title {
+    z-index: 999;
+    position: fixed;
+    background: #fafafb;
+    border-radius: 16px 16px 0 0;
     height: 74px;
+    width: 271px;
+    border-bottom: 1px solid #e6ecf0;
     h4 {
       padding: 24px;
-      border-bottom: 1px solid #e6ecf0;
     }
+  }
+  .list-wrapper {
+    margin-top: 74px;
   }
   .followboard-lists {
     display: flex;
     justify-content: space-between;
+    &:hover {
+      background-color: $dark-40-color;
+    }
   }
   .user-avatar {
-    margin: 16px;
+    margin: 16px 8px 16px 16px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
+  }
+
+  .right-content {
+    width: 170px;
+    justify-content: space-between;
   }
   .name-account {
     width: 0%;
@@ -60,13 +82,18 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    left: -54px;
+    left: -28px;
     pointer-events: none;
   }
   .name {
     font-weight: 700;
     font-size: 16px;
     color: #171725;
+    // 多餘文字省略隱藏
+    width: 84px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .account {
     font-weight: 400;
@@ -82,7 +109,7 @@
     color: #ffffff;
     border: none;
     top: 21px;
-    right: 13px;
+    right: 16px;
   }
   .btn-unfollow {
     position: relative;
@@ -93,7 +120,7 @@
     height: 40px;
     color: #ff6600;
     top: 21px;
-    right: 13px;
+    right: 16px;
   }
 }
 </style>
