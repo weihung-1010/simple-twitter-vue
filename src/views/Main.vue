@@ -123,8 +123,6 @@ export default {
         avatar,
       } = payload;
 
-      // 待刪除
-      console.log("afterSubmitTweet payload is: ", payload);
 
       this.tweets.unshift({
         id, // tweetID
@@ -143,9 +141,6 @@ export default {
     // 點擊留言圖示後，將該則推文的資料傳給 replyModal
     afterClickReply(payload) {
       const { id, avatar, name, account, createdAt, description } = payload;
-
-      // 待刪除
-      console.log("reply icon payload is: ", payload);
 
       this.replyModalData = {
         id, // tweetID

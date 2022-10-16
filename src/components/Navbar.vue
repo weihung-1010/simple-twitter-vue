@@ -43,7 +43,10 @@
             <h5>首頁</h5>
           </router-link>
 
-          <router-link :to="{ name: 'profile' }" class="tab">
+          <router-link
+            :to="{ name: 'user', params: { id: currentUser.id } }"
+            class="tab"
+          >
             <img class="icon" src="https://i.postimg.cc/L8VJKQf3/User.png" />
             <img
               class="icon-active"

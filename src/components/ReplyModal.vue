@@ -77,14 +77,11 @@
               </div>
             </div>
 
-            <!-- 下面樣式 OK，不需要修改 -->
             <span
               class="alert-error"
               v-if="description && description.trim().length === 0"
               >內容不可空白</span
             >
-
-            <!-- 樣式待修改：disabled 時按鈕顏色變灰色 -->
             <button
               class="modal-reply-btn"
               type="submit"
@@ -140,7 +137,6 @@ export default {
           tweetId: this.replyModalData.id,
           comment: this.description,
         });
-        console.log("create reply data is:", data);
         if (data.status !== "success") {
           throw new Error(data.status);
         }
@@ -149,7 +145,7 @@ export default {
         // 則會將推文 ID 傳回父元件 ReplyList
         // -> 觸發父元件 ReplyList 去取得該推文的所有留言與留言數
         // -> 連動即時將留言數顯示在同為子元件的 ReplyThread
-        if (this.$route.name === "main-reply-list") {
+        if (this.$route.name === "reply-list") {
           this.$emit("after-submit-reply", this.replyModalData.id);
 
 

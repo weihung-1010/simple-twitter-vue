@@ -1,0 +1,38 @@
+@import "./setups.scss";
+
+.nav-tag {
+  display: flex;
+  border-right: #E6ECF0 1px solid;
+  border-bottom: #E6ECF0 1px solid;
+  border-left: #E6ECF0 1px solid;
+
+  .tag-link {
+    color: $secondary-color;
+
+    .tag {
+      text-align: center;
+      padding: 0 0 15px 0;
+      font-weight: 700;
+      font-size: 15px;
+      width: 130px;
+    }
+
+    .tag-selected {
+      height: 100%;
+      border-bottom: 2px $logo-color solid;
+    }
+
+    .tag:hover {
+      cursor: pointer;
+      color: $logo-color;
+    }
+  }
+
+  .tag-link:hover {
+    color: $logo-color;
+  }
+
+  .tag-link-active {
+    color: $logo-color;
+  }
+}

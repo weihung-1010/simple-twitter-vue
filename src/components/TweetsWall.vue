@@ -162,7 +162,6 @@ export default {
     async deleteLiked(tweetId) {
       try {
         const { data } = await tweetsAPI.tweets.deleteLiked({ tweetId });
-        console.log("deleteLiked data is:", data);
 
         if (data.status === "error") {
           throw new Error(data.message);

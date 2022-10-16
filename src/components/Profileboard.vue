@@ -9,6 +9,8 @@
         <p class="tweet-count">{{ user.tweetCount }} 推文</p>
       </div>
     </div>
+
+
     <img
       class="bg-img"
       :src="
@@ -46,8 +48,14 @@
         </router-link>
       </div>
     </div>
+
+
+
     <!-- UserAction -->
     <UserAction />
+
+
+
     <!-- user-edit-modal -->
     <div
       class="modal fade"
@@ -92,7 +100,8 @@
           <div class="modal-body">
             <div class="modal-img">
               <div @click="$refs.cover.click()">
-                <!-- 背景圖 -->
+                
+                <!-- Cover 背景圖 -->
                 <img
                   class="background-img"
                   :src="
@@ -207,6 +216,8 @@
         </div>
       </form>
     </div>
+
+    <!-- user-edit-modal -->
   </div>
 </template>
 
@@ -503,8 +514,7 @@ export default {
     ...mapState(["currentUser"]),
   },
   created() {
-    // this.fetchAccountData();?
-    this.fetchUserData("14");
+    this.fetchUserData("254");
   },
   watch: {
     initialTargetProfile(newValue) {
@@ -517,7 +527,6 @@ export default {
         const response = await userAPI.getUser(userId);
         const { data } = response;
         this.user = data;
-        console.log(data);
       } catch (error) {
         console.log(error);
         Toast.fire({

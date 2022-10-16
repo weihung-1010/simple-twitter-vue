@@ -69,6 +69,8 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .right-content {
@@ -127,7 +129,7 @@
 
 <script>
 import { Toast } from "./../utils/helpers";
-import usersAPI from "./../apis/user";
+import userAPI from "./../apis/user";
 import { mapState } from "vuex";
 
 export default {
@@ -145,8 +147,7 @@ export default {
   methods: {
     async fetchTopUsers() {
       try {
-        const { data } = await usersAPI.getTopUsers();
-        console.log(data);
+        const { data } = await userAPI.getTopUsers();
         this.users = data.map((user) => ({
           id: user.id,
           name: user.name,

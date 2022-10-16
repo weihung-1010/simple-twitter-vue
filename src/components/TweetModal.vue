@@ -47,7 +47,6 @@
                     ></textarea>
                     <div class="modal-footer">
                       <div class="modal-error">
-                        <!-- 樣式＆位置待修改 -->
                         <!-- 字數限制 -->
                         <span
                           v-if="description.length > 140"
