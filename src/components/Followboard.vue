@@ -5,7 +5,7 @@
     </div>
     <div class="list-wrapper">
       <div class="followboard-lists" v-for="user in users" :key="user.id">
-        <router-link to="">
+        <router-link :to="{ name: 'user-tweet', params: { id: user.id } }">
           <img
             class="user-avatar"
             :src="user.avatar || 'https://i.imgur.com/hAKcS3E.jpg'"
@@ -19,7 +19,7 @@
             <p class="account">@{{ user.account }}</p>
           </div>
 
-          <button class="btn-follow btn-info" v-if="user.isFollowed">
+          <button class="btn-follow btn-info" v-if="!user.isFollowed">
             正在跟隨
           </button>
           <button class="btn-unfollow btn-info" v-else>跟隨</button>
@@ -140,6 +140,7 @@ export default {
       users: [],
       isLoading: true,
       isProcessing: false,
+      isFollowed:'',
     };
   },
   methods: {
