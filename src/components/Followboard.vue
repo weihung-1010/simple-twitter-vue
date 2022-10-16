@@ -12,10 +12,12 @@
         />
       </router-link>
       <div class="name-account">
-        <p class="name">{{user.name}}</p>
-        <p class="account">@{{user.account}}</p>
+        <p class="name">{{ user.name }}</p>
+        <p class="account">@{{ user.account }}</p>
       </div>
-      <button class="btn-follow btn-info" v-if="user.isFollowed">正在跟隨</button>
+      <button class="btn-follow btn-info" v-if="user.isFollowed">
+        正在跟隨
+      </button>
       <button class="btn-unfollow btn-info" v-else>跟隨</button>
     </div>
   </div>
@@ -94,12 +96,12 @@
 <script>
 import { Toast } from "./../utils/helpers";
 import usersAPI from "./../apis/user";
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   name: "FollowBoard",
   computed: {
-    ...mapState(['currentUser'])
+    ...mapState(["currentUser"]),
   },
   data() {
     return {
@@ -112,14 +114,14 @@ export default {
     async fetchTopUsers() {
       try {
         const { data } = await usersAPI.getTopUsers();
-        console.log(data)
+        console.log(data);
         this.users = data.map((user) => ({
-          id:user.id,
-          name:user.name,
-          account:user.account,
-          avatar:user.avatar,
-          followerCount:user.followerCount,
-          isFollowed:user.isFollowed,
+          id: user.id,
+          name: user.name,
+          account: user.account,
+          avatar: user.avatar,
+          followerCount: user.followerCount,
+          isFollowed: user.isFollowed,
         }));
       } catch (error) {
         console.error(error.message);

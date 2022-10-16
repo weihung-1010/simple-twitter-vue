@@ -13,26 +13,28 @@ export default {
     },
 
 
-    // 按喜歡推文
+    // 按喜歡這則推文
     addLiked({ tweetId }) {
       return apiHelper.post(`/tweets/${tweetId}/like`)
     },
 
-    // 按刪除喜歡
+    // 按刪除喜歡推文
     deleteLiked({ tweetId }) {
       return apiHelper.post(`/tweets/${tweetId}/unlike`)
     },
 
 
-    // 留言回覆
+    // 留言回覆推文
     createReply({ tweetId, comment }) {
-      return apiHelper.post(`tweets/${tweetId}/replies`, comment)
+      return apiHelper.post(`/tweets/${tweetId}/replies`, comment)
     },
 
 
-    // getOneTweet({ tweetId }) {
-    //   return apiHelper.get(`/tweets/${tweetId}`)
-    // },
+    // 顯示特定推文內容
+    getOneTweet({ tweetId }) {
+      return apiHelper.get(`/tweets/${tweetId}`)
+    },
+
 
     // getUsersTweets({ userId }) {
     //   return apiHelper.get(`/users/${userId}/tweets`)
@@ -41,10 +43,10 @@ export default {
 
   },
 
-
-  // replies: {
-  //   getReplies({ tweetId }) {
-  //     return apiHelper.get(`/tweets/${tweetId}/replies`)
-  //   },
-  // }
+  // 顯示特定推文的回覆串
+  replies: {
+    getReplies({ tweetId }) {
+      return apiHelper.get(`/tweets/${tweetId}/replies`)
+    },
+  }
 }

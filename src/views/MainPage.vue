@@ -149,7 +149,7 @@ export default {
           createdAt: data.data.createdAt,
           likeCount: 0,
           commentCount: 0,
-          isLiked: false,
+          isLike: false,
         });
 
         // 將發推區內的文字清空

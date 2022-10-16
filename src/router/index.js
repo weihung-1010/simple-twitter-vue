@@ -40,17 +40,13 @@ const routes = [
         path: 'mainpage',
         component: () => import('../views/MainPage'),
       },
-      // {
-      //   name: 'reply-list',
-      //   path: 'replylist/:id',
-      //   component: () => import('../views/ReplyList'),
-      // },
+      {
+        name: 'main-reply-list',
+        path: 'replylist/:id',
+        component: () => import('../views/ReplyList'),
+      },
     ]
   },
-
-
-
-
   {
     path: '/profile',
     name: 'profile',

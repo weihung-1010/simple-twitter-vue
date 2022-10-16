@@ -1,0 +1,102 @@
+@import "./setups.scss";
+
+.thread-container {
+  padding: 16px 23px;
+  border-bottom: 1px solid #e6ecf0;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.thread-info {
+  width: fill-available;
+  margin-left: 8px;
+
+  .line1 {
+    color: $dark-100-color;
+    font-size: 16px;
+    font-weight: 700;
+
+    &--little {
+      font-weight: 400;
+      font-size: 14px;
+      color: $secondary-color;
+    }
+  }
+
+  .line2 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    color: $secondary-color;
+    font-size: 14px;
+    font-weight: 400;
+
+    &--little {
+      color: $logo-color;
+    }
+  }
+
+  .line3 {
+    width: 85%;
+    word-wrap: break-word;
+  }
+
+  .line4 {
+    margin-bottom: 8px;
+    color: $secondary-color;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .tweet-description {
+    width: 95%;
+  }
+}
+
+.description-sec {
+  word-wrap: break-word;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.date {
+  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e6ecf0;
+}
+
+.num-sec {
+  height: 60px;
+  line-height: 60px;
+  font-weight: 500;
+  font-size: 19px;
+  color: $secondary-color;
+  border-bottom: 1px solid #e6ecf0;
+
+  .likedNum {
+    margin-left: 24px;
+  }
+
+  .number {
+    font-family: "Montserrat";
+    font-weight: 700;
+    color: black;
+  }
+}
+
+.icon-sec {
+  margin: 22px 0px 6px 0px;
+
+  img {
+    width: 25px;
+  }
+
+  .heart-icon {
+    margin-left: 133px;
+  }
+}

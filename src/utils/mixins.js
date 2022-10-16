@@ -11,6 +11,16 @@ export const fromNowFilter = {
 }
 
 
+// 
+export const accurateTimeFilter = {
+  filters: {
+    accurateTime(datetime) {
+      moment.locale('zh-tw');
+      return datetime ? moment(datetime).format('a hh:mm ⋅ YYYY年M月D日') : '-'
+    }
+  }
+}
+
 // 空白影像濾鏡：若無上傳頭像則套用此替代影像
 export const emptyImageFilter = {
   filters: {

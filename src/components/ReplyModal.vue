@@ -148,15 +148,17 @@ export default {
         // 如果是在 ReplyList 上按 ReplyModal 留言回覆的話
         // 則會將推文 ID 傳回父元件 ReplyList
         // -> 觸發父元件 ReplyList 去取得該推文的所有留言與留言數
-        // -> 連動即時將留言數顯示在同為子元件的 TweetDetail
-        if (this.$route.name === "reply-list") {
+        // -> 連動即時將留言數顯示在同為子元件的 ReplyThread
+        if (this.$route.name === "main-reply-list") {
           this.$emit("after-submit-reply", this.replyModalData.id);
+
 
           // 如果是在 MainPage（Main）上按 ReplyModal 留言回覆的話
           // Main 會記錄此推文的 ID，並傳給子元件 MainPage
           // 子元件 MainPage 監聽到 ID 有變化的話，便會增加並顯示新留言數
         } else if (this.$route.name === "main-page") {
           this.$emit("main-after-submit-reply", this.replyModalData.id);
+
 
           // 如果是在個人 MainTweets 或個人 LikedTweets 上按 ReplyModal 留言回覆的話
           // Users page 會記錄此推文的 ID，並傳給子元件 MainTweets/LikedTweets
