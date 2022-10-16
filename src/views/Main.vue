@@ -136,7 +136,7 @@ export default {
         likeCount,
         commentCount,
         avatar,
-        isLiked: false,
+        isLike: false,
       });
     },
 

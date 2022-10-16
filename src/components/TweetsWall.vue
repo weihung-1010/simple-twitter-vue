@@ -2,87 +2,89 @@
   <!-- 修改 -->
   <div>
     <div class="tweets-wall" v-for="tweet in tweets" :key="tweet.id">
-      <div class="user-img">
-        <!-- 待新增  router-link：replylist -->
-        <!-- replylist 的 router-link -->
-
-        <!-- 待新增 router-link：該用戶的個人資料頁 -->
-        <!-- 推文者頭像（點擊後會連到該用戶的個人資料頁） -->
-        <router-link to="">
-          <img
-            class="user-avatar"
-            :src="tweet.avatar | emptyImage"
-            alt="user-avatar"
-          />
-        </router-link>
-      </div>
-
-      <div class="tweet-box">
-        <!-- 推文資訊 -->
-        <div class="tweet-content d-flex">
+      <router-link
+        :to="{ path: `/main/replylist/${tweet.id}/` }"
+        class="tweet-link"
+      >
+        <div class="user-img">
           <!-- 待新增 router-link：該用戶的個人資料頁 -->
+          <!-- 推文者頭像（點擊後會連到該用戶的個人資料頁） -->
           <router-link to="">
-            <p class="name">{{ tweet.name }}</p>
+            <img
+              class="user-avatar"
+              :src="tweet.avatar | emptyImage"
+              alt="user-avatar"
+            />
           </router-link>
-
-          <!-- 待新增 router-link：該用戶的個人資料頁 -->
-          <router-link to="">
-            <p class="account">@{{ tweet.account }}</p>
-          </router-link>
-
-          <p class="time">‧{{ tweet.createdAt | fromNow }}</p>
         </div>
 
-        <!-- 推文敘述 -->
-        <div class="tweet-text">
-          <p>{{ tweet.description }}</p>
-        </div>
-      </div>
+        <div class="tweet-box">
+          <!-- 推文資訊 -->
+          <div class="tweet-content d-flex">
+            <!-- 待新增 router-link：該用戶的個人資料頁 -->
+            <router-link to="">
+              <p class="name">{{ tweet.name }}</p>
+            </router-link>
 
-      <div class="tweet-reply-heart d-flex">
-        <!-- 留言圖示（點擊後會跳出留言互動視窗） -->
-        <div
-          @click.prevent="isClickedTweet(tweet.id)"
-          class="tweet-reply d-flex"
-          data-toggle="modal"
-          data-target="#replyModal"
-        >
-          <img
-            class="icon-reply-heart"
-            src="~@/assets/images/tweetReply@2x.png"
-            alt="reply-icon"
-          />
-          <p class="number">{{ tweet.commentCount }}</p>
-        </div>
+            <!-- 待新增 router-link：該用戶的個人資料頁 -->
+            <router-link to="">
+              <p class="account">@{{ tweet.account }}</p>
+            </router-link>
 
-        <!-- 紅色愛心圖示（點擊後會加到喜歡的內容） -->
-        <div
-          class="tweet-heart d-flex"
-          v-if="tweet.isLiked"
-          @click.stop.prevent="deleteLiked(tweet.id)"
-        >
-          <img
-            class="icon-reply-heart"
-            src="https://i.postimg.cc/rFB1FHD6/icon-Liked.png"
-            alt="red-heart-icon"
-          />
-          <p class="number">{{ tweet.likeCount }}</p>
+            <p class="time">‧{{ tweet.createdAt | fromNow }}</p>
+          </div>
+
+          <!-- 推文敘述 -->
+          <div class="tweet-text">
+            <p>{{ tweet.description }}</p>
+          </div>
         </div>
 
-        <!-- 空白愛心圖示（點擊後會加到喜歡的內容） -->
-        <div
-          class="tweet-heart d-flex"
-          v-if="!tweet.isLiked"
-          @click.stop.prevent="addLiked(tweet.id)"
-        >
-          <img
-            class="icon-reply-heart"
-            src="~@/assets/images/tweetLike@2x.png"
-            alt="empty-heart-icon"
-          />
-          <p class="number">{{ tweet.likeCount }}</p>
+        <div class="tweet-reply-heart d-flex">
+          <!-- 留言圖示（點擊後會跳出留言互動視窗） -->
+          <div
+            @click.prevent="isClickedTweet(tweet.id)"
+            class="tweet-reply d-flex"
+            data-toggle="modal"
+            data-target="#replyModal"
+          >
+            <img
+              class="icon-reply-heart"
+              src="~@/assets/images/tweetReply@2x.png"
+              alt="reply-icon"
+            />
+            <p class="number">{{ tweet.commentCount }}</p>
+          </div>
+
+          <!-- 紅色愛心圖示（點擊後會加到喜歡的內容） -->
+          <div
+            class="tweet-heart d-flex"
+            v-if="tweet.isLike"
+            @click.stop.prevent="deleteLiked(tweet.id)"
+          >
+            <img
+              class="icon-reply-heart"
+              src="https://i.postimg.cc/rFB1FHD6/icon-Liked.png"
+              alt="red-heart-icon"
+            />
+            <p class="number">{{ tweet.likeCount }}</p>
+          </div>
+
+          <!-- 空白愛心圖示（點擊後會加到喜歡的內容） -->
+          <div
+            class="tweet-heart d-flex"
+            v-if="!tweet.isLike"
+            @click.stop.prevent="addLiked(tweet.id)"
+          >
+            <img
+              class="icon-reply-heart"
+              src="~@/assets/images/tweetLike@2x.png"
+              alt="empty-heart-icon"
+            />
+            <p class="number">{{ tweet.likeCount }}</p>
+          </div>
         </div>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -122,7 +124,7 @@ export default {
       this.tweets = this.initialTweets;
     },
 
-    // 透過 tweetID 找出被點擊留言的哪一篇推文 -> 顯示 modal 使用
+    // 透過 tweetID 找出被點擊留言的是哪一篇推文，用於顯示 replyModal
     isClickedTweet(tweetId) {
       this.oneTweet = this.tweets.find((tweet) => {
         return tweet.id === tweetId;
@@ -135,18 +137,15 @@ export default {
     async addLiked(tweetId) {
       try {
         const { data } = await tweetsAPI.tweets.addLiked({ tweetId });
-        console.log("addLiked data is:", data);
-
         if (data.status === "error") {
           throw new Error(data.message);
         }
-        //顯示紅心 & 愛心數加一
         this.tweets = this.tweets.map((tweet) => {
           return tweetId === tweet.id
             ? {
                 ...tweet,
-                isLiked: !tweet.isLiked,
-                likeCount: tweet.likeCount + 1,
+                isLike: !tweet.isLike, //將愛心改成紅心
+                likeCount: tweet.likeCount + 1, //愛心數加一
               }
             : tweet;
         });
@@ -168,14 +167,12 @@ export default {
         if (data.status === "error") {
           throw new Error(data.message);
         }
-
-        //顯示空心 & 愛心數減一
         this.tweets = this.tweets.map((tweet) => {
           return tweetId === tweet.id
             ? {
                 ...tweet,
-                isLiked: !tweet.isLiked,
-                likeCount: tweet.likeCount - 1,
+                isLike: !tweet.isLike, //將愛心改成空心
+                likeCount: tweet.likeCount - 1, //愛心數減一
               }
             : tweet;
         });

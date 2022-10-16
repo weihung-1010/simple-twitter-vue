@@ -26,7 +26,7 @@ export default {
 
     // 留言回覆推文
     createReply({ tweetId, comment }) {
-      return apiHelper.post(`tweets/${tweetId}/replies`, comment)
+      return apiHelper.post(`/tweets/${tweetId}/replies`, comment)
     },
 
 
