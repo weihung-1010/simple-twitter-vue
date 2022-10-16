@@ -34,7 +34,7 @@
             class="logo mb-4"
             src="https://i.postimg.cc/Dfp23k8g/logo-2x.png"
           />
-          <router-link :to="{ name: 'main' }" class="tab">
+          <router-link :to="{ name: 'main-page' }" class="tab">
             <img class="icon" src="https://i.postimg.cc/MK4VTFr0/home.png" />
             <img
               class="icon-active"
