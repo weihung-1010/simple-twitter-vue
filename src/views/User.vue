@@ -51,6 +51,7 @@
       <!-- Modal -->
       <UserEditModal
         @after-submit-profile="afterSubmitProfile"
+        @realtime-change-profile="realtimeChangeProfile"
         :initialTargetProfile="targetProfile"
       />
       <TweetModal />
@@ -109,7 +110,8 @@ export default {
       followingList: [],
       followShip: false,
       isLoading: true,
-      theTweetId: -1, //及時增加留言數使用
+      theTweetId: -1,
+      newProfile: {},
     };
   },
   beforeRouteUpdate(to, from, next) {
@@ -197,7 +199,6 @@ export default {
       };
     },
     userAfterSubmitReply(id) {
-      //即時顯示留言數字 + 1
       this.theTweetId = id;
     },
     async afterSubmitProfile(formData) {
@@ -206,19 +207,14 @@ export default {
           userId: this.currentUser.id,
           formData,
         });
-        // 更新後的資料，渲染用
         if (response.statusText !== "OK") {
           throw new Error("無法編輯個人資料，請稍後再試");
         }
-        // 及時更新圖
-        const data = response.data;
-        console.log("data is:", data)
-        
         const { name, avatar, cover, introduction } = {
-          name: data.name,
-          avatar: data.avatar,
-          cover: data.cover,
-          introduction: data.introduction,
+          name: this.newProfile.name,
+          avatar: this.newProfile.avatar,
+          cover: this.newProfile.cover,
+          introduction: this.newProfile.introduction,
         };
         this.targetProfile = {
           ...this.targetProfile,
@@ -239,6 +235,13 @@ export default {
         });
       }
     },
+    // 由於 API 沒有回傳資料，因此利用時間差的方式
+    // 先儲存 newProfile 資料，再透過 afterSubmitProfile() 去即時更新 profile
+    realtimeChangeProfile(profile) {
+      this.newProfile = profile;
+      console.log("submitted newProfile is:", this.newProfile);
+    },
+
     async fetchFollowings(userId) {
       // 這邊為了個人頁面的追蹤按鈕
       try {

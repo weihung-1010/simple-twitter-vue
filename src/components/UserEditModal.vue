@@ -263,6 +263,7 @@ export default {
       const formData = new FormData(form);
       console.log("formData is:", formData)
       this.$emit("after-submit-profile", formData);
+      this.$emit("realtime-change-profile", this.profile)
     },
   },
 };
