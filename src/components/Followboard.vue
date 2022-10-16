@@ -19,10 +19,20 @@
             <p class="account">@{{ user.account }}</p>
           </div>
 
-          <button class="btn-follow btn-info" v-if="!user.isFollowed">
+          <button
+            class="btn-follow btn-info"
+            v-if="user.isFollowed"
+            @click.stop.prevent="deleteFollowed"
+          >
             正在跟隨
           </button>
-          <button class="btn-unfollow btn-info" v-else>跟隨</button>
+          <button
+            class="btn-unfollow btn-info"
+            v-else
+            @click.stop.prevent="addFollowed"
+          >
+            跟隨
+          </button>
         </div>
       </div>
     </div>
@@ -163,6 +173,19 @@ export default {
           title: "無法取得人氣使用者，請稍後再試",
         });
       }
+    },
+    addFollowed() {
+      this.users = {
+        ...this.users,
+        isFollowed: true,
+      };
+      console.log(this.user)
+    },
+    deleteFollowed() {
+      this.users = {
+        ...this.users,
+        isFollowed: false,
+      };
     },
   },
   created() {
