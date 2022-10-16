@@ -27,10 +27,15 @@
 @import "../assets/scss/setups.scss";
 .followboard-wrapper {
   position: fixed; // 固定在右邊
+  height: 100vh; // 高度維持在視窗高度
+  overflow-y: scroll; // 產生捲軸
   width: 273px;
   margin-top: 16px;
   background: #fafafb;
   border-radius: 16px;
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
   .followboard-title {
     height: 74px;
     h4 {
