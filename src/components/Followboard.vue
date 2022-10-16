@@ -12,10 +12,12 @@
         />
       </router-link>
       <div class="name-account">
-        <p class="name">{{user.name}}</p>
-        <p class="account">@{{user.account}}</p>
+        <p class="name">{{ user.name }}</p>
+        <p class="account">@{{ user.account }}</p>
       </div>
-      <button class="btn-follow btn-info" v-if="user.isFollowed">正在跟隨</button>
+      <button class="btn-follow btn-info" v-if="user.isFollowed">
+        正在跟隨
+      </button>
       <button class="btn-unfollow btn-info" v-else>跟隨</button>
     </div>
   </div>
@@ -25,10 +27,15 @@
 @import "../assets/scss/setups.scss";
 .followboard-wrapper {
   position: fixed; // 固定在右邊
+  height: 100vh; // 高度維持在視窗高度
+  overflow-y: scroll; // 產生捲軸
   width: 273px;
   margin-top: 16px;
   background: #fafafb;
   border-radius: 16px;
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
   .followboard-title {
     height: 74px;
     h4 {
@@ -94,12 +101,12 @@
 <script>
 import { Toast } from "./../utils/helpers";
 import usersAPI from "./../apis/user";
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   name: "FollowBoard",
   computed: {
-    ...mapState(['currentUser'])
+    ...mapState(["currentUser"]),
   },
   data() {
     return {
@@ -112,14 +119,14 @@ export default {
     async fetchTopUsers() {
       try {
         const { data } = await usersAPI.getTopUsers();
-        console.log(data)
+        console.log(data);
         this.users = data.map((user) => ({
-          id:user.id,
-          name:user.name,
-          account:user.account,
-          avatar:user.avatar,
-          followerCount:user.followerCount,
-          isFollowed:user.isFollowed,
+          id: user.id,
+          name: user.name,
+          account: user.account,
+          avatar: user.avatar,
+          followerCount: user.followerCount,
+          isFollowed: user.isFollowed,
         }));
       } catch (error) {
         console.error(error.message);
