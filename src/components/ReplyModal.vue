@@ -149,7 +149,7 @@ export default {
         // 則會將推文 ID 傳回父元件 ReplyList
         // -> 觸發父元件 ReplyList 去取得該推文的所有留言與留言數
         // -> 連動即時將留言數顯示在同為子元件的 TweetDetail
-        if (this.$route.name === "reply-list") {
+        if (this.$route.name === "main-reply-list") {
           this.$emit("after-submit-reply", this.replyModalData.id);
 
           // 如果是在 MainPage（Main）上按 ReplyModal 留言回覆的話
