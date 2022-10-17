@@ -261,7 +261,6 @@ export default {
       // 表單資料轉為物件傳回父層 User.vue
       const form = e.target; // <form></form>
       const formData = new FormData(form);
-      console.log("formData is:", formData)
       this.$emit("after-submit-profile", formData);
       this.$emit("realtime-change-profile", this.profile)
     },

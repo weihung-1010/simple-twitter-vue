@@ -36,8 +36,8 @@ export default {
     return apiHelper.get(`/users/${userId}/followings`)
   },
   // 加入追蹤
-  addFollowed(id) {
-    return apiHelper.post(`/followships`, { id })
+  addFollowed(userId) {
+    return apiHelper.post(`/followships`, { userId })
   },
   // 取消追蹤
   deleteFollowed(userId) {

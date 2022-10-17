@@ -117,7 +117,6 @@ export default {
     // created 時抓取從父元件 MainPage 繼承來的推文資料
     fetchTweets() {
       this.tweets = this.initialTweets;
-      console.log(this.tweets);
     },
 
     // 透過 tweetID 找出被點擊留言的是哪一篇推文，用於顯示 replyModal

@@ -239,7 +239,6 @@ export default {
     // 先儲存 newProfile 資料，再透過 afterSubmitProfile() 去即時更新 profile
     realtimeChangeProfile(profile) {
       this.newProfile = profile;
-      console.log("submitted newProfile is:", this.newProfile);
     },
 
     async fetchFollowings(userId) {
