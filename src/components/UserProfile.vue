@@ -54,11 +54,11 @@
       {{ targetProfile.introduction }}
     </p>
     <div class="follow">
-      <router-link :to="{ name: 'user-followings' }" class="following">
+      <router-link to="" class="following">
         <div class="follow-count">{{ targetProfile.followingCount }} 個</div>
         <div class="follow-text">跟隨中</div>
       </router-link>
-      <router-link :to="{ name: 'user-followers' }" class="follower">
+      <router-link to="" class="follower">
         <div class="follow-count">{{ targetProfile.followerCount }} 位</div>
         <div class="follow-text">跟隨者</div>
       </router-link>

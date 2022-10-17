@@ -10,7 +10,7 @@
         <div class="tweet-wrapper">
           <div class="avatar-input d-flex">
             <!-- 使用者頭像（點擊後會連到該用戶的個人資料頁） -->
-            <!-- 待新增 router-link：目前使用者的個人資料頁  -->
+            <!-- 新增 router-link：目前使用者的個人資料頁  -->
             <router-link to="">
               <img
                 class="user-avatar"
@@ -129,7 +129,6 @@ export default {
         const { data } = await tweetsAPI.tweets.create({
           description: this.description,
         });
-
 
         if (data.status === "error") {
           throw new Error(data.message);

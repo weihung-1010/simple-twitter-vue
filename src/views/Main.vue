@@ -38,7 +38,7 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 import Spinner from "../components/Spinner.vue";
-import Followboard from "../components/Followboard.vue";
+import Followboard from "../components/Followboard";
 import TweetModal from "../components/TweetModal";
 import ReplyModal from "../components/ReplyModal.vue";
 import tweetsAPI from "../apis/tweets";

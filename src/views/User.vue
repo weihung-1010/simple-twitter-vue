@@ -187,7 +187,6 @@ export default {
       }
     },
     afterClickReply(payload) {
-      // 點擊回覆，顯示 modal 使用的資料
       const { id, avatar, name, account, createdAt, description } = payload;
       this.replyModalData = {
         id, // tweetID
@@ -242,7 +241,6 @@ export default {
     },
 
     async fetchFollowings(userId) {
-      // 這邊為了個人頁面的追蹤按鈕
       try {
         const response = await userAPI.getFollowings(userId);
         const { data } = response;
@@ -253,17 +251,14 @@ export default {
         const followingShip = this.followingList.find(
           (following) => following.followingId === Number(this.$route.params.id)
         );
-        this.followShip = !!followingShip; //可以判斷 true 正在追蹤，傳到 UserProfileCard 使用
+        this.followShip = !!followingShip;
       } catch (error) {
         console.error(error.message);
       }
     },
     changeProfilePopular(change) {
-      // 個人頁面的追蹤按鈕
-      // popular 傳回來的 change 物件包含 id 和 改變狀態 true or false
       const userId = change.userId;
       const { id } = this.$route.params;
-      // 如果目前是在別人的個人頁面: 如果popular改動的追蹤按鈕使用者id跟當前個人頁面id相符合, 才改變按鈕狀態
       if (userId === Number(id)) {
         this.followShip = change.change;
         // 改變user profile頁面的跟隨中與跟隨者人數
@@ -278,7 +273,6 @@ export default {
             followerCount: this.targetProfile.followerCount - 1,
           };
         }
-        // 如果是在自己的個人頁面: 追蹤中人數相應改變
       } else if (userId !== Number(id) && Number(id) === this.currentUser.id) {
         if (change.change === true) {
           this.targetProfile = {
@@ -295,7 +289,6 @@ export default {
     },
     changeFollowShip(payload) {
       this.followShip = payload;
-      // 在"別人"的個人頁面按下追蹤或退追按鈕, 下方的追隨者人數會相應變化
       if (this.followShip === true) {
         this.targetProfile = {
           ...this.targetProfile,

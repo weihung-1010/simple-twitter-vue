@@ -1,7 +1,7 @@
 <template>
   <ul class="nav-tag">
     <router-link
-      :to="{ name: 'main-tweets' }"
+      to=""
       class="tag-link"
       :class="{ 'tag-link-active': $route.name === 'main-tweets' }"
       ><li
@@ -12,7 +12,7 @@
       </li>
     </router-link>
     <router-link
-      :to="{ name: 'replies' }"
+      to=""
       class="tag-link"
       :class="{ 'tag-link-active': $route.name === 'replies' }"
       ><li class="tag" :class="{ 'tag-selected': $route.name === 'replies' }">
@@ -20,7 +20,7 @@
       </li></router-link
     >
     <router-link
-      :to="{ name: 'liked-tweets' }"
+      to=""
       class="tag-link"
       :class="{ 'tag-link-active': $route.name === 'liked-tweets' }"
     >

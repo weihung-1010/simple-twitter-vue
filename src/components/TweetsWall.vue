@@ -7,7 +7,7 @@
       >
         <div class="user-img">
           <!-- 推文者頭像（點擊後會連到該用戶的個人資料頁） -->
-          <router-link :to="{ path: `/users/${tweet.UserId.id}` }">
+          <router-link :to="{ path: `/users/${tweet.UserId}` }">
             <img
               class="user-avatar"
               :src="tweet.avatar | emptyImage"
@@ -19,10 +19,10 @@
         <div class="tweet-box">
           <!-- 推文資訊 -->
           <div class="tweet-content d-flex">
-            <router-link :to="{ path: `/users/${tweet.UserId.id}` }">
+            <router-link :to="{ path: `/users/${tweet.UserId}` }">
               <p class="name">{{ tweet.name }}</p>
             </router-link>
-            <router-link :to="{ path: `/users/${tweet.UserId.id}` }">
+            <router-link :to="{ path: `/users/${tweet.UserId}` }">
               <p class="account">@{{ tweet.account }}</p>
             </router-link>
 

@@ -34,13 +34,6 @@ export default {
     getOneTweet({ tweetId }) {
       return apiHelper.get(`/tweets/${tweetId}`)
     },
-
-
-    // getUsersTweets({ userId }) {
-    //   return apiHelper.get(`/users/${userId}/tweets`)
-    // },
-
-
   },
 
   // 顯示特定推文的回覆串

@@ -4,7 +4,6 @@
       <h4>推薦跟隨</h4>
     </div>
     <div class="list-wrapper">
-      <!-- 待確認連結 -->
       <router-link
         :to="{ path: `/users/${user.id}` }"
         v-for="user in topPopular"
@@ -157,7 +156,7 @@ export default {
   methods: {
     async addFollowed(userId) {
       try {
-        const { data } = await userAPI.addFollowed({ id: userId });
+        const { data } = await userAPI.addFollowed(userId);
         if (data.status === "error") {
           throw new Error(data.message);
         }
@@ -192,7 +191,7 @@ export default {
     },
     async deleteFollowed(userId) {
       try {
-        const { data } = await userAPI.deleteFollowed({ userId });
+        const { data } = await userAPI.deleteFollowed(userId);
         if (data.status === "error") {
           throw new Error(data.message);
         }
