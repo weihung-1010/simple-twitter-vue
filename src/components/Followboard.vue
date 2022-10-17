@@ -222,19 +222,19 @@ export default {
         });
       }
     },
-    addFollowed() {
-      this.users = {
-        ...this.users,
-        isFollowed: true,
-      };
-      console.log(this.user)
-    },
-    deleteFollowed() {
-      this.users = {
-        ...this.users,
-        isFollowed: false,
-      };
-    },
+    // addFollowed() {
+    //   this.users = {
+    //     ...this.users,
+    //     isFollowed: true,
+    //   };
+    //   console.log(this.user)
+    // },
+    // deleteFollowed() {
+    //   this.users = {
+    //     ...this.users,
+    //     isFollowed: false,
+    //   };
+    // },
   },
 };
 </script>
