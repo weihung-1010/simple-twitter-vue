@@ -10,6 +10,7 @@
         :key="user.id"
       >
         <div class="followboard-lists">
+
           <img
             class="user-avatar"
             :src="user.avatar || 'https://i.imgur.com/hAKcS3E.jpg'"
@@ -37,6 +38,7 @@
               跟隨
             </button>
           </div>
+
         </div>
       </router-link>
     </div>
@@ -219,6 +221,19 @@ export default {
           title: "無法取消追蹤，請稍後再試",
         });
       }
+    },
+    addFollowed() {
+      this.users = {
+        ...this.users,
+        isFollowed: true,
+      };
+      console.log(this.user)
+    },
+    deleteFollowed() {
+      this.users = {
+        ...this.users,
+        isFollowed: false,
+      };
     },
   },
 };
