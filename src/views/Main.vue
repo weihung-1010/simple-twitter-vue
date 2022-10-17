@@ -38,7 +38,7 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 import Spinner from "../components/Spinner.vue";
-import Followboard from "../components/Followboard.vue";
+import Followboard from "../components/Followboard";
 import TweetModal from "../components/TweetModal";
 import ReplyModal from "../components/ReplyModal.vue";
 import tweetsAPI from "../apis/tweets";
@@ -123,8 +123,6 @@ export default {
         avatar,
       } = payload;
 
-      // 待刪除
-      console.log("afterSubmitTweet payload is: ", payload);
 
       this.tweets.unshift({
         id, // tweetID
@@ -143,9 +141,6 @@ export default {
     // 點擊留言圖示後，將該則推文的資料傳給 replyModal
     afterClickReply(payload) {
       const { id, avatar, name, account, createdAt, description } = payload;
-
-      // 待刪除
-      console.log("reply icon payload is: ", payload);
 
       this.replyModalData = {
         id, // tweetID

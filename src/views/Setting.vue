@@ -270,7 +270,7 @@ export default {
           checkPassword: this.checkPassword,
         };
 
-        const { data } = await userAPI.update({
+        const { data } = await userAPI.updateAccount({
           userId: this.id,
           newData,
         });

@@ -4,37 +4,43 @@
       <h4>推薦跟隨</h4>
     </div>
     <div class="list-wrapper">
-      <div class="followboard-lists" v-for="user in users" :key="user.id">
-        <router-link :to="{ name: 'user-tweet', params: { id: user.id } }">
+      <router-link
+        :to="{ path: `/users/${user.id}` }"
+        v-for="user in topPopular"
+        :key="user.id"
+      >
+        <div class="followboard-lists">
+
           <img
             class="user-avatar"
             :src="user.avatar || 'https://i.imgur.com/hAKcS3E.jpg'"
             alt="user-avatar"
           />
-        </router-link>
 
-        <div class="right-content d-flex">
-          <div class="name-account">
-            <p class="name">{{ user.name }}</p>
-            <p class="account">@{{ user.account }}</p>
+          <div class="right-content d-flex">
+            <div class="name-account">
+              <p class="name">{{ user.name }}</p>
+              <p class="account">@{{ user.account }}</p>
+            </div>
+
+            <button
+              class="btn-follow btn-info"
+              v-if="user.isFollowed"
+              @click.stop.prevent="deleteFollowed(user.id)"
+            >
+              正在跟隨
+            </button>
+            <button
+              class="btn-unfollow btn-info"
+              v-else
+              @click.stop.prevent="addFollowed(user.id)"
+            >
+              跟隨
+            </button>
           </div>
 
-          <button
-            class="btn-follow btn-info"
-            v-if="user.isFollowed"
-            @click.stop.prevent="deleteFollowed"
-          >
-            正在跟隨
-          </button>
-          <button
-            class="btn-unfollow btn-info"
-            v-else
-            @click.stop.prevent="addFollowed"
-          >
-            跟隨
-          </button>
         </div>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -79,6 +85,8 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .right-content {
@@ -135,42 +143,82 @@
 }
 </style>
 
+
+
 <script>
 import { Toast } from "./../utils/helpers";
-import usersAPI from "./../apis/user";
+import userAPI from "./../apis/user";
 import { mapState } from "vuex";
 
 export default {
   name: "FollowBoard",
   computed: {
-    ...mapState(["currentUser"]),
-  },
-  data() {
-    return {
-      users: [],
-      isLoading: true,
-      isProcessing: false,
-      isFollowed:'',
-    };
+    ...mapState(["topPopular"]),
   },
   methods: {
-    async fetchTopUsers() {
+    async addFollowed(userId) {
       try {
-        const { data } = await usersAPI.getTopUsers();
-        console.log(data);
-        this.users = data.map((user) => ({
-          id: user.id,
-          name: user.name,
-          account: user.account,
-          avatar: user.avatar,
-          followerCount: user.followerCount,
-          isFollowed: user.isFollowed,
-        }));
+        const { data } = await userAPI.addFollowed(userId);
+        if (data.status === "error") {
+          throw new Error(data.message);
+        }
+        this.$store.dispatch("fetchPopular");
+        this.$emit("after-follow-change-in-popular");
+        Toast.fire({
+          icon: "success",
+          title: "已成功追蹤",
+        });
+        if (
+          this.$route.name === "main-tweets" ||
+          this.$route.name === "replies" ||
+          this.$route.name === "liked-tweets"
+        ) {
+          // 如果變動在個人頁面發生，帶 id 和 追蹤狀態 true 回 User.vue
+          this.$emit("change-profile-follow", { userId: userId, change: true });
+        }
+      } catch (error) {
+        console.error(error.message);
+        if (error.message === "Can not follow yourself.") {
+          Toast.fire({
+            icon: "warning",
+            title: "不能追蹤自己哦！",
+          });
+        } else {
+          Toast.fire({
+            icon: "error",
+            title: "目前無法追蹤，請稍後再試",
+          });
+        }
+      }
+    },
+    async deleteFollowed(userId) {
+      try {
+        const { data } = await userAPI.deleteFollowed(userId);
+        if (data.status === "error") {
+          throw new Error(data.message);
+        }
+        this.$store.dispatch("fetchPopular");
+        this.$emit("after-follow-change-in-popular");
+        Toast.fire({
+          icon: "success",
+          title: "已取消追蹤",
+        });
+        if (
+          this.$route.name === "main-tweets" ||
+          this.$route.name === "replies" ||
+          this.$route.name === "liked-tweets"
+        ) {
+          // 如果變動在個人頁面發生，帶 id 和 追蹤狀態 true 回 User.vue
+          this.$emit("change-profile-follow", {
+            userId: userId,
+            change: false,
+          });
+        }
       } catch (error) {
         console.error(error.message);
         Toast.fire({
           icon: "error",
-          title: "無法取得人氣使用者，請稍後再試",
+          title: "無法取消追蹤，請稍後再試",
         });
       }
     },
@@ -187,9 +235,6 @@ export default {
         isFollowed: false,
       };
     },
-  },
-  created() {
-    this.fetchTopUsers();
   },
 };
 </script>

@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Main from '../views/Main.vue'
-import Profile from '../views/Profile.vue'
+import User from '../views/User.vue'
+// import Profile from '../views/Profile.vue'
 import Setting from '../views/Setting.vue'
 import store from './../store'
 import { Toast } from "./../utils/helpers";
@@ -41,28 +42,53 @@ const routes = [
         component: () => import('../views/MainPage'),
       },
       {
-        name: 'main-reply-list',
+        name: 'reply-list',
         path: 'replylist/:id',
         component: () => import('../views/ReplyList'),
       },
     ]
   },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: Profile,
-    children: [
-      {
-        name: 'user-tweet',
-        path: '/tweet',
-        component: () => import('../components/UserTweet'),
-      },
-    ]
-  },
+  // {
+  //   path: '/profile',
+  //   name: 'profile',
+  //   component: Profile,
+  //   children: [
+  //     {
+  //       name: 'user-tweet',
+  //       path: '/tweet',
+  //       component: () => import('../components/UserTweet'),
+  //     },
+  //   ]
+  // },
   {
     path: '/setting',
     name: 'setting',
     component: Setting
+  },
+
+
+  {
+    path: '/users/:id',
+    name: 'user',
+    // redirect: '/users/:id/tweets',
+    component: User,
+    // children: [
+    //   {
+    //     name: 'main-tweets',
+    //     path: 'tweets',
+    //     component: () => import('../views/MainTweets'),
+    //   },
+    //   {
+    //     name: 'replies',
+    //     path: 'replies',
+    //     component: () => import('../views/Replies'),
+    //   },
+    //   {
+    //     name: 'liked-tweets',
+    //     path: 'liked',
+    //     component: () => import('../views/likedTweets'),
+    //   },
+    // ]
   },
 
   // 後台頁面

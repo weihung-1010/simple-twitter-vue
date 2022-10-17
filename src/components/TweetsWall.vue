@@ -1,15 +1,13 @@
 <template>
-  <!-- 修改 -->
   <div>
     <div class="tweets-wall" v-for="tweet in tweets" :key="tweet.id">
       <router-link
-        :to="{ path: `/main/replylist/${tweet.id}/` }"
+        :to="{ path: `/main/replylist/${tweet.id}` }"
         class="tweet-link"
       >
         <div class="user-img">
-          <!-- 待新增 router-link：該用戶的個人資料頁 -->
           <!-- 推文者頭像（點擊後會連到該用戶的個人資料頁） -->
-          <router-link to="">
+          <router-link :to="{ path: `/users/${tweet.UserId}` }">
             <img
               class="user-avatar"
               :src="tweet.avatar | emptyImage"
@@ -21,13 +19,10 @@
         <div class="tweet-box">
           <!-- 推文資訊 -->
           <div class="tweet-content d-flex">
-            <!-- 待新增 router-link：該用戶的個人資料頁 -->
-            <router-link to="">
+            <router-link :to="{ path: `/users/${tweet.UserId}` }">
               <p class="name">{{ tweet.name }}</p>
             </router-link>
-
-            <!-- 待新增 router-link：該用戶的個人資料頁 -->
-            <router-link to="">
+            <router-link :to="{ path: `/users/${tweet.UserId}` }">
               <p class="account">@{{ tweet.account }}</p>
             </router-link>
 
@@ -162,7 +157,6 @@ export default {
     async deleteLiked(tweetId) {
       try {
         const { data } = await tweetsAPI.tweets.deleteLiked({ tweetId });
-        console.log("deleteLiked data is:", data);
 
         if (data.status === "error") {
           throw new Error(data.message);

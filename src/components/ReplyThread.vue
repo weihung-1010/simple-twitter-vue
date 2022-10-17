@@ -6,15 +6,19 @@
         <div class="thread">
           <div class="d-flex">
             <div class="avatar-container">
-              <!-- 待新增 router-link：該用戶的個人資料頁 (start) -->
-              <img class="avatar" :src="oneTweet.avatar | emptyImage" />
+              <router-link :to="{ path: `/users/${oneTweet.UserId}` }">
+                <img class="avatar" :src="oneTweet.avatar | emptyImage" />
+              </router-link>
             </div>
 
             <div class="thread-info">
-              <!-- 待新增 router-link：該用戶的個人資料頁 (start) -->
-              <div class="line1">{{ oneTweet.name }}</div>
-              <!-- 待新增 router-link：該用戶的個人資料頁 (start) -->
-              <div class="line4">@{{ oneTweet.account }}</div>
+              <router-link :to="{ path: `/users/${oneTweet.UserId}` }">
+                <div class="line1">{{ oneTweet.name }}</div>
+              </router-link>
+
+              <router-link :to="{ path: `/users/${oneTweet.UserId}` }">
+                <div class="line4">@{{ oneTweet.account }}</div>
+              </router-link>
             </div>
           </div>
 
@@ -51,24 +55,27 @@
     >
       <div class="thread d-flex">
         <div class="avatar-container">
-          <!-- 待新增 router-link：該用戶的個人資料頁 (start) -->
-          <img class="avatar" :src="comment.avatar" alt="avatar" />
+          <router-link :to="{ path: `/users/${comment.UserId}` }">
+            <img class="avatar" :src="comment.avatar" alt="avatar" />
+          </router-link>
         </div>
 
         <div class="thread-info">
-          <!-- 待新增 router-link：該用戶的個人資料頁 (start) -->
-          <div class="line1">
-            {{ comment.name }}
-            <!-- 待新增 router-link：該用戶的個人資料頁 (start) -->
-            <span class="line1--little"
-              >@a{{ comment.account }}‧{{ comment.createdAt | fromNow }}</span
-            >
-          </div>
+          <router-link :to="{ path: `/users/${comment.UserId}` }">
+            <div class="line1">
+              {{ comment.name }}
 
-          <!-- 待新增 router-link：該用戶的個人資料頁 (start) -->
-          <div class="line2">
-            回覆<span class="line2--little">@{{ oneTweet.account }}</span>
-          </div>
+              <span class="line1--little"
+                >@a{{ comment.account }}‧{{ comment.createdAt | fromNow }}</span
+              >
+            </div>
+          </router-link>
+
+          <router-link :to="{ path: `/users/${oneTweet.UserId}` }">
+            <div class="line2">
+              回覆<span class="line2--little">@{{ oneTweet.account }}</span>
+            </div>
+          </router-link>
 
           <div class="line3">
             {{ comment.comment }}
@@ -123,42 +130,6 @@ export default {
         ...this.oneTweet,
         ...newValue,
       };
-
-      // const {
-      //   avatar,
-      //   userId,
-      //   account,
-      //   name,
-      //   createdAt,
-      //   description,
-      //   id,
-      //   isLike,
-      //   likeCount,
-      //   commentCount,
-      // } = {
-      //   avatar: this.oneTweet.avatar,
-      //   id: this.oneTweet.id,
-      //   userId: this.oneTweet.userId,
-      //   account: this.oneTweet.account,
-      //   name: this.oneTweet.name,
-      //   createdAt: this.oneTweet.createdAt,
-      //   description: this.oneTweet.description,
-      //   isLike: this.oneTweet.isLike,
-      //   likeCount: this.oneTweet.likeCount,
-      //   commentCount: this.oneTweet.commentCount,
-      // };
-      // this.oneTweet = {
-      //   avatar,
-      //   userId,
-      //   account,
-      //   name,
-      //   createdAt,
-      //   description,
-      //   id,
-      //   isLike,
-      //   likeCount,
-      //   commentCount,
-      // };
     },
     // 當新增評論時，及時更新評論數使用
     initialRepliesLength(newValue) {

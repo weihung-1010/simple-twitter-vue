@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import userAPI from "./../apis/user"
+import { Toast } from './../utils/helpers'
 
 
 Vue.use(Vuex)
@@ -48,6 +49,11 @@ export default new Vuex.Store({
       state.token = ""
       // 4. 移除 localStorage 的 token 記錄
       localStorage.removeItem('token')
+    },
+
+    // 設定前十名的人氣用戶
+    setTopPopular(state, topPopular) {
+      state.topPopular = [...topPopular]
     }
   },
   // 以 dispatch 來發動，用來設定其他的非同步函式：透過 API 請求資料等
@@ -65,15 +71,30 @@ export default new Vuex.Store({
         commit('setCurrentUser', {
           id, name, account, email, avatar, role
         })
-
-
         return { isAuthenticated: true, role: this.state.currentUser.role }
-
         // 無法取得資料，代表沒有確實登入
       } catch (error) {
         console.error(error.message)
         commit('revokeAuthentication');
         return { isAuthenticated: false, role: '' };
+      }
+    },
+
+    // 透過 API 請求前十名的人氣用戶
+    async fetchPopular({ commit }) {
+      try {
+        const response = await userAPI.getTopUsers();
+        const { data } = response;
+        if (response.statusText !== "OK") {
+          throw new Error(data.message);
+        }
+        commit('setTopPopular', data)
+      } catch (error) {
+        console.error(error.message);
+        Toast.fire({
+          icon: "error",
+          title: "無法取得推薦追蹤名單",
+        });
       }
     },
   },

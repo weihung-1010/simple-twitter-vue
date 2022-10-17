@@ -65,7 +65,6 @@ export default {
         const response = await tweetsAPI.tweets.getOneTweet({
           tweetId: id,
         });
-        console.log("fetchTweet response is:", response);
         if (response.statusText !== "OK") {
           throw new Error();
         }
@@ -85,7 +84,6 @@ export default {
         const response = await tweetsAPI.replies.getReplies({
           tweetId: id,
         });
-        console.log("fetchReplies response is:", response);
 
         if (response.statusText !== "OK") {
           throw new Error();

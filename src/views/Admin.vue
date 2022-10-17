@@ -109,7 +109,6 @@ export default {
           password: this.password,
         });
         const { data } = res;
-        console.log("response is: ", res);
 
         // STEP3-1. 帳密驗證若失敗，API 回傳錯誤
         if (data.status === "error") {
@@ -137,7 +136,6 @@ export default {
         // 錯誤通知處理
         console.error(error.message);
         this.errorMsg = error.message;
-        console.log("errorMsg is:", this.errorMsg);
 
         if (error.message === "此帳號不存在！") {
           Toast.fire({

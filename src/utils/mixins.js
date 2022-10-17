@@ -34,7 +34,8 @@ export const emptyImageFilter = {
 export const emptyCoverFilter = {
   filters: {
     emptyCover(src) {
-      return src || require("../assets/images/Night.jpg")
+      // return src || require("../assets/images/Night.jpg")
+      return src || "https://i.postimg.cc/nLwNk2CD/unsplash-c-O9-jo-Z1-Fd-A.png"
     }
   }
 }
